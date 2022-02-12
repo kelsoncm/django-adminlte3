@@ -1,0 +1,48 @@
+{% load static i18n adminlte3 %}
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    {% block layout_brand_logo %}
+    <a href="{% url layout_home_url_name %}" class="brand-link">
+      <img src="{% static '/adminlte3/img/AdminLTELogo.png' %}" alt="{{ layout_site_name }} logo" width="33" height="33" class="brand-image img-circle elevation-3" />
+      <span class="brand-text font-weight-light">{{ layout_site_name }}</span>
+    </a>
+    {% endblock layout_brand_logo %}
+    <!-- /.Brand Logo -->
+
+    <!-- Sidebar -->
+    {% block layout_sidebar %}
+    <div class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      {% block layoyout_sidebar_user_panel %}
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image"><img src="{% static '/adminlte3/img/user2-160x160.jpg' %}" class="img-circle elevation-2"  width="33" height="33" alt="{% translate 'Foto do usuário' %}" /></div>
+        <div class="info"><a href="{{ user_profile_url }}" class="d-block">{{ user_display_name }}</a></div>
+      </div>
+      {% endblock layoyout_sidebar_user_panel %}
+      <!-- /.Sidebar user panel (optional) -->
+
+      <!-- SidebarSearch Form -->
+      {% block layoyout_sidebar_search %}
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="{% translate 'Procurar' %}" aria-label="{% translate 'Procurar' %}" />
+          <div class="input-group-append"><button class="btn btn-sidebar"><i class="fas fa-search fa-fw"></i></button></div>
+        </div>
+      </div>
+      {% endblock layoyout_sidebar_search %}
+      <!-- /.Sidebar user panel (optional) -->
+
+      <!-- Sidebar Menu -->
+      {% block layoyout_sidebar_menu %}
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          {% render_menu_list layout_sidebar_menu %}
+        </ul>
+      </nav>
+      {% endblock layoyout_sidebar_menu %}
+      <!-- /.sidebar-menu -->
+    </div>
+    {% endblock layout_sidebar %}
+    <!-- /.sidebar -->
+  </aside>

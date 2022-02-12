@@ -1,0 +1,71 @@
+{% extends "adminlte3/layouts/base_auth.html" %}
+{% load static i18n %}
+
+{% block content_wrapper %}
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center"><a href="../../index2.html" class="h1">{{ layout_site_name }}</a></div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        {% for error, erros in form.errors.items %}
+          {% if error == '__all__' %}
+            {% for messsage in erros %}
+              <p class="text-danger">{{ messsage }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <input type="username" name="username" id="id_username" value="{{ form.username.data | default_if_none:'' }}" placeholder="Username"  class="form-control {% if form.username.errors %}is-invalid" aria-describedby="username-error" aria-invalid="true{% endif %}" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+            {% for error in form.username.errors%}
+              <span id="username-error" class="error invalid-feedback">{{ error }}</span>
+            {% endfor %}
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="password" value="{{ form.password.data | default_if_none:'' }}" class="form-control" placeholder="Password" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+                {% if layout_has_auth_remembering %}<div class="icheck-primary"><input type="checkbox" id="remember" /><label for="remember">{% translate 'Remember Me' %}</label></div>{% endif %}
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">{% translate 'Sign in'%}</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+  
+        {% block social_auth %}
+        <div class="social-auth-links text-center mt-2 mb-3">
+          <a href="#" class="btn btn-block btn-primary">
+            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+          </a>
+          <a href="#" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          </a>
+        </div>
+        {% endblock social_auth %}
+        <!-- /.social-auth-links -->
+  
+        <p class="mb-1"><a href="{% url 'password_reset' %}">{% translate "I forgot my password" %}</a></p>
+        <p class="mb-0"><a href="{% url layout_register_url_name %}">{% translate "Register a new membership" %}</a></p>
+        
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+{% endblock content_wrapper %}

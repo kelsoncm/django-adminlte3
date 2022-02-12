@@ -1,0 +1,11 @@
+django==4.0.2
+
+# UI
+# jinja2==3.0.3
+# django-fontawesome==1.0
+
+# DEV
+django-extensions==3.1.5
+django-debug-toolbar==3.2.4
+ipdb==0.13.9
+Werkzeug==2.0.3

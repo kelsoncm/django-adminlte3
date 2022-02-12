@@ -1,0 +1,6 @@
+{% extends "adminlte3/layouts/base_auth.html" %}
+
+{% block content_wrapper %}
+    <p>{% translate "Thanks for spending some quality time with the web site today." %}</p>
+    <p><a href="{% url layout_home_url_name %}">{% translate 'Go to home' %}</a></p>
+{% endblock content_wrapper %}   
