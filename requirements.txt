@@ -8,4 +8,6 @@ django==4.0.2
 django-extensions==3.1.5
 django-debug-toolbar==3.2.4
 ipdb==0.13.9
+ipython==8.0.1
 Werkzeug==2.0.3
+twine==1.12.1
