@@ -8,14 +8,14 @@ def fast_scandir(dirname):
     return subfolders
 
 setup(
-    name='adminlte3',
+    name='django-theme-adminlte3',
     version='lib_version',
-    download_url='https://github.com/kelsoncm/python_brfied/releases',
+    url='https://github.com/kelsoncm/django-theme-adminlte3',
+    download_url='https://github.com/kelsoncm/django-theme-adminlte3/releases',
     description='Django Admin LTE v3 Theme',
     license="MIT license",
     author='Kelson da Costa Medeiros',
     author_email='kelsoncm@gmail.com',
-    url='https://github.com/kelsoncm/django-adminlte3',
     keywords=['django', 'admin lte', 'theme'],
     classifiers = [
         'Development Status :: 5 - Production/Stable',
