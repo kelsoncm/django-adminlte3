@@ -5,6 +5,8 @@ db.sqlite3
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+adminlte3.egg-info
+
 # Node artifact files
 node_modules/
 dist/
