@@ -9,13 +9,12 @@ def fast_scandir(dirname):
 
 setup(
     name='adminlte3',
-    version='3.2.0.001',
+    version='3.2.0.1',
     download_url='https://github.com/kelsoncm/python_brfied/releases',
     description='Django Admin LTE v3 Theme',
     license="MIT license",
     author='Kelson da Costa Medeiros',
     author_email='kelsoncm@gmail.com',
-
     url='https://github.com/kelsoncm/django-adminlte3',
     keywords=['django', 'admin lte', 'theme'],
     classifiers = [
@@ -36,9 +35,9 @@ setup(
         'Programming Language :: Python :: 3.10',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
+    
     python_requires='>=3.7',
     install_requires=['Django>=3.2'],
-    include_package_data=True,
     packages=['adminlte3', 'adminlte3.templatetags'],
     package_dir={'adminlte3': 'adminlte3'},
     package_data={
@@ -46,4 +45,5 @@ setup(
             [x.replace('adminlte3/', '') + '/*' for x in fast_scandir('adminlte3/templates')] +
             [x.replace('adminlte3/', '') + '/*' for x in fast_scandir('adminlte3/static')]
     },
+    include_package_data=True,
 )

@@ -6,6 +6,7 @@ db.sqlite3
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 adminlte3.egg-info
+adminlte3-3.*
 
 # Node artifact files
 node_modules/
