@@ -5,8 +5,8 @@ db.sqlite3
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
-adminlte3.egg-info
-adminlte3-3.*
+django_theme_adminlte3.egg-info
+django-theme-adminlte3-3.*
 
 # Node artifact files
 node_modules/
