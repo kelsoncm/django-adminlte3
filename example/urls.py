@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import dashboard, contacts, register, term_of_use
-from .apps import AdminLTE3Config
+from adminlte3.apps import AdminLTE3Config
 
 
 app_name = AdminLTE3Config.name

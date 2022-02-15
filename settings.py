@@ -5,12 +5,13 @@ os.environ['PYTHONBREAKPOINT'] = 'ipdb.set_trace'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJECT_DIR = Path(__file__).resolve().parent
-BASE_DIR = Path(__file__).resolve().parent.parent
+PARENT_DIR = PROJECT_DIR.parent
 DEBUG = True
 
 # Application definition
 INSTALLED_APPS = [
     'adminlte3',
+    'example',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -4,16 +4,16 @@ from django.http import HttpResponse, HttpRequest
 
 
 def dashboard(request: HttpRequest) -> HttpResponse:
-    return render(request, "adminlte3/dashboard.html", context={'page_title': 'Dashboard v1'})
+    return render(request, "example/dashboard.html", context={'page_title': 'Dashboard v1'})
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
-    return render(request, "adminlte3/contacts.html")
+    return render(request, "example/contacts.html")
 
 
 def register(request: HttpRequest) -> HttpResponse:
-    return render(request, "adminlte3/register.html")
+    return render(request, "example/register.html")
 
 
 def term_of_use(request: HttpRequest) -> HttpResponse:
-    return render(request, "adminlte3/term_of_use.html")
+    return render(request, "example/term_of_use.html")
