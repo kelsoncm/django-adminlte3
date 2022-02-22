@@ -1,0 +1,27 @@
+{% load i18n admin_urls %}
+
+    
+<div class="submit-row">
+    <div class="float-right">
+        {% block submit-row %}
+            {% comment %} {% if show_save_as_new %}<input type="submit" value="{% translate 'Save as new' %}" name="_saveasnew" class="btn btn-default" />{% endif %}
+            {% if show_save_and_add_another %}<input type="submit" value="{% translate 'Save and add another' %}" name="_addanother" class="btn btn-default" />{% endif %}
+            {% if show_save_and_continue %}<input type="submit" value="{% if can_change %}{% translate 'Save and continue editing' %}{% else %}{% translate 'Save and view' %}{% endif %}" name="_continue" class="btn btn-default" />{% endif %}
+            {% if show_close %}<a href="{% url opts|admin_urlname:'changelist' %}" class="closelink btn btn-default">{% translate 'Close' %}</a>{% endif %}
+            {% if show_save %}<button type="submit" class="btn btn-primary" value="{% translate 'Save' %}" name="_save" ><i class="fas fa-sd-card"></i> {% translate 'Save' %}</button>{% endif %} {% endcomment %}
+
+            {% if show_save_as_new %}         <button type="submit" class="btn btn-default" value="{% translate 'Save as new' %}"               name="_saveasnew" ><i class="fas fa-plus"    ></i> {% translate 'Save as new' %}              </button>{% endif %}
+            {% if show_save_and_add_another %}<button type="submit" class="btn btn-default" value="{% translate 'Save and add another' %}"      name="_addanother" ><i class="fas fa-plus"   ></i> {% translate 'Save and add another' %}     </button>{% endif %}
+            {% if show_save_and_continue %}   <button type="submit" class="btn btn-default" value="{% translate 'Save and continue editing' %}" name="_continue"   ><i class="fas fa-edit"   ></i> {% translate 'Save and continue editing' %}</button>{% endif %}
+            {% if show_save %}                <button type="submit" class="btn btn-primary" value="{% translate 'Save and close' %}"            name="_save"       ><i class="fas fa-sd-card"></i> {% translate 'Save and close' %}            </button>{% endif %}
+
+            {% if show_close                %}<a href="{% url opts|admin_urlname:'changelist' %}" class="btn btn-primary">{% translate 'Close' %}</a>{% endif %}
+        {% endblock submit-row %}
+    </div>
+    
+    {% if show_delete_link and original %}
+        {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+        <a href="{% add_preserved_filters delete_url %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> {% translate "Delete" %}</a>
+    {% endif %}
+    
+</div> <!-- /.submit-row -->

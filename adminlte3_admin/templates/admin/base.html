@@ -1,0 +1,10 @@
+{% extends "adminlte3/layouts/base.html" %}
+{% load i18n static %}
+
+{% block stylesheet_rtl %}{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/rtl.css" %}" />{% endif %}{% endblock stylesheet_rtl %}
+
+{% block responsive %}
+    {% comment %} <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}" />
+    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}" />{% endif %} {% endcomment %}
+{% endblock responsive %}

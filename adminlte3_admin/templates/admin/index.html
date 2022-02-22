@@ -1,0 +1,62 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static log %}
+
+{% block content %}
+
+<!-- .card -->
+<div class="card">
+    <!-- .card-header -->
+    <div class="card-header">
+      <h3 class="card-title">{% translate 'Ações recentes' %}</h3>
+    </div>
+    <!-- /.card-header -->
+
+    <!-- .card-body -->
+    <div class="card-body p-0">
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if admin_log %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>{% translate 'Modelo' %}</th>
+                        <th style="width: 40px">{% translate 'Ação' %}</th>
+                        <th>{% translate 'Conteúdo' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in admin_log %}
+                        <tr>
+                            <td>{{ forloop.counter }}.</td>
+                            <td>
+                                {% if entry.content_type %}
+                                    {% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}
+                                {% else %}
+                                    {% translate 'Unknown content' %}
+                                {% endif %}                                    
+                            </td>
+                            <td>
+                                {% if entry.is_addition %}<span class="badge bg-info">{% translate 'Add' %}</span>{% endif %}
+                                {% if entry.is_change %}<span class="badge bg-warning">{% translate 'Change' %}</span>{% endif %}
+                                {% if entry.is_deletion %}<span class="badge bg-danger">{% translate 'Delete' %}</span>{% endif %}
+                            </td>
+                            <td>
+                                {% if entry.is_deletion or not entry.get_admin_url %}
+                                    {{ entry.object_repr }}
+                                {% else %}
+                                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                                {% endif %}
+                            </td>
+                        </tr>   
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{% translate 'None available' %}</p>
+        {% endif %}
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+
+{% endblock content %}

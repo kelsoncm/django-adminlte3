@@ -1,16 +1,16 @@
-{% load static i18n %}
-<!DOCTYPE html>
+{% load i18n admin_urls static admin_modify %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
-<html lang="en">
 <head>
   <meta charset="utf-8" />
 
   <meta name="keywords" content="{{ site_keywords }}" />
   <meta name="description" content="{{ site_description }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 
-  <title>{% block page_title %}{{ layout_site_name }}{% if page_title %} | {{ page_title }} {% endif %}{% endblock page_title %}</title>
-
+  <title>{% block title %}{{ layout_site_name }}{% if page_title %} | {{ page_title }} {% endif %}{% endblock title %}</title>
   {% block favicon %}
     <link rel="apple-touch-icon" sizes="120x120" href="{% static '/favicon/apple-touch-icon.png' %}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon/favicon-32x32.png' %}" />
@@ -42,10 +42,17 @@
   <link rel="stylesheet" href="{% static '/daterangepicker/daterangepicker.css' %}" />
   <!-- summernote -->
   <link rel="stylesheet" href="{% static '/summernote/summernote-bs4.min.css' %}" />
+
+  {% block stylesheet_rtl %}{% endblock stylesheet_rtl %}
+
+  {% block extrahead %}{% endblock extrahead %}
+
+  {% block responsive %}{% endblock responsive %}
+  
   {% block extra_styles %}{% endblock extra_styles %}
   {% block extra_top_scripts %}{% endblock extra_top_scripts %}
 </head>
-<body class="{% block body_classes %}hold-transition sidebar-mini layout-fixed {% block extra_body_classes %}{% if body_classes %}{{ body_classes }}{% endif %}{% endblock extra_body_classes %}{% endblock body_classes %}">
+<body class="{% if is_popup %}popup {% endif %}{% block body_classes %}hold-transition sidebar-mini layout-fixed {% block bodyclass %}{% if body_classes %}{{ body_classes }}{% endif %}{% endblock bodyclass %}{% endblock body_classes %}" data-admin-utc-offset="{% now "Z" %}">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -60,36 +67,85 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-    {% block main_sidebar %}
-      {% include 'adminlte3/layouts/partials/main_sidebar.html' %}
-    {% endblock main_sidebar %}
+  {% block main_sidebar %}
+    {% include 'adminlte3/layouts/partials/main_sidebar.html' %}
+  {% endblock main_sidebar %}
   <!-- /.main_sidebar -->
 
   <!-- Content Wrapper. Contains page content -->
   {% block content_wrapper %}
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      {% block content_header %}
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6"><h1 class="m-0">{% if page_title %}{{ page_title }}{% else %}{{ layout_auto_page_title }}{% endif %}</h1></div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="{{ layout_home_url_name }}">{% translate 'Home' %}</a></li>
-                  <li class="breadcrumb-item active">{% if page_title %}{{ page_title }}{% else %}{{ layout_auto_page_title }}{% endif %}</li>
-                </ol>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
-      {% endblock content_header %}
-      <!-- /.content-header -->
-
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        {% block content_header %}
+          <section class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">                  
+                    <div class="col-sm-6">
+                      <h1 class="m-0">
+                        {% block content_title %}
+                          {% if page_title %}
+                            {{ page_title }}
+                          {% elif cl.opts %}
+                            {{ cl.opts.verbose_name_plural|capfirst }}
+                          {% elif opts %}
+                            {% if add %}{% blocktranslate with name=opts.verbose_name %}Add {{ name }}{% endblocktranslate %}{% else %}{% blocktranslate with name=opts.verbose_name %}Change {{ name }}{% endblocktranslate %}{% endif %}
+                          {% else %}
+                            {{ layout_auto_page_title }}
+                          {% endif %}
+                        {% endblock content_title %}
+                      </h1>
+                    </div>
+                  
+                  {% if not is_popup %}
+                    {% block breadcrumbs %}
+                      <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                          <li class="breadcrumb-item"><a href="{% url layout_home_url_name %}">{% translate 'Home' %}</a></li>
+                          {% if cl.opts %}
+                            <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">{% translate 'Admin' %}</a></li>
+                            {% comment %} <li class="breadcrumb-item"><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a></li> {% endcomment %}
+                            <li class="breadcrumb-item active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
+                          {% elif opts %}
+                            <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">{% translate 'Admin' %}</a></li>
+                            <li class="breadcrumb-item">{% if has_view_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
+                            <li class="breadcrumb-item active">{% if add %}{% blocktranslate with name=opts.verbose_name %}Add {{ name }}{% endblocktranslate %}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
+                          {% else %}
+                            <li class="breadcrumb-item active">{% if page_title %}{{ page_title }}{% else %}{{ layout_auto_page_title }}{% endif %}</li>
+                          {% endif %}
+                        </ol>
+                      </div><!-- /.col -->
+                    {% endblock breadcrumbs %}            
+                  {% endif %}
+                </div><!-- /.row -->
+                {% block content_subtitle %}
+                  {% if subtitle %}
+                    <div class="row mb-2">
+                      <h2>{{ subtitle }}</h2>
+                    </div><!-- /.row -->
+                  {% endif %}
+                {% endblock content_subtitle %}
+              </div><!-- /.container-fluid -->
+          </section>
+        {% endblock content_header %}
+        <!-- /.content-header -->
+        
       <!-- Main content -->
-      <section class="content">
+      <section class="content {% block coltype %} colM {% endblock coltype %}">
+        <div class="container-fluid">
+          {% block messages %}
+            {% if messages %}
+              <ul class="messagelist">{% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+              {% endfor %}</ul>
+            {% endif %}
+          {% endblock messages %}
           {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
           {% endblock content %}
+          {% block sidebar %}{% endblock sidebar %}
+          <br class="clear" />
+        </div >
       </section>
       <!-- /.content -->  
     </div>
@@ -98,10 +154,10 @@
 
   <!-- Footer -->
   {% block footer %}
-  <footer class="main-footer">
+  {% comment %} <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>All rights reserved.
     <div class="float-right d-none d-sm-inline-block"><b>Version</b> 3.2.0</div>
-  </footer>
+  </footer> {% endcomment %}
   {% endblock footer %}
   <!-- /.footer -->
 
@@ -144,11 +200,14 @@
   <script src="{% static '/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
   <!-- AdminLTE App -->
   <script src="{% static '/adminlte3/js/adminlte.js' %}"></script>
+{% endblock bottom_scripts %}
+
+{% block customizer_scripts %}
   {% if layout_has_customizer %}
   <!-- AdminLTE for demo purposes -->
   <script src="{% static '/adminlte3/js/customizer.js' %}"></script>
   {% endif %}
-{% endblock bottom_scripts %}
+{% endblock customizer_scripts %}
 
 {% block extra_bottom_scripts %}
 {% endblock extra_bottom_scripts %}

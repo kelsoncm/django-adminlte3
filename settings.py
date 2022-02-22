@@ -10,6 +10,7 @@ DEBUG = True
 
 # Application definition
 INSTALLED_APPS = [
+    'adminlte3_admin',
     'adminlte3',
     'example',
     'django.contrib.admin',
@@ -52,7 +53,8 @@ TEMPLATES = [
                 'adminlte3.context_processors.layout_settings',
                 'adminlte3.context_processors.top_menu',
                 'adminlte3.context_processors.user',
-                'adminlte3.context_processors.sidebar_menu',
+                # 'adminlte3.context_processors.sidebar_menu',
+                'adminlte3_admin.context_processors.sidebar_menu',
                 'adminlte3.context_processors.messages',
                 'adminlte3.context_processors.notifications',
             ],
@@ -125,4 +127,3 @@ INTERNAL_IPS = [
     "localhost",
     # ...
 ]
-

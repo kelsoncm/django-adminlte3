@@ -7,6 +7,7 @@ from django.urls import reverse
 
 def layout_settings(request: HttpRequest) -> dict:
     return {
+        "site_title": "AdminLTE 3",
         "layout_home_url_name": "adminlte3:dashboard",
         "layout_register_url_name": "adminlte3:register",
         "layout_term_of_use_url_name": "adminlte3:term_of_use",
@@ -24,7 +25,7 @@ def top_menu(request: HttpRequest) -> dict:
         "layout_navbar_top_menu":
         [
             {"label": _("Início"), "url": reverse('adminlte3:dashboard'), },
-            {"label": _("Contatos"), "url": reverse('adminlte3:contacts'), },
+            {"label": _("Admin"), "url": reverse('admin:index'), },
         ]
     }
 
@@ -35,6 +36,14 @@ def user(request: HttpRequest) -> dict:
         "user_profile_url": "#",
         "user_profile_url": "#",
     }
+
+
+def breadcrumbs(request: HttpRequest) -> dict:
+    return {
+        "user_display_name": request.user.fullname if hasattr(request.user, 'fullname') else "Desconhecido",
+        "user_profile_url": "#",
+        "user_profile_url": "#",
+    }    
 
 
 def sidebar_menu(request: HttpRequest) -> dict:
