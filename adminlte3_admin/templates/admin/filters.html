@@ -1,0 +1,9 @@
+{% load i18n admin_urls admin_list %}
+<div id="changelist-filter">
+    <h3>
+        {% translate 'Filters' %}
+        {% comment %} {% if cl.has_active_filters %}<a href="{{ cl.clear_all_filters_qs }}" class="btn btn-info btn-sm">✖ {% translate "Clear all filters" %}</a>{% endif %} {% endcomment %}
+    </h3> 
+    {% if cl.has_active_filters %}<a href="{{ cl.clear_all_filters_qs }}" class="btn btn-block btn-info btn-sm">✖ {% translate "Clear all filters" %}</a><br />{% endif %}
+</div>
+{% for spec in cl.filter_specs %} {% admin_list_filter cl spec %} {% endfor %}

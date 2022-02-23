@@ -1,5 +1,6 @@
 from django.utils.safestring import mark_safe
 from django import template
+from django.contrib.admin.views.main import PAGE_VAR
 
 
 register = template.Library()
@@ -32,3 +33,18 @@ def render_menu_list(menu_items: list, top_level=True) -> str:
         result += f'</li>'
     result += f'</ul>' if not top_level else ''
     return mark_safe(result)
+    
+@register.simple_tag
+def page_item(cl, page):
+    
+    if page == cl.paginator.ELLIPSIS:
+        extra_class = 'disabled'
+    elif page == cl.page_num:
+        extra_class = 'active'
+    else:
+        extra_class = ''
+
+    url = cl.get_query_string({PAGE_VAR: page})
+        
+    return mark_safe(f'''<li class="paginate_button page-item {extra_class}"><a href="{url}" data-dt-idx="{page}" tabindex="{page}" class="page-link">{page}</a></li>''')
+    

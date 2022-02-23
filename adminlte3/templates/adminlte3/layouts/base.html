@@ -43,6 +43,8 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{% static '/summernote/summernote-bs4.min.css' %}" />
 
+  {% if cl.formset %} <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" /> {% endif %}
+
   {% block stylesheet_rtl %}{% endblock stylesheet_rtl %}
 
   {% block extrahead %}{% endblock extrahead %}
@@ -50,9 +52,11 @@
   {% block responsive %}{% endblock responsive %}
   
   {% block extra_styles %}{% endblock extra_styles %}
+
+  {% if cl or action_form %} <script src="{% url 'admin:jsi18n' %}"></script>{% endif %}
   {% block extra_top_scripts %}{% endblock extra_top_scripts %}
 </head>
-<body class="{% if is_popup %}popup {% endif %}{% block body_classes %}hold-transition sidebar-mini layout-fixed {% block bodyclass %}{% if body_classes %}{{ body_classes }}{% endif %}{% endblock bodyclass %}{% endblock body_classes %}" data-admin-utc-offset="{% now "Z" %}">
+<body class="{% if is_popup %}popup {% endif %}{% block body_classes %}hold-transition sidebar-mini layout-boxed {% block bodyclass %}{% if body_classes %}{{ body_classes }}{% endif %}{% endblock bodyclass %}{% endblock body_classes %}" data-admin-utc-offset="{% now "Z" %}">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -130,7 +134,7 @@
         <!-- /.content-header -->
         
       <!-- Main content -->
-      <section class="content {% block coltype %} colM {% endblock coltype %}">
+      <section class="content">
         <div class="container-fluid">
           {% block messages %}
             {% if messages %}

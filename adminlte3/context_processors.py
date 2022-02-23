@@ -32,18 +32,10 @@ def top_menu(request: HttpRequest) -> dict:
 
 def user(request: HttpRequest) -> dict:
     return {
-        "user_display_name": request.user.fullname if hasattr(request.user, 'fullname') else "Desconhecido",
+        "user_display_name": request.user.get_short_name() if hasattr(request.user, 'get_short_name') and request.user.get_short_name() else request.user.username,
         "user_profile_url": "#",
-        "user_profile_url": "#",
+        "user_profile_thumbnail_url": '/static/adminlte3/img/avatar.png',
     }
-
-
-def breadcrumbs(request: HttpRequest) -> dict:
-    return {
-        "user_display_name": request.user.fullname if hasattr(request.user, 'fullname') else "Desconhecido",
-        "user_profile_url": "#",
-        "user_profile_url": "#",
-    }    
 
 
 def sidebar_menu(request: HttpRequest) -> dict:

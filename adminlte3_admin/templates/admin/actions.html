@@ -1,0 +1,35 @@
+{% load i18n static admin_urls admin_list %}
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title">{% translate 'Actions' %}</h3>
+    </div>
+    
+    <div class="card-body actions">
+        <a href="{% url opts|admin_urlname:'add' %}" class="btn btn-primary btn-block mb-3"><i class="fas fa-plus"></i> {% translate 'New' %}</a>
+
+        {% block actions-counter %}
+            {% if actions_selection_counter %}
+                <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
+                {% if cl.result_count != cl.result_list|length %}
+                    <span class="all hidden">{{ selection_note_all }}</span>
+                    <span class="question hidden">
+                        <a href="#" title="{% translate "Click here to select the objects across all pages" %}">{% blocktranslate with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktranslate %}</a>
+                    </span>
+                    <span class="clear hidden"><a href="#">{% translate "Clear selection" %}</a></span>
+                {% endif %}
+            {% endif %}
+        {% endblock actions-counter %}
+
+        {% for action in action_form %}
+            {% if action.field.choices %}
+                {% for choice in action.field.choices %}
+                    {% if choice.0 %}
+                        <button href="javascript:void" class="btn btn-default btn-block mt-1">{{ choice.1 }}</button>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+    

@@ -1,25 +1,11 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls static admin_list %}
+{% load i18n static admin_urls admin_list %}
 
-{% block extrastyle %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
-  {% if cl.formset %} <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" /> {% endif %}
-  {% if cl.formset or action_form %} <script src="{% url 'admin:jsi18n' %}"></script> {% endif %}
-  {{ media.css }}
-  {% if not actions_on_top and not actions_on_bottom %}
-    <style> #changelist table thead th:first-child {width: inherit} </style>
-  {% endif %}
-{% endblock extrastyle %}
+{% block extrastyle %}{{ block.super }} {{ media.css }}{% endblock extrastyle %}
 
-{% block extrahead %}
-  {{ block.super }}
-  {{ media.js }}
-{% endblock extrahead %}
+{% block extrahead %}{{ block.super }} {{ media.js }}{% endblock extrahead %}
 
-{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
-
-{% block coltype %}{% endblock %}
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock bodyclass %}
 
 {% block content %}
   <div id="content-main">
@@ -31,82 +17,50 @@
     {% endif %}
     <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
       <div class="changelist-form-container">
-        {% block date_hierarchy %}{% if cl.date_hierarchy %}{% date_hierarchy cl %}{% endif %}{% endblock %}
+        {% block date_hierarchy %}{% if cl.date_hierarchy %}{% date_hierarchy cl %}{% endif %}{% endblock date_hierarchy %}
 
-        <form id="changelist-form" method="post"{% if cl.formset and cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
         {% if cl.formset %}
-          <div>{{ cl.formset.management_form }}</div>
+            <div>{{ cl.formset.management_form }}</div>
         {% endif %}
 
         <div class="row"><!-- .row -->
-          <div class="{% if cl.has_filters %}col-md-10{% else %}col-md-12{% endif %} admin-result_list"><!-- .admin-result_list -->
-            <div class="card card-primary card-outline"><!-- .card -->
+            <div class="col-md-9 admin-result_list"><!-- .admin-result_list -->
+                <div class="card card-primary card-outline"><!-- .card -->
 
-              {% comment %} <div class="card-header"><!-- .card-header -->
-                <h3 class="card-title">{{ cl.opts.verbose_name_plural|capfirst }}</h3>
-                <div class="card-tools">
-                  <a href="{% url 'admin:index' %}" class="btn btn-primary btn-sm">{% translate 'New' %}</a>
-               </div>
-              </div><!-- /.card-header --> {% endcomment %}
-
-              <div class="card-header"><!-- .card-header -->
-                <h3 class="card-title">{{ cl.opts.verbose_name_plural|capfirst }}</h3>
-                <div class="card-tools">
-                  <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="{% translate 'Search' %}" />
-                    <div class="input-group-append">
-                      <div class="btn btn-primary"><i class="fas fa-search"></i></div>
-                    </div>
-                  </div>
-                </div>                
-              </div><!-- /.card-header -->
-
-              <div class="card-body"><!-- .card-body -->
-
-                {% block object-tools %}
-                  <ul class="object-tools">
-                    {% comment %} {% block object-tools-items %}{% change_list_object_tools %}{% endblock object-tools-items %} {% endcomment %}
-                    <li>{% block search %}{% search_form cl %}{% endblock search %}</li>
-                    <li>{% if action_form and actions_on_top and cl.show_admin_actions %}{% admin_actions %}{% endif %}</li>
-                  </ul>
-                {% endblock object-tools %}
-        
-                {% block result_list %}
-                  {% result_list cl %}
-                  {% if action_form and actions_on_bottom and cl.show_admin_actions %}{% admin_actions %}{% endif %}
-                {% endblock result_list %}
-
-                {% block pagination %}{% pagination cl %}{% endblock pagination %}
-              </div><!-- /.card-body -->
-
-            </div><!-- /.card -->
-          </div><!-- /.admin-result_list -->
-
-          {% if cl.has_filters %}
-            {% block filters %}
-              <div class="col-md-2 admin-filters"><!-- .admin-filters -->
-                {% comment %} <a href="{% url 'admin:index' %}" class="btn btn-primary btn-block mb-3">{% translate 'New' %}</a> {% endcomment %}
-                <div id="changelist-filter">
-                  <h3>
-                    {% translate 'Filters' %}
-                    {% if cl.has_active_filters %}
-                      <a href="{{ cl.clear_all_filters_qs }}" class="btn btn-info btn-sm">✖ {% translate "Clear all filters" %}</a>
-                    {% endif %}
-                  </h3> 
-                  {% comment %} {% if cl.has_active_filters %}
-                    <a href="{{ cl.clear_all_filters_qs }}" class="btn btn-block btn-info btn-sm">&#10006; {% translate "Clear all filters" %}</a><br />
-                  {% endif %}{% endcomment %}
+                {% comment %} <div class="card-header"><!-- .card-header -->
+                    <h3 class="card-title">{{ cl.opts.verbose_name_plural|capfirst }}</h3>
+                    <div class="card-tools">
+                    <a href="{% url 'admin:index' %}" class="btn btn-primary btn-sm">{% translate 'New' %}</a>
                 </div>
+                </div><!-- /.card-header --> {% endcomment %}
 
-                {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
-              </div><!-- .admin-filters -->    
-            {% endblock filters %}
-          {% endif %}
+                <div class="card-header"><!-- .card-header -->
+                    <h3 class="card-title">{{ cl.opts.verbose_name_plural|capfirst }}</h3>
+                    <div class="card-tools">{% block search %}{% search_form cl %}{% endblock search %}</div>
+                </div><!-- /.card-header -->
+                
+                <form id="changelist-form" method="post"{% if cl.formset and cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
+                    <div class="card-body"><!-- .card-body -->
+                        {% pagination cl %}
+                        {% block result_list %}{% result_list cl %}{% endblock result_list %}
+                    </div><!-- /.card-body -->
+                </form>
+
+                <div class="card-footer"><!-- .card-footer -->
+                    {% pagination cl %}
+                </div><!-- /.card-footer -->
+                </div><!-- /.card -->
+            </div><!-- /.admin-result_list -->
+          
+            <div class="col-md-3">
+                {% block actions %} {% admin_actions %} {% endblock actions %}
+
+                {% if cl.has_filters %} {% block filters %} {% include 'admin/filters.html' %} {% endblock filters %} {% endif %}
+            </div>
 
         </div><!-- /.row -->
       
         
-        </form>
       </div>
     </div>
   </div>
