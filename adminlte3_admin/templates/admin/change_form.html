@@ -56,23 +56,32 @@
                     {{ adminform.form.non_field_errors }}
                   </div>
                 {% endif %}
+                <div class="row"> <!-- fieldsets -->                  
+                  <div class="col-5 col-sm-12"> <!-- fieldsets_nav_col -->
+                    {% for fieldset in adminform %}
+                      {% if not fieldset.name %}
+                          {% include "admin/includes/fieldset.html" %}
+                      {% endif %}
+                    {% endfor %}
+                  </div> <!-- fieldsets_nav_col -->
+                </div> <!-- fieldsets -->                  
                 <div class="row"> <!-- fieldsets -->
-
                   <div class="col-5 col-sm-3"> <!-- fieldsets_nav_col -->
-                    <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical"><!-- fieldsets_navs -->
-                      {% for fieldset in adminform %}
-                        <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}" id="vert-tabs-{{ fieldset.name|slugify }}-tab" data-toggle="pill" href="#vert-tabs-{{ fieldset.name|slugify }}" role="tab" aria-controls="vert-tabs-{{ fieldset.name|slugify }}" aria-selected="true">{% if fieldset.name %}{{ fieldset.name }}{% else %}-{% endif %}</a>
-                      {% endfor %}
-                      {% for inline_admin_formset in inline_admin_formsets %}
-                        <a class="nav-link" id="vert-tabs-{{ inline_admin_formset.name|slugify }}-tab" data-toggle="pill" href="#vert-tabs-{{ inline_admin_formset.name|slugify }}" role="tab" aria-controls="vert-tabs-{{ inline_admin_formset.name|slugify }}" aria-selected="true">{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}</a>
-                      {% endfor %}
-                    </div><!-- /fieldsets_navs -->
+                      <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical"><!-- fieldsets_navs -->
+                        {% for fieldset in adminform %}
+                          {% if fieldset.name %}
+                            <a class="nav-link {% if forloop.counter == 2 %}active{% endif %}" id="vert-tabs-{{ fieldset.name|slugify }}-tab" data-toggle="pill" href="#vert-tabs-{{ fieldset.name|slugify }}" role="tab" aria-controls="vert-tabs-{{ fieldset.name|slugify }}" aria-selected="{% if forloop.counter == 2 %}true{% else %}false{% endif %}">{{ fieldset.name }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div><!-- /fieldsets_navs -->                    
                   </div><!-- /fieldsets_nav_col -->
 
                   <div class="col-7 col-sm-9"><!-- fieldsets_fields_col -->
                     <div class="tab-content" id="vert-tabs-tabContent"><!-- fieldsets_fields -->
                       {% for fieldset in adminform %}
-                        {% include "admin/includes/fieldset.html" %}
+                        {% if fieldset.name %}
+                          {% include "admin/includes/fieldset.html" %}
+                        {% endif %}
                       {% endfor %}
                     
                     </div><!-- /fieldsets_fields -->
