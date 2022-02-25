@@ -1,9 +1,14 @@
 from django.utils.safestring import mark_safe
-from django import template
 from django.contrib.admin.views.main import PAGE_VAR
+from django.template.defaultfilters import stringfilter, register
 
 
-register = template.Library()
+@register.filter(is_safe=False)
+@stringfilter
+def remove_colon(value):
+    """Convert a string into all uppercase."""
+    print(value.upper())
+    return value.upper()
 
 
 @register.simple_tag
