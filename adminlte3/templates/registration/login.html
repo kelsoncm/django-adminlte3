@@ -17,25 +17,7 @@
         {% endfor %}
         <form method="post">
           {% csrf_token %}
-          <div class="input-group mb-3">
-            <input type="username" name="username" id="id_username" value="{{ form.username.data | default_if_none:'' }}" placeholder="Username"  class="form-control {% if form.username.errors %}is-invalid" aria-describedby="username-error" aria-invalid="true{% endif %}" />
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
-            {% for error in form.username.errors%}
-              <span id="username-error" class="error invalid-feedback">{{ error }}</span>
-            {% endfor %}
-          </div>
-          <div class="input-group mb-3">
-            <input type="password" name="password" value="{{ form.password.data | default_if_none:'' }}" class="form-control" placeholder="Password" />
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
+          {{ form }}
           <div class="row">
             <div class="col-8">
                 {% if layout_has_auth_remembering %}<div class="icheck-primary"><input type="checkbox" id="remember" /><label for="remember">{% translate 'Remember Me' %}</label></div>{% endif %}
