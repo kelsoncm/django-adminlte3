@@ -13,7 +13,7 @@
                         <input class="form-check-input" type="checkbox" checked="" id="id_{{ field.field.name }}" /><label class="form-check-label" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
                     </div>
                 {% else %}
-                    {{ field.label_tag }}
+                    <label class="required" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
                     {{ field.field }}
                 {% endif %}
                 
