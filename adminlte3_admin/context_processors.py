@@ -1,4 +1,3 @@
-from sys import breakpointhook
 from django.utils.translation import gettext as _
 from django.http import HttpRequest
 from django.urls import reverse, NoReverseMatch
