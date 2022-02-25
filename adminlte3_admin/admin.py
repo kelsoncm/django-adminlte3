@@ -1,5 +1,5 @@
 
-from django.contrib.admin import widgets, ModelAdmin
+from django.contrib.admin import ModelAdmin
 from django.db import models
 from django import forms
 from adminlte3_admin.widgets import (
@@ -25,5 +25,5 @@ ModelAdmin.formfield_overrides = {
     models.ImageField: {'widget': AdminLTEFileWidget},
     models.FileField: {'widget': AdminLTEFileWidget},
     models.EmailField: {'widget': AdminLTEEmailInputWidget},
-    models.UUIDField: {'widget': AdminLTEUUIDInputWidget},
+    # models.UUIDField: {'widget': AdminLTEUUIDInputWidget},
 }
