@@ -1,11 +1,22 @@
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
+
 
 def fast_scandir(dirname):
     subfolders= [f.path for f in os.scandir(dirname) if f.is_dir()]
     for dirname in list(subfolders):
         subfolders.extend(fast_scandir(dirname))
     return subfolders
+
+
+def package_data_dirs(root, data_dirs):
+
+    data_dirs_path = [x + '/*' for x in data_dirs]
+    for data_dir in data_dirs:
+        data_dirs_path += [x.replace(f'{root}/', '') + '/*' for x in fast_scandir(f'{root}/{data_dir}')]
+        
+    return {root: data_dirs_path}
+
 
 setup(
     name='django-theme-adminlte3',
@@ -40,10 +51,6 @@ setup(
     install_requires=['Django>=3.2'],
     packages=['adminlte3', 'adminlte3.templatetags'],
     package_dir={'adminlte3': 'adminlte3'},
-    package_data={
-        'adminlte3': 
-            [x.replace('adminlte3/', '') + '/*' for x in fast_scandir('adminlte3/templates')] +
-            [x.replace('adminlte3/', '') + '/*' for x in fast_scandir('adminlte3/static')]
-    },
+    package_data=package_data_dirs('adminlte3', ['templates', 'static']),
     include_package_data=True,
 )
