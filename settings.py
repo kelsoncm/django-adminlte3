@@ -12,6 +12,7 @@ DEBUG = True
 INSTALLED_APPS = [
     'adminlte3_admin',
     'adminlte3',
+    'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
                 'adminlte3.context_processors.layout_settings',
                 'adminlte3.context_processors.top_menu',
                 'adminlte3.context_processors.user',
@@ -61,6 +63,8 @@ TEMPLATES = [
         },
     },
 ]
+
+FORM_RENDERER = 'adminlte3.renderers.DjangoTemplates'
 
 
 ###
