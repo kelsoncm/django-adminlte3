@@ -1,0 +1,24 @@
+{{ errors }}
+{% if errors and not fields %}
+    <p>{% for field in hidden_fields %}{{ field }}{% endfor %}</p>
+{% endif %}
+
+{% for field, errors in fields %}
+    <div class="form-group {% if errors %}is-invalid{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }} </label>
+        {{ field }}
+        {% if field.help_text %}
+            <span class="info-container"><span class="info" id="{{ field.id_for_label }}-help_text">{{ field.help_text|safe }}</span></span>
+        {% endif %}
+        
+        {{ errors }}
+        
+        {% if forloop.last %}
+            {% for field in hidden_fields %}{{ field }}{% endfor %}
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% if not fields and not errors %}
+    {% for field in hidden_fields %}{{ field }}{% endfor %}
+{% endif %}

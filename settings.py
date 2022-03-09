@@ -64,7 +64,7 @@ TEMPLATES = [
     },
 ]
 
-FORM_RENDERER = 'adminlte3.renderers.DjangoTemplates'
+FORM_RENDERER = 'adminlte3.renderers.DjangoTemplatesRenderer'
 
 
 ###

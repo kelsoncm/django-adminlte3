@@ -65,3 +65,5 @@ class ModelAdmin(ModelAdmin):
         ('Extra', {"fields": ['json_field', 'uuid_field', 'file_path_field', 'file_field', 'image_field']}),
         ('Relational', {"fields": ['foreign_key_field', 'one_to_one_field', 'many_to_many_field']}),
     )
+    
+    autocomplete_fields = ['foreign_key_field', 'one_to_one_field']

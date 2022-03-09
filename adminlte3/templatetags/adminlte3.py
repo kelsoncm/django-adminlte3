@@ -1,15 +1,13 @@
 from django.utils.safestring import mark_safe
 from django.contrib.admin.views.main import PAGE_VAR
 from django.template.defaultfilters import stringfilter, register
+from django.forms.fields import Field
 
 
 @register.filter(is_safe=False)
-@stringfilter
-def remove_colon(value):
-    """Convert a string into all uppercase."""
-    print(value.upper())
-    return value.upper()
-
+# @stringfilter
+def quiet(field: Field):
+    return ''
 
 @register.simple_tag
 def render_menu_list(menu_items: list, top_level=True) -> str:

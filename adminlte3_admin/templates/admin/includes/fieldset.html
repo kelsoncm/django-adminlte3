@@ -6,20 +6,17 @@
     {% endif %}
     {% for line in fieldset %}
         {% for field in line %}
-            <div class="form-group">
-                
+            <div class="form-group {% if field.errors %}is-invalid{% endif %}">
                 {% if field.is_checkbox %}
                     <div class="icheck-primary d-inline">
-                        <input class="form-check-input" type="checkbox" checked="" id="id_{{ field.field.name }}" /><label class="form-check-label" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
+                        <input class="form-check-input" type="checkbox" {% if field.field.initial %}checked="" {% endif %} id="{{ field.field.id_for_label }}" name="{{ field.field.name }}" /><label class="form-check-label" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
                     </div>
                 {% else %}
                     <label class="required" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
                     {{ field.field }}
                 {% endif %}
                 
-                {% if not line.fields|length_is:'1' and not field.is_readonly %}
-                    <span id="id_{{ field.field.name }}_error" class="error invalid-feedback">{{ field.errors }}</span>
-                {% endif %}
+                {{ field.errors }}
 
                 {% if field.field.help_text %}
                     <div class="help-block text-sm text-muted">{{ field.field.help_text|safe }}</div>

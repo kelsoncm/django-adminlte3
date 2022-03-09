@@ -55,9 +55,9 @@
       background-position: right calc(0.375em + 0.1875rem) center;
       background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
     }
-    .is-invalid > .invalid-feedback, .is-invalid > .invalid-tooltip,
+    .is-invalid > .invalid-feedback, .is-invalid > .invalid-tooltip
     {
-      display: block;
+      display: block !important;
     }
   </style>
 
@@ -220,6 +220,14 @@
   <script src="{% static '/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
   <!-- AdminLTE App -->
   <script src="{% static '/adminlte3/js/adminlte.js' %}"></script>
+  <script>
+    $(function () {
+      //Datemask dd/mm/yyyy
+      //$('.date-field').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+      $('.datetimepicker-input').datetimepicker({format: 'L'});
+    })
+  </script>
+  
 {% endblock bottom_scripts %}
 
 {% block customizer_scripts %}

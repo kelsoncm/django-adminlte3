@@ -17,7 +17,7 @@ class EngineMixin:
         })
 
 
-class DjangoTemplates(EngineMixin, BaseRenderer):
+class DjangoTemplatesRenderer(EngineMixin, BaseRenderer):
     """
     Load Django templates from the built-in widget templates in
     django/forms/templates and from apps' 'templates' directory.
