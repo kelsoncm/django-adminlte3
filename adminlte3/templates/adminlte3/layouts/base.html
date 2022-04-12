@@ -3,6 +3,10 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 
 <head>
+  <script>function gettext(txt){ return txt }</script>
+  <script>function pgettext(txt){ return txt }</script>
+  <script>function get_format(txt){ return txt }</script>
+  <script>function gettext_noop(txt){ return txt }</script>
   <meta charset="utf-8" />
 
   <meta name="keywords" content="{{ site_keywords }}" />
@@ -59,6 +63,21 @@
     {
       display: block !important;
     }
+
+    .borda-vermelha{
+      border: 1px solid red !important;
+    }
+    .borda-verde{
+      border: 1px solid green !important;
+    }
+
+    .borda-vermelha-navMenu{
+      border-color: red !important;
+    }
+    .borda-verde-navMenu{
+      border-color: green !important;
+    }
+
   </style>
 
   {% block stylesheet_rtl %}{% endblock stylesheet_rtl %}
@@ -192,14 +211,15 @@
 <!-- ./wrapper -->
 
 {% block bottom_scripts %}
+{% comment %} <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
   <!-- jQuery -->
   <script src="{% static '/jquery/jquery.min.js'%}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{% static '/jquery-ui/jquery-ui.min.js' %}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>$.widget.bridge('uibutton', $.ui.button)</script>
-  <!-- Bootstrap 4 -->
-  <script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <!-- ChartJS -->
   <script src="{% static '/chart.js/Chart.min.js' %}"></script>
   <!-- Sparkline -->
@@ -210,22 +230,829 @@
   <!-- jQuery Knob Chart -->
   <script src="{% static '/jquery-knob/jquery.knob.min.js' %}"></script>
   <!-- daterangepicker -->
-  <script src="{% static '/moment/moment.min.js' %}"></script>
+  <script src="{% static '/moment/moment-with-locales.min.js' %}"></script>
   <script src="{% static '/daterangepicker/daterangepicker.js' %}"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="{% static '/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+
   <!-- Summernote -->
   <script src="{% static '/summernote/summernote-bs4.min.js' %}"></script>
   <!-- overlayScrollbars -->
   <script src="{% static '/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
   <!-- AdminLTE App -->
   <script src="{% static '/adminlte3/js/adminlte.js' %}"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{% static '/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js' %}"></script>
   <script>
     $(function () {
       //Datemask dd/mm/yyyy
       //$('.date-field').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
-      $('.datetimepicker-input').datetimepicker({format: 'L'});
+      //$('.datetimepicker-input').datetimepicker({format: 'L', sideBySide: true, debug: true});
+      //$.datetimepicker.setLocale('br');
+      $('#id_date_field-input-group').datetimepicker({
+        format: 'DD/MM/YYYY', 
+        sideBySide: true, 
+        locale: "pt-BR",
+        debug: true,
+
+      });
+
+      $('#id_date_time_field_0-input-group').datetimepicker({
+        format: 'DD/MM/YYYY', 
+        sideBySide: true, 
+        locale: "pt-BR",
+        debug: true,
+        });
+
+      $('#id_time-input-group').datetimepicker({
+        //format: 'LT'
+        format: 'HH:mm'
+      });
+
+      $('#id_date_time_field_1-input-group').datetimepicker({
+        //format: 'LT'
+        format: 'HH:mm'
+      });
+
+      })
+  </script>
+
+  <script>
+
+    // Validador campo Email field
+    function validateEmail(email) {
+      var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      return emailReg.test( email );
+  }
+
+
+    $("#id_email_field").focusout(function() {
+        var email = $("input[type='email']").val();
+        if(!validateEmail(email) || email == ""){
+          $("#id_email_field").removeClass("borda-verde");
+          $("#id_email_field").addClass("borda-vermelha");
+        }else{
+          $("#id_email_field").removeClass("borda-vermelha");
+          $("#id_email_field").addClass("borda-verde");
+        }
+        
     })
+
+    //Validador campo Char Field
+    $("#id_char_field").focusout(function(){
+  
+      if($("#id_char_field").val() == ""){
+        $("#id_char_field").addClass("borda-vermelha");
+        $("#id_char_field").removeClass("borda-verde");
+      }else{
+        $("#id_char_field").removeClass("borda-vermelha");
+        $("#id_char_field").addClass("borda-verde");
+      }
+    })
+
+    //Validador Text Field
+    $("#id_text_field").focusout(function(){
+  
+      if($("#id_text_field").val() == ""){
+        $("#id_text_field").addClass("borda-vermelha");
+        $("#id_text_field").removeClass("borda-verde");
+      }else{
+        $("#id_text_field").removeClass("borda-vermelha");
+        $("#id_text_field").addClass("borda-verde");
+      }
+    })
+
+    //Validador Slug  Field
+
+    $("#id_slug_field").focusout(function(){
+  
+      if($("#id_slug_field").val() == ""){
+        $("#id_slug_field").addClass("borda-vermelha");
+        $("#id_slug_field").removeClass("borda-verde");
+      }else{
+        $("#id_slug_field").removeClass("borda-vermelha");
+        $("#id_slug_field").addClass("borda-verde");
+      }
+    })
+
+        // Validador campo small intenger Field
+        $("#id_small_integer_field").focusout(function(){
+  
+          if($("#id_small_integer_field").val() == ""){
+            $("#id_small_integer_field").addClass("borda-vermelha");
+            $("#id_small_integer_field").removeClass("borda-verde");
+          }else{
+            $("#id_small_integer_field").removeClass("borda-vermelha");
+            $("#id_small_integer_field").addClass("borda-verde");
+          }
+        })
+
+        // Validador campo Intenger Field 
+        $("#id_integer_field").focusout(function(){
+  
+          if($("#id_integer_field").val() == ""){
+            $("#id_integer_field").addClass("borda-vermelha");
+            $("#id_integer_field").removeClass("borda-verde");
+          }else{
+            $("#id_integer_field").removeClass("borda-vermelha");
+            $("#id_integer_field").addClass("borda-verde");
+          }
+        })
+
+        // Validador campo Big Intenger Field 
+        $("#id_big_integer_field").focusout(function(){
+  
+          if($("#id_big_integer_field").val() == ""){
+            $("#id_big_integer_field").addClass("borda-vermelha");
+            $("#id_big_integer_field").removeClass("borda-verde");
+          }else{
+            $("#id_big_integer_field").removeClass("borda-vermelha");
+            $("#id_big_integer_field").addClass("borda-verde");
+          }
+        })
+
+        // Validador campo Positive small integer field 
+        function validatePositiveInteger(positiveIntenger) {
+          var positiveReg = /^[1-9]\d*$/;
+          return positiveReg.test( positiveIntenger );
+      }
+    
+    
+        $("#id_positive_small_integer_field").focusout(function() {
+            var positiveItenger = $("#id_positive_small_integer_field").val();
+            if(!validatePositiveInteger(positiveItenger)){
+              $("#id_positive_small_integer_field").removeClass("borda-verde");
+              $("#id_positive_small_integer_field").addClass("borda-vermelha");
+            }else{
+              $("#id_positive_small_integer_field").removeClass("borda-vermelha");
+              $("#id_positive_small_integer_field").addClass("borda-verde");
+            }
+            
+        })
+
+        // Validador campo Positive integer field
+        function validatePositiveInteger(positiveIntenger) {
+          var positiveReg = /^[1-9]\d*$/;
+          return positiveReg.test( positiveIntenger );
+      }
+    
+    
+        $("#id_positive_integer_field").focusout(function() {
+            var positiveItenger = $("#id_positive_integer_field").val();
+            if(!validatePositiveInteger(positiveItenger)){
+              $("#id_positive_integer_field").removeClass("borda-verde");
+              $("#id_positive_integer_field").addClass("borda-vermelha");
+            }else{
+              $("#id_positive_integer_field").removeClass("borda-vermelha");
+              $("#id_positive_integer_field").addClass("borda-verde");
+            }
+            
+        })
+
+        // Validador campo Positive big integer field
+        function validatePositiveInteger(positiveIntenger) {
+          var positiveReg = /^[1-9]\d*$/;
+          return positiveReg.test( positiveIntenger );
+      }
+    
+    
+        $("#id_positive_big_integer_field").focusout(function() {
+            var positiveItenger = $("#id_positive_big_integer_field").val();
+            if(!validatePositiveInteger(positiveItenger)){
+              $("#id_positive_big_integer_field").removeClass("borda-verde");
+              $("#id_positive_big_integer_field").addClass("borda-vermelha");
+            }else{
+              $("#id_positive_big_integer_field").removeClass("borda-vermelha");
+              $("#id_positive_big_integer_field").addClass("borda-verde");
+            }
+            
+        })
+
+        // Validador campo Decimal field 
+        $("#id_decimal_field").focusout(function(){
+  
+          if($("#id_decimal_field").val() == ""){
+            $("#id_decimal_field").addClass("borda-vermelha");
+            $("#id_decimal_field").removeClass("borda-verde");
+          }else{
+            $("#id_decimal_field").removeClass("borda-vermelha");
+            $("#id_decimal_field").addClass("borda-verde");
+          }
+        })
+
+        // Validador campo Float field 
+        $("#id_float_field").focusout(function(){
+  
+          if($("#id_float_field").val() == ""){
+            $("#id_float_field").addClass("borda-vermelha");
+            $("#id_float_field").removeClass("borda-verde");
+          }else{
+            $("#id_float_field").removeClass("borda-vermelha");
+            $("#id_float_field").addClass("borda-verde");
+          }
+        })
+
+        //Date Field
+        function validateDateField(dateField) {
+          var dateReg = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-.\/])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/;
+          return dateReg.test( dateField );
+      }
+    
+    
+        $("#id_date_field").focusout(function() {
+            var dateField = $("#id_date_field").val();
+            if(!validateDateField(dateField)){
+              $("#id_date_field").removeClass("borda-verde");
+              $("#id_date_field").addClass("borda-vermelha");
+            }else{
+              $("#id_date_field").removeClass("borda-vermelha");
+              $("#id_date_field").addClass("borda-verde");
+            }
+            
+        })
+
+        //Time Negrito
+        function validateTimeNegrito(timeNegrito) {
+          var timeReg = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+          return timeReg.test( timeNegrito );
+      }
+    
+    
+        $("#id_time").focusout(function() {
+            var timeNegrito = $("#id_time").val();
+            if(!validateTimeNegrito(timeNegrito)){
+              $("#id_time").removeClass("borda-verde");
+              $("#id_time").addClass("borda-vermelha");
+            }else{
+              $("#id_time").removeClass("borda-vermelha");
+              $("#id_time").addClass("borda-verde");
+            }
+            
+        })
+
+        //Date
+        $("#id_date_time_field_0").focusout(function() {
+          var dateField = $("#id_date_time_field_0").val();
+          if(!validateDateField(dateField)){
+            $("#id_date_time_field_0").removeClass("borda-verde");
+            $("#id_date_time_field_0").addClass("borda-vermelha");
+          }else{
+            $("#id_date_time_field_0").removeClass("borda-vermelha");
+            $("#id_date_time_field_0").addClass("borda-verde");
+          }
+          
+      })
+
+        //Time Sem Negrito
+        $("#id_date_time_field_1").focusout(function() {
+          var timeSemNegrito = $("#id_date_time_field_1").val();
+          if(!validateTimeNegrito(timeSemNegrito)){
+            $("#id_date_time_field_1").removeClass("borda-verde");
+            $("#id_date_time_field_1").addClass("borda-vermelha");
+          }else{
+            $("#id_date_time_field_1").removeClass("borda-vermelha");
+            $("#id_date_time_field_1").addClass("borda-verde");
+          }
+          
+      })
+
+        //Duration Field
+        $("#id_duration_field").focusout(function(){
+  
+          if($("#id_duration_field").val() == ""){
+            $("#id_duration_field").addClass("borda-vermelha");
+            $("#id_duration_field").removeClass("borda-verde");
+          }else{
+            $("#id_duration_field").removeClass("borda-vermelha");
+            $("#id_duration_field").addClass("borda-verde");
+          }
+        })
+
+        // Validador campo Generic ip address field
+        function validateIpAdress(ipAdress) {
+          var IpAdress = /(?:0|25[0-5]|2[0-4]\d|1\d?\d?|[1-9]\d?)(?:\.(?:0|25[0-5]|2[0-4]\d|1\d?\d?|[1-9]\d?)){3}/;
+          return IpAdress.test( ipAdress );
+      }
+    
+    
+        $("#id_generic_ip_address_field").focusout(function() {
+            var ipAdress = $("#id_generic_ip_address_field").val();
+            if(!validateIpAdress(ipAdress)){
+              $("#id_generic_ip_address_field").removeClass("borda-verde");
+              $("#id_generic_ip_address_field").addClass("borda-vermelha");
+            }else{
+              $("#id_generic_ip_address_field").removeClass("borda-vermelha");
+              $("#id_generic_ip_address_field").addClass("borda-verde");
+            }
+            
+        })
+
+        // Validador campo Url field
+        function validateUrl(url) {
+          var urlValidator = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+          return urlValidator.test( url );
+      }
+    
+    
+        $("#id_url_field").focusout(function() {
+            var urlValidator = $("#id_url_field").val();
+            if(!validateUrl(urlValidator)){
+              $("#id_url_field").removeClass("borda-verde");
+              $("#id_url_field").addClass("borda-vermelha");
+            }else{
+              $("#id_url_field").removeClass("borda-vermelha");
+              $("#id_url_field").addClass("borda-verde");
+            }
+            
+        })
+
+
+        //After an submit click, this will be called
+        $('#alldatatypes_form').submit(function(event) {
+        //  alert("Alert 01");
+          event.preventDefault(); //this will prevent the default submit
+          var _this = $(this); //store form so it can be accessed later
+          var goAheadSubmit = "";
+          $.ajax('GET', 'url').then(function(resp) {
+
+            //Char Field
+            if($("#id_char_field").val() == ""){
+              $("#id_char_field").addClass("borda-vermelha");
+              $("#id_char_field").removeClass("borda-verde");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_char_field").removeClass("borda-vermelha");
+              $("#id_char_field").addClass("borda-verde");
+              
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            }
+
+            //Text Field
+            if($("#id_text_field").val() == ""){
+              $("#id_text_field").addClass("borda-vermelha");
+              $("#id_text_field").removeClass("borda-verde");
+              
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_text_field").removeClass("borda-vermelha");
+              $("#id_text_field").addClass("borda-verde");
+              
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            }
+
+            //Slug Field
+            if($("#id_slug_field").val() == ""){
+              $("#id_slug_field").addClass("borda-vermelha");
+              $("#id_slug_field").removeClass("borda-verde");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_slug_field").removeClass("borda-vermelha");
+              $("#id_slug_field").addClass("borda-verde");
+
+              //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Small Integer Field
+            if($("#id_small_integer_field").val() == ""){
+              $("#id_small_integer_field").addClass("borda-vermelha");
+              $("#id_small_integer_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_small_integer_field").removeClass("borda-vermelha");
+              $("#id_small_integer_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Integer Field
+            if($("#id_integer_field").val() == ""){
+              $("#id_integer_field").addClass("borda-vermelha");
+              $("#id_integer_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_integer_field").removeClass("borda-vermelha");
+              $("#id_integer_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+              //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Big Integer Field
+            if($("#id_big_integer_field").val() == ""){
+              $("#id_big_integer_field").addClass("borda-vermelha");
+              $("#id_big_integer_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_big_integer_field").removeClass("borda-vermelha");
+              $("#id_big_integer_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            }
+
+            //Positive Small Integer Field
+            var positiveItenger = $("#id_positive_small_integer_field").val();
+            if(!validatePositiveInteger(positiveItenger)){
+              $("#id_positive_small_integer_field").removeClass("borda-verde");
+              $("#id_positive_small_integer_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_positive_small_integer_field").removeClass("borda-vermelha");
+              $("#id_positive_small_integer_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Positive integer field
+            var positiveItenger = $("#id_positive_integer_field").val();
+            if(!validatePositiveInteger(positiveItenger)){
+              $("#id_positive_integer_field").removeClass("borda-verde");
+              $("#id_positive_integer_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_positive_integer_field").removeClass("borda-vermelha");
+              $("#id_positive_integer_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+              
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            // Positive big Integer FIeld
+            var positiveItenger = $("#id_positive_big_integer_field").val();
+            if(!validatePositiveInteger(positiveItenger)){
+              $("#id_positive_big_integer_field").removeClass("borda-verde");
+              $("#id_positive_big_integer_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_positive_big_integer_field").removeClass("borda-vermelha");
+              $("#id_positive_big_integer_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Decial Field
+            if($("#id_decimal_field").val() == ""){
+              $("#id_decimal_field").addClass("borda-vermelha");
+              $("#id_decimal_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_decimal_field").removeClass("borda-vermelha");
+              $("#id_decimal_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Float Field
+            if($("#id_float_field").val() == ""){
+              $("#id_float_field").addClass("borda-vermelha");
+              $("#id_float_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_float_field").removeClass("borda-vermelha");
+              $("#id_float_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Date Field
+              var dateField = $("#id_date_field").val();
+              if(!validateDateField(dateField)){
+                $("#id_date_field").removeClass("borda-verde");
+                $("#id_date_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-date-time-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-date-time-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+              }else{
+                $("#id_date_field").removeClass("borda-vermelha");
+                $("#id_date_field").addClass("borda-verde");
+
+                //sidebar Menu
+                $("#vert-tabs-date-time-tab").removeClass("borda-vermelha-navMenu");
+                $("#vert-tabs-date-time-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+                goAheadSubmit = "true";
+              }
+
+            //Time Negrito
+
+              var timeNegrito = $("#id_time").val();
+              if(!validateTimeNegrito(timeNegrito)){
+                $("#id_time").removeClass("borda-verde");
+                $("#id_time").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-date-time-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-date-time-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+              }else{
+                $("#id_time").removeClass("borda-vermelha");
+                $("#id_time").addClass("borda-verde");
+
+                //sidebar Menu
+                $("#vert-tabs-date-time-tab").removeClass("borda-vermelha-navMenu");
+                $("#vert-tabs-date-time-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+                goAheadSubmit = "true";
+              }
+
+               //Date
+                var dateField = $("#id_date_time_field_0").val();
+                if(!validateDateField(dateField)){
+                  $("#id_date_time_field_0").removeClass("borda-verde");
+                  $("#id_date_time_field_0").addClass("borda-vermelha");
+
+                  //sidebar Menu
+                 $("#vert-tabs-date-time-tab").addClass("borda-vermelha-navMenu");
+                 $("#vert-tabs-date-time-tab").removeClass("borda-verde-navMenu");
+
+                  //Seguir para o submit false
+                  goAheadSubmit = "false";
+                }else{
+                  $("#id_date_time_field_0").removeClass("borda-vermelha");
+                  $("#id_date_time_field_0").addClass("borda-verde");
+
+                  //sidebar Menu
+                  $("#vert-tabs-date-time-tab").removeClass("borda-vermelha-navMenu");
+                  $("#vert-tabs-date-time-tab").addClass("borda-verde-navMenu");
+
+                  //Seguir para o submit true
+                  goAheadSubmit = "true";
+                }
+              
+              //Time Sem Negrito
+                var timeSemNegrito = $("#id_date_time_field_1").val();
+                if(!validateTimeNegrito(timeSemNegrito)){
+                  $("#id_date_time_field_1").removeClass("borda-verde");
+                  $("#id_date_time_field_1").addClass("borda-vermelha");
+
+                //sidebar Menu
+                 $("#vert-tabs-date-time-tab").addClass("borda-vermelha-navMenu");
+                 $("#vert-tabs-date-time-tab").removeClass("borda-verde-navMenu");
+
+                  //Seguir para o submit false
+                  goAheadSubmit = "false";
+                }else{
+                  $("#id_date_time_field_1").removeClass("borda-vermelha");
+                  $("#id_date_time_field_1").addClass("borda-verde");
+
+                  //sidebar Menu
+                  $("#vert-tabs-date-time-tab").removeClass("borda-vermelha-navMenu");
+                  $("#vert-tabs-date-time-tab").addClass("borda-verde-navMenu");
+
+                  //Seguir para o submit true
+                  goAheadSubmit = "true";
+                }
+
+              //Duration Field      
+                if($("#id_duration_field").val() == ""){
+                  $("#id_duration_field").addClass("borda-vermelha");
+                  $("#id_duration_field").removeClass("borda-verde");
+
+                //sidebar Menu
+                 $("#vert-tabs-date-time-tab").addClass("borda-vermelha-navMenu");
+                 $("#vert-tabs-date-time-tab").removeClass("borda-verde-navMenu");
+
+                  //Seguir para o submit false
+                  goAheadSubmit = "false";
+                }else{
+                  $("#id_duration_field").removeClass("borda-vermelha");
+                  $("#id_duration_field").addClass("borda-verde");
+
+                  //sidebar Menu
+                  $("#vert-tabs-date-time-tab").removeClass("borda-vermelha-navMenu");
+                  $("#vert-tabs-date-time-tab").addClass("borda-verde-navMenu");
+
+                  //Seguir para o submit true
+                  goAheadSubmit = "true";
+                }
+
+
+            //Email Field
+            var email = $("input[type='email']").val();
+            if(!validateEmail(email) || email == ""){
+              $("#id_email_field").removeClass("borda-verde");
+              $("#id_email_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-net-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-net-tab").removeClass("borda-verde-navMenu");
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_email_field").removeClass("borda-vermelha");
+              $("#id_email_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-net-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-net-tab").addClass("borda-verde-navMenu");
+
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            }
+
+            //Generic Ip Adress Field
+            var ipAdress = $("#id_generic_ip_address_field").val();
+            if(!validateIpAdress(ipAdress)){
+              $("#id_generic_ip_address_field").removeClass("borda-verde");
+              $("#id_generic_ip_address_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-net-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-net-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_generic_ip_address_field").removeClass("borda-vermelha");
+              $("#id_generic_ip_address_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-net-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-net-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
+            }
+
+            //Url Field
+            var urlValidator = $("#id_url_field").val();
+            if(!validateUrl(urlValidator)){
+              $("#id_url_field").removeClass("borda-verde");
+              $("#id_url_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-net-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-net-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_url_field").removeClass("borda-vermelha");
+              $("#id_url_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-net-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-net-tab").addClass("borda-verde-navMenu");
+
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            }
+
+           // FIle Field
+            if($("#id_file_field").val() == ""){
+              $("#id_file_field").addClass("borda-vermelha");
+              $("#id_file_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_file_field").removeClass("borda-vermelha");
+              $("#id_file_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
+             
+              //Seguir para o submit true
+               goAheadSubmit = "true";
+            } 
+        
+            //Image field
+            if($("#id_image_field").val() == ""){
+              $("#id_image_field").addClass("borda-vermelha");
+              $("#id_image_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_image_field").removeClass("borda-vermelha");
+              $("#id_image_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
+             
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            } 
+
+            //Faz o submit se receber true de todas as condições.
+            if(goAheadSubmit == "true"){
+              _this.unbind('submit').submit();
+            }
+
+            // continue the submit unbind preventDefault
+          })  
+        })
+        
   </script>
   
 {% endblock bottom_scripts %}

@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from django.db.models import Model
 from django.db.models import \
     SmallIntegerField, IntegerField, BigIntegerField, PositiveSmallIntegerField, PositiveIntegerField, PositiveBigIntegerField, \
@@ -11,6 +12,8 @@ from django.db.models import \
     FilePathField, FileField, ImageField, CASCADE
 from django.contrib.auth.models import User, Group, Permission
 from django.conf import settings
+
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class AllDataTypes(Model):
@@ -27,7 +30,7 @@ class AllDataTypes(Model):
     char_field = CharField(max_length=255)
     text_field = TextField()
     slug_field = SlugField()
-    date_field = DateField()
+    date_field = DateField(validators=[MinValueValidator(datetime(2000,1,1).date())])
     time = TimeField()
     date_time_field = DateTimeField()
     duration_field = DurationField()
