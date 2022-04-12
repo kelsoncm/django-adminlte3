@@ -8,3 +8,4 @@
 7. Suba a aplicação (disponível em http://localhost:8000) `./manage.py runserver_plus`
 8. Se você alterar algum plugin `python manage.py makemigrations`
 9. Defina o ipdb como default breackpoint `export PYTHONBREAKPOINT=ipdb.set_trace`
+10. Criar super usuário `python3 manage.py createsuperuser
