@@ -30,11 +30,7 @@ jobs:
     - name: Build package
       if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
       run: |
-        echo $SOURCE_TAG
-      env:
-        SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
-        SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
-        SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}        
+        python setup.py sdist
     - name: Publish package
       if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
       uses: pypa/gh-action-pypi-publish@release/v1
