@@ -48,7 +48,7 @@ setup(
     ],
     
     python_requires='>=3.7',
-    install_requires=['Django>=3.2'],
+    install_requires=['Django>=4.0.0'],
     packages=['adminlte3', 'adminlte3.templatetags'],
     package_dir={'adminlte3': 'adminlte3'},
     package_data=package_data_dirs('adminlte3', ['templates', 'static']),
