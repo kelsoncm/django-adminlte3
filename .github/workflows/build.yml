@@ -30,7 +30,7 @@ jobs:
     - name: Build package
       if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
       run: |
-        ./release.py $SOURCE_TAG
+        echo $SOURCE_TAG
       env:
         SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
         SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
