@@ -1,5 +1,14 @@
-import os
-from setuptools import setup
+#!/usr/bin/env python
+import os, sys
+
+if len(sys.argv) != 2:
+    print("""
+DESCRIPTION
+       Create a new release $PROJECT_NAME package.
+EXAMPLE
+       ./release.sh 3.2.0.3
+""")
+    exit()
 
 
 def fast_scandir(dirname):
@@ -17,10 +26,17 @@ def package_data_dirs(root, data_dirs):
         
     return {root: data_dirs_path}
 
+version = sys.argv[1]
+packages_theme = package_data_dirs('adminlte3', ['templates', 'static'])
+packages_admin = package_data_dirs('adminlte3_admin', ['templates'])
+packages = {**packages_admin, **packages_theme}
+
+with open('setup.py', 'w') as f:
+    f.write("""from setuptools import setup
 
 setup(
     name='django-theme-adminlte3',
-    version='lib_version',
+    version='%s',
     url='https://github.com/kelsoncm/django-theme-adminlte3',
     download_url='https://github.com/kelsoncm/django-theme-adminlte3/releases',
     description='Django Admin LTE v3 Theme',
@@ -49,8 +65,11 @@ setup(
     
     python_requires='>=3.7',
     install_requires=['Django>=3.2'],
-    packages=['adminlte3', 'adminlte3.templatetags'],
+    packages=['adminlte3', 'adminlte3.templatetags', 'adminlte3_admin'],
     package_dir={'adminlte3': 'adminlte3'},
-    package_data=package_data_dirs('adminlte3', ['templates', 'static']),
-    include_package_data=True,
+    package_data=%s,
 )
+""" % (version, packages))
+
+os.system("rm -rf django_theme_adminlte3.egg-info dist")
+os.system("python setup.py sdist")
