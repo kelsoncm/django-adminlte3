@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-theme-adminlte3',
-    version='3.2.0.3',
+    version='3.2.0.4',
     url='https://github.com/kelsoncm/django-theme-adminlte3',
     download_url='https://github.com/kelsoncm/django-theme-adminlte3/releases',
     description='Django Admin LTE v3 Theme',
