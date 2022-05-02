@@ -565,6 +565,45 @@
             
         })
 
+        //Json Field
+        function validatorJson(json){
+          let jsonValid = false;
+            try{
+              JSON.parse(json);
+              jsonValid = true;
+              return true;
+            }catch(err){
+              jsonValid = false;
+              return false;
+              
+            }
+          return jsonValid;
+        }
+
+        $("#id_json_field").focusout(function() {
+          var jsonValidator = $("#id_json_field").val();
+          console.log(jsonValidator);
+          if(!validatorJson(jsonValidator) || jsonValidator == "null"){
+            $("#id_json_field").removeClass("borda-verde");
+            $("#id_json_field").addClass("borda-vermelha");
+          }else{
+            $("#id_json_field").removeClass("borda-vermelha");
+            $("#id_json_field").addClass("borda-verde");
+          }
+          
+      })
+        //Uuid field
+
+        $("#id_uuid_field").focusout(function(){
+  
+          if($("#id_uuid_field").val() == ""){
+            $("#id_uuid_field").addClass("borda-vermelha");
+            $("#id_uuid_field").removeClass("borda-verde");
+          }else{
+            $("#id_uuid_field").removeClass("borda-vermelha");
+            $("#id_uuid_field").addClass("borda-verde");
+          }
+        })
 
         //After an submit click, this will be called
         $('#alldatatypes_form').submit(function(event) {
@@ -996,6 +1035,55 @@
 
               //Seguir para o submit true
               goAheadSubmit = "true";
+            }
+            
+            //Json FIeld
+
+            var jsonValidator = $("#id_json_field").val();
+            if(!validatorJson(jsonValidator) || jsonValidator == "null"){
+              $("#id_json_field").removeClass("borda-verde");
+              $("#id_json_field").addClass("borda-vermelha");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_json_field").removeClass("borda-vermelha");
+              $("#id_json_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
+
+              //Seguir para o submit true
+              goAheadSubmit = "true";
+            }
+
+            //Uuid Field
+
+            if($("#id_uuid_field").val() == ""){
+              $("#id_uuid_field").addClass("borda-vermelha");
+              $("#id_uuid_field").removeClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").addClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").removeClass("borda-verde-navMenu");
+
+              //Seguir para o submit false
+              goAheadSubmit = "false";
+            }else{
+              $("#id_uuid_field").removeClass("borda-vermelha");
+              $("#id_uuid_field").addClass("borda-verde");
+
+              //sidebar Menu
+              $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
+              $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
+
+                //Seguir para o submit true
+               goAheadSubmit = "true";
             }
 
            // FIle Field
