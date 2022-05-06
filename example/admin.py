@@ -59,7 +59,7 @@ class ModelAdmin(ModelAdmin):
     fieldsets = (
         (None, {"fields": ['char_field', 'text_field', 'slug_field']}),
         ('Number', {"fields": ['small_integer_field', 'integer_field', 'big_integer_field', 'positive_small_integer_field', 'positive_integer_field', 'positive_big_integer_field', 'decimal_field', 'float_field']}),
-        ('Boolean', {"fields": ['boolean_field', 'null_boolean_field']}),
+        ('Boolean', {"fields": ['desconhecido', 'sim', 'nao']}),
         ('Date & time', {"fields": ['date_field', 'time', 'date_time_field', 'duration_field']}),
         ('Net', {"fields": ['email_field', 'generic_ip_address_field', 'url_field']}),
         ('Extra', {"fields": ['json_field', 'uuid_field', 'file_path_field', 'file_field', 'image_field']}),
