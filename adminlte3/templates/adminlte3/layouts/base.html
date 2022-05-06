@@ -592,18 +592,25 @@
           }
           
       })
-        //Uuid field
+        //Uuid Field
 
-        $("#id_uuid_field").focusout(function(){
-  
-          if($("#id_uuid_field").val() == ""){
-            $("#id_uuid_field").addClass("borda-vermelha");
-            $("#id_uuid_field").removeClass("borda-verde");
-          }else{
-            $("#id_uuid_field").removeClass("borda-vermelha");
-            $("#id_uuid_field").addClass("borda-verde");
-          }
-        })
+        // Validador campo Uuid Field
+        function validateUuid(uuid) {
+          var uuidValidator = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+          return uuidValidator.test( uuid );
+      }
+
+      $("#id_uuid_field").focusout(function() {
+        var uuidlValidator = $("#id_uuid_field").val();
+        if(!validateUuid(uuidlValidator)){
+          $("#id_uuid_field").removeClass("borda-verde");
+          $("#id_uuid_field").addClass("borda-vermelha");
+        }else{
+          $("#id_uuid_field").removeClass("borda-vermelha");
+          $("#id_uuid_field").addClass("borda-verde");
+        }
+        
+    })
 
         //After an submit click, this will be called
         $('#alldatatypes_form').submit(function(event) {
@@ -1037,7 +1044,7 @@
               goAheadSubmit = "true";
             }
             
-            //Json FIeld
+            //Json Field
 
             var jsonValidator = $("#id_json_field").val();
             if(!validatorJson(jsonValidator) || jsonValidator == "null"){
@@ -1064,9 +1071,10 @@
 
             //Uuid Field
 
-            if($("#id_uuid_field").val() == ""){
-              $("#id_uuid_field").addClass("borda-vermelha");
+            var uuidlValidator = $("#id_uuid_field").val();
+            if(!validateUuid(uuidlValidator)){
               $("#id_uuid_field").removeClass("borda-verde");
+              $("#id_uuid_field").addClass("borda-vermelha");
 
               //sidebar Menu
               $("#vert-tabs-extra-tab").addClass("borda-vermelha-navMenu");
@@ -1082,8 +1090,8 @@
               $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
               $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
 
-                //Seguir para o submit true
-               goAheadSubmit = "true";
+              //Seguir para o submit true
+              goAheadSubmit = "true";
             }
 
            // FIle Field
@@ -1138,7 +1146,7 @@
             }
 
             // continue the submit unbind preventDefault
-          })  
+          })
         })
         
   </script>
