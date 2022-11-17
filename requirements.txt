@@ -3,7 +3,7 @@ django==4.0.2
 # UI
 # jinja2==3.0.3
 # django-fontawesome==1.0
-pillow==9.0.1
+pillow==9.2.0
 
 # DEV
 django-extensions==3.1.5
