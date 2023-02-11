@@ -9,6 +9,6 @@ pillow==9.0.1
 django-extensions==3.1.5
 django-debug-toolbar==3.2.4
 ipdb==0.13.9
-ipython==8.0.1
+ipython==8.10.0
 Werkzeug==2.0.3
 twine==1.12.1
