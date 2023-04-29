@@ -12,11 +12,11 @@
 
 ### Como gerar uma nova release
 
-1. No arquivo `setup.py`, incremente o número da versão
-2. No arquivo `setup.py`, se foi criada uma nova pasta em `templates` ou em  `static`, adicione estas pastas usuando as demais como exemplo
-3. Teste localmente:
-    1. Crie a dist: `python setup.py sdist`
-    2. Teste se está tudo lá: `untar dist/django-theme-adminlte3-3.2.0.*`
-    3. Apague o lixo: `rm -rf dist django_theme_adminlte3.egg-info  django-theme-adminlte3-3.2.0.*`
-4. Crie uma tag com o nome da igual à `version` do arquivo `setup.py`
-5. Faça um push da tag
+1. Crie uma nova branch, `git checkout -b issueX`
+2. Instale o validador de QA installando o pre-commmit, `pre-commit install`
+3. Teste o QA, `pre-commit run --all-files`
+4. Incremente o número da versão no arquivo `setup.py`
+5. Se foi criada uma nova pasta em `templates` ou em  `static`, adicione estas pastas usuando o exemplo presente nos arquivos `setup.py`
+6. Faça um commit, `git commit -m "feat: [add] subject"`
+7. Crie uma release na interface do Github
+```
