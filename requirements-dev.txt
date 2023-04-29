@@ -1,18 +1,15 @@
-# Django dev
-django-extensions>=3.1.5
+black
 django-debug-toolbar>=3.2.4
+django-extensions>=3.1.5
+flake8
 ipdb>=0.13.9
 ipython>=8.0.1
-Werkzeug>=2.0.3
-
-# QA
-ruff
-flake8
-pytest
-black
+lxml
+mypy
 pdoc3
+pytest
 pytest-cov
 pytest-profiling
-mypy
-lxml
+ruff
 types-requests
+Werkzeug>=2.0.3
