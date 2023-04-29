@@ -1,22 +1,32 @@
 from django.contrib.admin.widgets import (
-    AdminDateWidget, AdminTimeWidget, AdminSplitDateTime, AdminRadioSelect, 
-    AdminFileWidget, ForeignKeyRawIdWidget, ManyToManyRawIdWidget, 
-    RelatedFieldWidgetWrapper, AdminTextareaWidget, AdminTextInputWidget, 
-    AdminEmailInputWidget, AdminURLFieldWidget, AdminIntegerFieldWidget, 
-    AdminBigIntegerFieldWidget, AutocompleteMixin, AutocompleteMixin, 
-    AutocompleteSelect, AutocompleteSelectMultiple 
+    AdminDateWidget,
+    AdminTimeWidget,
+    AdminSplitDateTime,
+    AdminRadioSelect,
+    AdminFileWidget,
+    ForeignKeyRawIdWidget,
+    ManyToManyRawIdWidget,
+    RelatedFieldWidgetWrapper,
+    AdminTextareaWidget,
+    AdminTextInputWidget,
+    AdminEmailInputWidget,
+    AdminURLFieldWidget,
+    AdminIntegerFieldWidget,
+    AdminBigIntegerFieldWidget,
+    AutocompleteMixin,
+    AutocompleteSelect,
+    AutocompleteSelectMultiple,
 )
+from typing import Union
+
 
 class AdminLTEDateWidget(AdminDateWidget):
     pass
-    # def __init__(self, attrs=None, format=None):
-    #     attrs = {'class': 'form-control', 'size': '10', **(attrs or {})}
-    #     super().__init__(attrs=attrs, format=format)
 
 
 class AdminLTETimeWidget(AdminTimeWidget):
-    def __init__(self, attrs=None, format=None):
-        attrs = {'class': 'form-control', 'size': '8', **(attrs or {})}
+    def __init__(self, attrs: Union[dict, None] = None, format: Union[str, None] = None):
+        attrs = {"class": "form-control", "size": "8", **(attrs or {})}
         super().__init__(attrs=attrs, format=format)
 
 
@@ -45,18 +55,18 @@ class AdminLTERelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
 
 
 class AdminLTETextareaWidget(AdminTextareaWidget):
-    def __init__(self, attrs=None):
-        super().__init__(attrs={'class': 'form-control', **(attrs or {})})
+    def __init__(self, attrs: Union[dict, None] = None):
+        super().__init__(attrs={"class": "form-control", **(attrs or {})})
 
 
 class AdminLTETextInputWidget(AdminTextInputWidget):
-    def __init__(self, attrs=None):
-        super().__init__(attrs={'class': 'form-control', **(attrs or {})})
+    def __init__(self, attrs: Union[dict, None] = None):
+        super().__init__(attrs={"class": "form-control", **(attrs or {})})
 
 
 class AdminLTEEmailInputWidget(AdminEmailInputWidget):
-    def __init__(self, attrs=None):
-        super().__init__(attrs={'class': 'form-control', **(attrs or {})})
+    def __init__(self, attrs: Union[dict, None] = None):
+        super().__init__(attrs={"class": "form-control", **(attrs or {})})
 
 
 class AdminLTEURLFieldWidget(AdminURLFieldWidget):
@@ -64,18 +74,18 @@ class AdminLTEURLFieldWidget(AdminURLFieldWidget):
 
 
 class AdminLTEIntegerFieldWidget(AdminIntegerFieldWidget):
-    def __init__(self, attrs=None):
-        super().__init__(attrs={'class': 'form-control', **(attrs or {})})
+    def __init__(self, attrs: Union[dict, None] = None):
+        super().__init__(attrs={"class": "form-control", **(attrs or {})})
 
 
 class AdminLTEBigIntegerFieldWidget(AdminBigIntegerFieldWidget):
-    def __init__(self, attrs=None):
-        super().__init__(attrs={'class': 'form-control', **(attrs or {})})
+    def __init__(self, attrs: Union[dict, None] = None):
+        super().__init__(attrs={"class": "form-control", **(attrs or {})})
 
 
 class AdminLTEUUIDInputWidget(AutocompleteMixin):
-    def __init__(self, attrs=None):
-        super().__init__(attrs={'class': 'form-control', **(attrs or {})})
+    def __init__(self, attrs: Union[dict, None] = None):
+        super().__init__(attrs={"class": "form-control", **(attrs or {})})
 
 
 class AdminLTEAutocompleteMixin(AutocompleteMixin):
@@ -88,4 +98,3 @@ class AdminLTEAutocompleteSelect(AutocompleteSelect):
 
 class AdminLTEAutocompleteSelectMultiple(AutocompleteSelectMultiple):
     pass
-

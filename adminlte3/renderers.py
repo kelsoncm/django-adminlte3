@@ -9,12 +9,14 @@ class EngineMixin:
 
     @cached_property
     def engine(self):
-        return self.backend({
-            'APP_DIRS': True,
-            'DIRS': [],
-            'NAME': 'djangoforms',
-            'OPTIONS': {},
-        })
+        return self.backend(
+            {
+                "APP_DIRS": True,
+                "DIRS": [],
+                "NAME": "djangoforms",
+                "OPTIONS": {},
+            }
+        )
 
 
 class DjangoTemplatesRenderer(EngineMixin, BaseRenderer):
@@ -22,4 +24,5 @@ class DjangoTemplatesRenderer(EngineMixin, BaseRenderer):
     Load Django templates from the built-in widget templates in
     django/forms/templates and from apps' 'templates' directory.
     """
+
     backend = DjangoTemplates

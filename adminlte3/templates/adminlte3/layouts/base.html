@@ -91,7 +91,7 @@
   {% if cl or action_form %} <script src="{% url 'admin:jsi18n' %}"></script>{% endif %}
   {% block extra_top_scripts %}{% endblock extra_top_scripts %}
 </head>
-<body class="{% if is_popup %}popup {% endif %}{% block body_classes %}hold-transition sidebar-mini layout-boxed {% block bodyclass %}{% if body_classes %}{{ body_classes }}{% endif %}{% endblock bodyclass %}{% endblock body_classes %}" data-admin-utc-offset="{% now "Z" %}">
+<body class="{% if is_popup %}popup {% endif %} hold-transition{% block body_classes %}sidebar-mini {% block bodyclass %}{% if body_classes %}{{ body_classes }}{% endif %}{% endblock bodyclass %}{% endblock body_classes %}" data-admin-utc-offset="{% now "Z" %}">
 <div class="wrapper">
 
   <!-- Preloader -->
