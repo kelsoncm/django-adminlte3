@@ -12,11 +12,13 @@
 
 ### Como gerar uma nova release
 
-1. Crie uma nova branch, `git checkout -b issueX`
+1. Clone o projeto
 2. Instale o validador de QA installando o pre-commmit, `pre-commit install`
-3. Teste o QA, `pre-commit run --all-files`
-4. Incremente o número da versão no arquivo `setup.py`
-5. Se foi criada uma nova pasta em `templates` ou em  `static`, adicione estas pastas usuando o exemplo presente nos arquivos `setup.py`
-6. Faça um commit, `git commit -m "feat: [add] subject"`
-7. Crie uma release na interface do Github
+3. Crie uma nova branch, `git checkout -b issueX`
+4. Se foi criada uma nova pasta em `templates` ou em  `static`, adicione estas pastas usuando o exemplo presente nos arquivos `setup.py`
+5. Incremente o número da versão no arquivo `setup.py`
+6. Teste o QA, `pre-commit run --all-files`
+7. Faça um commit, `git commit -m "feat: [add] subject"`
+8. Solicite um Pull Request na interface do Github
+9. Crie uma release na interface do Github
 ```
