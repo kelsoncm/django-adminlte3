@@ -1,10 +1,4 @@
-from django.utils.translation import gettext as _
-from django.urls import path
-from django.contrib.admin import ModelAdmin, register, site
-# from django.contrib.admin import site
-# from django.contrib.auth.models import User
-# from django.contrib.auth.admin import UserAdmin, sensitive_post_parameters_m, csrf_protect_m, transaction, router, settings, Http404, PermissionDenied, unquote, escape
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AdminPasswordChangeForm
+from django.contrib.admin import ModelAdmin, register
 from .models import AllDataTypes
 
 
@@ -57,13 +51,27 @@ from .models import AllDataTypes
 @register(AllDataTypes)
 class ModelAdmin(ModelAdmin):
     fieldsets = (
-        (None, {"fields": ['char_field', 'text_field', 'slug_field']}),
-        ('Number', {"fields": ['small_integer_field', 'integer_field', 'big_integer_field', 'positive_small_integer_field', 'positive_integer_field', 'positive_big_integer_field', 'decimal_field', 'float_field']}),
-        ('Boolean', {"fields": ['desconhecido', 'sim', 'nao']}),
-        ('Date & time', {"fields": ['date_field', 'time', 'date_time_field', 'duration_field']}),
-        ('Net', {"fields": ['email_field', 'generic_ip_address_field', 'url_field']}),
-        ('Extra', {"fields": ['json_field', 'uuid_field', 'file_path_field', 'file_field', 'image_field']}),
-        ('Relational', {"fields": ['foreign_key_field', 'one_to_one_field', 'many_to_many_field']}),
+        (None, {"fields": ["char_field", "text_field", "slug_field"]}),
+        (
+            "Number",
+            {
+                "fields": [
+                    "small_integer_field",
+                    "integer_field",
+                    "big_integer_field",
+                    "positive_small_integer_field",
+                    "positive_integer_field",
+                    "positive_big_integer_field",
+                    "decimal_field",
+                    "float_field",
+                ]
+            },
+        ),
+        ("Boolean", {"fields": ["desconhecido", "sim", "nao"]}),
+        ("Date & time", {"fields": ["date_field", "time", "date_time_field", "duration_field"]}),
+        ("Net", {"fields": ["email_field", "generic_ip_address_field", "url_field"]}),
+        ("Extra", {"fields": ["json_field", "uuid_field", "file_path_field", "file_field", "image_field"]}),
+        ("Relational", {"fields": ["foreign_key_field", "one_to_one_field", "many_to_many_field"]}),
     )
-    
-    autocomplete_fields = ['foreign_key_field', 'one_to_one_field']
+
+    autocomplete_fields = ["foreign_key_field", "one_to_one_field"]

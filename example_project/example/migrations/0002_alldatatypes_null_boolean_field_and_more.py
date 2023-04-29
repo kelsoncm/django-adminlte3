@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('example', '0001_initial'),
+        ("example", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='alldatatypes',
-            name='null_boolean_field',
+            model_name="alldatatypes",
+            name="null_boolean_field",
             field=models.BooleanField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='alldatatypes',
-            name='file_path_field',
-            field=models.FilePathField(path='/Users/kelson/devel/pessoal/django-adminlte3'),
+            model_name="alldatatypes",
+            name="file_path_field",
+            field=models.FilePathField(path="/Users/kelson/devel/pessoal/django-adminlte3"),
         ),
     ]

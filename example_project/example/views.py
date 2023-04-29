@@ -1,10 +1,9 @@
-from django.utils.translation import gettext as _
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 
 
 def dashboard(request: HttpRequest) -> HttpResponse:
-    return render(request, "example/dashboard.html", context={'page_title': 'Dashboard v1'})
+    return render(request, "example/dashboard.html", context={"page_title": "Dashboard v1"})
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
