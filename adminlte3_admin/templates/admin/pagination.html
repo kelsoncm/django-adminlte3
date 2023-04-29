@@ -28,13 +28,13 @@
                 {% for page in page_range %}
                     {% page_item cl page %}
                 {% endfor %}
-                
+
                 {% if show_all_url %}
                 <li class="paginate_button page-item next">
                     <a href="{{ show_all_url }}" class="showall page-link">{% translate 'Show all' %}</a>
                 </li>
                 {% endif %}
-                
+
             </ul>
         </div>
     </div>

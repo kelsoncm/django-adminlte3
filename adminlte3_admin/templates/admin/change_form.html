@@ -38,7 +38,7 @@
                     {% endif %}
                   {% endblock object-tools %}
                 </div>
-              </div>                
+              </div>
             </div><!-- /.card-header -->
 
             <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock form_top %}
@@ -56,7 +56,7 @@
                     {{ adminform.form.non_field_errors }}
                   </div>
                 {% endif %}
-                <div class="row"> <!-- fieldsets -->                  
+                <div class="row"> <!-- fieldsets -->
                   <div class="col-5 col-sm-12"> <!-- fieldsets_nav_col -->
                     {% for fieldset in adminform %}
                       {% if not fieldset.name %}
@@ -64,7 +64,7 @@
                       {% endif %}
                     {% endfor %}
                   </div> <!-- fieldsets_nav_col -->
-                </div> <!-- fieldsets -->                  
+                </div> <!-- fieldsets -->
                 <div class="row"> <!-- fieldsets -->
                   <div class="col-5 col-sm-3"> <!-- fieldsets_nav_col -->
                       <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical"><!-- fieldsets_navs -->
@@ -73,7 +73,7 @@
                             <a class="nav-link {% if forloop.counter == 2 %}active{% endif %}" id="vert-tabs-{{ fieldset.name|slugify }}-tab" data-toggle="pill" href="#vert-tabs-{{ fieldset.name|slugify }}" role="tab" aria-controls="vert-tabs-{{ fieldset.name|slugify }}" aria-selected="{% if forloop.counter == 2 %}true{% else %}false{% endif %}">{{ fieldset.name }}</a>
                           {% endif %}
                         {% endfor %}
-                      </div><!-- /fieldsets_navs -->                    
+                      </div><!-- /fieldsets_navs -->
                   </div><!-- /fieldsets_nav_col -->
 
                   <div class="col-7 col-sm-9"><!-- fieldsets_fields_col -->
@@ -83,12 +83,12 @@
                           {% include "admin/includes/fieldset.html" %}
                         {% endif %}
                       {% endfor %}
-                    
+
                     </div><!-- /fieldsets_fields -->
                   </div><!-- /fieldsets_fields_col -->
 
                 </div> <!-- /fieldsets -->
-{% comment %}  
+{% comment %}
                 <div class="row">
                   <div class="col-5 col-sm-3">
                     <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
@@ -149,8 +149,8 @@
           </div><!-- /.card -->
         </div><!-- /.admin-result_list -->
       </div><!-- /.row -->
-    
-      
+
+
     </div>
   </div>
 </div>

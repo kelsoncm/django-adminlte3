@@ -51,7 +51,7 @@
   <style>
     .form-group.is-invalid > .form-control,
     .form-group.is-invalid > .input-group > .form-control
-    { 
+    {
       border-color: red;
       padding-right: 2.25rem!important;
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -85,7 +85,7 @@
   {% block extrahead %}{% endblock extrahead %}
 
   {% block responsive %}{% endblock responsive %}
-  
+
   {% block extra_styles %}{% endblock extra_styles %}
 
   {% if cl or action_form %} <script src="{% url 'admin:jsi18n' %}"></script>{% endif %}
@@ -118,7 +118,7 @@
         {% block content_header %}
           <section class="content-header">
               <div class="container-fluid">
-                <div class="row mb-2">                  
+                <div class="row mb-2">
                     <div class="col-sm-6">
                       <h1 class="m-0">
                         {% block content_title %}
@@ -134,7 +134,7 @@
                         {% endblock content_title %}
                       </h1>
                     </div>
-                  
+
                   {% if not is_popup %}
                     {% block breadcrumbs %}
                       <div class="col-sm-6">
@@ -153,7 +153,7 @@
                           {% endif %}
                         </ol>
                       </div><!-- /.col -->
-                    {% endblock breadcrumbs %}            
+                    {% endblock breadcrumbs %}
                   {% endif %}
                 </div><!-- /.row -->
                 {% block content_subtitle %}
@@ -167,7 +167,7 @@
           </section>
         {% endblock content_header %}
         <!-- /.content-header -->
-        
+
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -186,7 +186,7 @@
           <br class="clear" />
         </div >
       </section>
-      <!-- /.content -->  
+      <!-- /.content -->
     </div>
   {% endblock content_wrapper %}
   <!-- /.content-wrapper -->
@@ -249,16 +249,16 @@
       //$('.datetimepicker-input').datetimepicker({format: 'L', sideBySide: true, debug: true});
       //$.datetimepicker.setLocale('br');
       $('#id_date_field-input-group').datetimepicker({
-        format: 'DD/MM/YYYY', 
-        sideBySide: true, 
+        format: 'DD/MM/YYYY',
+        sideBySide: true,
         locale: "pt-BR",
         debug: true,
 
       });
 
       $('#id_date_time_field_0-input-group').datetimepicker({
-        format: 'DD/MM/YYYY', 
-        sideBySide: true, 
+        format: 'DD/MM/YYYY',
+        sideBySide: true,
         locale: "pt-BR",
         debug: true,
         });
@@ -294,12 +294,12 @@
           $("#id_email_field").removeClass("borda-vermelha");
           $("#id_email_field").addClass("borda-verde");
         }
-        
+
     })
 
     //Validador campo Char Field
     $("#id_char_field").focusout(function(){
-  
+
       if($("#id_char_field").val() == ""){
         $("#id_char_field").addClass("borda-vermelha");
         $("#id_char_field").removeClass("borda-verde");
@@ -311,7 +311,7 @@
 
     //Validador Text Field
     $("#id_text_field").focusout(function(){
-  
+
       if($("#id_text_field").val() == ""){
         $("#id_text_field").addClass("borda-vermelha");
         $("#id_text_field").removeClass("borda-verde");
@@ -324,7 +324,7 @@
     //Validador Slug  Field
 
     $("#id_slug_field").focusout(function(){
-  
+
       if($("#id_slug_field").val() == ""){
         $("#id_slug_field").addClass("borda-vermelha");
         $("#id_slug_field").removeClass("borda-verde");
@@ -336,7 +336,7 @@
 
         // Validador campo small intenger Field
         $("#id_small_integer_field").focusout(function(){
-  
+
           if($("#id_small_integer_field").val() == ""){
             $("#id_small_integer_field").addClass("borda-vermelha");
             $("#id_small_integer_field").removeClass("borda-verde");
@@ -346,9 +346,9 @@
           }
         })
 
-        // Validador campo Intenger Field 
+        // Validador campo Intenger Field
         $("#id_integer_field").focusout(function(){
-  
+
           if($("#id_integer_field").val() == ""){
             $("#id_integer_field").addClass("borda-vermelha");
             $("#id_integer_field").removeClass("borda-verde");
@@ -358,9 +358,9 @@
           }
         })
 
-        // Validador campo Big Intenger Field 
+        // Validador campo Big Intenger Field
         $("#id_big_integer_field").focusout(function(){
-  
+
           if($("#id_big_integer_field").val() == ""){
             $("#id_big_integer_field").addClass("borda-vermelha");
             $("#id_big_integer_field").removeClass("borda-verde");
@@ -370,13 +370,13 @@
           }
         })
 
-        // Validador campo Positive small integer field 
+        // Validador campo Positive small integer field
         function validatePositiveInteger(positiveIntenger) {
           var positiveReg = /^[1-9]\d*$/;
           return positiveReg.test( positiveIntenger );
       }
-    
-    
+
+
         $("#id_positive_small_integer_field").focusout(function() {
             var positiveItenger = $("#id_positive_small_integer_field").val();
             if(!validatePositiveInteger(positiveItenger)){
@@ -386,7 +386,7 @@
               $("#id_positive_small_integer_field").removeClass("borda-vermelha");
               $("#id_positive_small_integer_field").addClass("borda-verde");
             }
-            
+
         })
 
         // Validador campo Positive integer field
@@ -394,8 +394,8 @@
           var positiveReg = /^[1-9]\d*$/;
           return positiveReg.test( positiveIntenger );
       }
-    
-    
+
+
         $("#id_positive_integer_field").focusout(function() {
             var positiveItenger = $("#id_positive_integer_field").val();
             if(!validatePositiveInteger(positiveItenger)){
@@ -405,7 +405,7 @@
               $("#id_positive_integer_field").removeClass("borda-vermelha");
               $("#id_positive_integer_field").addClass("borda-verde");
             }
-            
+
         })
 
         // Validador campo Positive big integer field
@@ -413,8 +413,8 @@
           var positiveReg = /^[1-9]\d*$/;
           return positiveReg.test( positiveIntenger );
       }
-    
-    
+
+
         $("#id_positive_big_integer_field").focusout(function() {
             var positiveItenger = $("#id_positive_big_integer_field").val();
             if(!validatePositiveInteger(positiveItenger)){
@@ -424,12 +424,12 @@
               $("#id_positive_big_integer_field").removeClass("borda-vermelha");
               $("#id_positive_big_integer_field").addClass("borda-verde");
             }
-            
+
         })
 
-        // Validador campo Decimal field 
+        // Validador campo Decimal field
         $("#id_decimal_field").focusout(function(){
-  
+
           if($("#id_decimal_field").val() == ""){
             $("#id_decimal_field").addClass("borda-vermelha");
             $("#id_decimal_field").removeClass("borda-verde");
@@ -439,9 +439,9 @@
           }
         })
 
-        // Validador campo Float field 
+        // Validador campo Float field
         $("#id_float_field").focusout(function(){
-  
+
           if($("#id_float_field").val() == ""){
             $("#id_float_field").addClass("borda-vermelha");
             $("#id_float_field").removeClass("borda-verde");
@@ -456,8 +456,8 @@
           var dateReg = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-.\/])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/;
           return dateReg.test( dateField );
       }
-    
-    
+
+
         $("#id_date_field").focusout(function() {
             var dateField = $("#id_date_field").val();
             if(!validateDateField(dateField)){
@@ -467,7 +467,7 @@
               $("#id_date_field").removeClass("borda-vermelha");
               $("#id_date_field").addClass("borda-verde");
             }
-            
+
         })
 
         //Time Negrito
@@ -475,8 +475,8 @@
           var timeReg = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
           return timeReg.test( timeNegrito );
       }
-    
-    
+
+
         $("#id_time").focusout(function() {
             var timeNegrito = $("#id_time").val();
             if(!validateTimeNegrito(timeNegrito)){
@@ -486,7 +486,7 @@
               $("#id_time").removeClass("borda-vermelha");
               $("#id_time").addClass("borda-verde");
             }
-            
+
         })
 
         //Date
@@ -499,7 +499,7 @@
             $("#id_date_time_field_0").removeClass("borda-vermelha");
             $("#id_date_time_field_0").addClass("borda-verde");
           }
-          
+
       })
 
         //Time Sem Negrito
@@ -512,12 +512,12 @@
             $("#id_date_time_field_1").removeClass("borda-vermelha");
             $("#id_date_time_field_1").addClass("borda-verde");
           }
-          
+
       })
 
         //Duration Field
         $("#id_duration_field").focusout(function(){
-  
+
           if($("#id_duration_field").val() == ""){
             $("#id_duration_field").addClass("borda-vermelha");
             $("#id_duration_field").removeClass("borda-verde");
@@ -532,8 +532,8 @@
           var IpAdress = /(?:0|25[0-5]|2[0-4]\d|1\d?\d?|[1-9]\d?)(?:\.(?:0|25[0-5]|2[0-4]\d|1\d?\d?|[1-9]\d?)){3}/;
           return IpAdress.test( ipAdress );
       }
-    
-    
+
+
         $("#id_generic_ip_address_field").focusout(function() {
             var ipAdress = $("#id_generic_ip_address_field").val();
             if(!validateIpAdress(ipAdress)){
@@ -543,7 +543,7 @@
               $("#id_generic_ip_address_field").removeClass("borda-vermelha");
               $("#id_generic_ip_address_field").addClass("borda-verde");
             }
-            
+
         })
 
         // Validador campo Url field
@@ -551,8 +551,8 @@
           var urlValidator = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
           return urlValidator.test( url );
       }
-    
-    
+
+
         $("#id_url_field").focusout(function() {
             var urlValidator = $("#id_url_field").val();
             if(!validateUrl(urlValidator)){
@@ -562,7 +562,7 @@
               $("#id_url_field").removeClass("borda-vermelha");
               $("#id_url_field").addClass("borda-verde");
             }
-            
+
         })
 
         //Json Field
@@ -575,7 +575,7 @@
             }catch(err){
               jsonValid = false;
               return false;
-              
+
             }
           return jsonValid;
         }
@@ -590,7 +590,7 @@
             $("#id_json_field").removeClass("borda-vermelha");
             $("#id_json_field").addClass("borda-verde");
           }
-          
+
       })
         //Uuid Field
 
@@ -609,7 +609,7 @@
           $("#id_uuid_field").removeClass("borda-vermelha");
           $("#id_uuid_field").addClass("borda-verde");
         }
-        
+
     })
 
         //After an submit click, this will be called
@@ -630,7 +630,7 @@
             }else{
               $("#id_char_field").removeClass("borda-vermelha");
               $("#id_char_field").addClass("borda-verde");
-              
+
               //Seguir para o submit true
               goAheadSubmit = "true";
             }
@@ -639,13 +639,13 @@
             if($("#id_text_field").val() == ""){
               $("#id_text_field").addClass("borda-vermelha");
               $("#id_text_field").removeClass("borda-verde");
-              
+
               //Seguir para o submit false
               goAheadSubmit = "false";
             }else{
               $("#id_text_field").removeClass("borda-vermelha");
               $("#id_text_field").addClass("borda-verde");
-              
+
               //Seguir para o submit true
               goAheadSubmit = "true";
             }
@@ -777,7 +777,7 @@
               //sidebar Menu
               $("#vert-tabs-number-tab").removeClass("borda-vermelha-navMenu");
               $("#vert-tabs-number-tab").addClass("borda-verde-navMenu");
-              
+
                 //Seguir para o submit true
                goAheadSubmit = "true";
             }
@@ -924,7 +924,7 @@
                   //Seguir para o submit true
                   goAheadSubmit = "true";
                 }
-              
+
               //Time Sem Negrito
                 var timeSemNegrito = $("#id_date_time_field_1").val();
                 if(!validateTimeNegrito(timeSemNegrito)){
@@ -949,7 +949,7 @@
                   goAheadSubmit = "true";
                 }
 
-              //Duration Field      
+              //Duration Field
                 if($("#id_duration_field").val() == ""){
                   $("#id_duration_field").addClass("borda-vermelha");
                   $("#id_duration_field").removeClass("borda-verde");
@@ -1043,7 +1043,7 @@
               //Seguir para o submit true
               goAheadSubmit = "true";
             }
-            
+
             //Json Field
 
             var jsonValidator = $("#id_json_field").val();
@@ -1112,11 +1112,11 @@
               //sidebar Menu
               $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
               $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
-             
+
               //Seguir para o submit true
                goAheadSubmit = "true";
-            } 
-        
+            }
+
             //Image field
             if($("#id_image_field").val() == ""){
               $("#id_image_field").addClass("borda-vermelha");
@@ -1135,10 +1135,10 @@
               //sidebar Menu
               $("#vert-tabs-extra-tab").removeClass("borda-vermelha-navMenu");
               $("#vert-tabs-extra-tab").addClass("borda-verde-navMenu");
-             
+
               //Seguir para o submit true
               goAheadSubmit = "true";
-            } 
+            }
 
             //Faz o submit se receber true de todas as condições.
             if(goAheadSubmit == "true"){
@@ -1148,9 +1148,9 @@
             // continue the submit unbind preventDefault
           })
         })
-        
+
   </script>
-  
+
 {% endblock bottom_scripts %}
 
 {% block customizer_scripts %}

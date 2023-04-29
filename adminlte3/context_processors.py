@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.utils.translation import gettext as _
 from django.conf import settings
 from django.http import HttpRequest

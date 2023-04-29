@@ -38,7 +38,7 @@
                     <h3 class="card-title">{{ cl.opts.verbose_name_plural|capfirst }}</h3>
                     <div class="card-tools">{% block search %}{% search_form cl %}{% endblock search %}</div>
                 </div><!-- /.card-header -->
-                
+
                 <form id="changelist-form" method="post"{% if cl.formset and cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
                     <div class="card-body"><!-- .card-body -->
                         {% pagination cl %}
@@ -51,7 +51,7 @@
                 </div><!-- /.card-footer -->
                 </div><!-- /.card -->
             </div><!-- /.admin-result_list -->
-          
+
             <div class="col-md-3">
                 {% block actions %} {% admin_actions %} {% endblock actions %}
 
@@ -59,8 +59,8 @@
             </div>
 
         </div><!-- /.row -->
-      
-        
+
+
       </div>
     </div>
   </div>

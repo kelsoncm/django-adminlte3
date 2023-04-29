@@ -33,7 +33,7 @@
                                     {% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}
                                 {% else %}
                                     {% translate 'Unknown content' %}
-                                {% endif %}                                    
+                                {% endif %}
                             </td>
                             <td>
                                 {% if entry.is_addition %}<span class="badge bg-info">{% translate 'Add' %}</span>{% endif %}
@@ -47,7 +47,7 @@
                                     <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
                                 {% endif %}
                             </td>
-                        </tr>   
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>

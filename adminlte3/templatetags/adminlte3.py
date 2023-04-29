@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.utils.safestring import mark_safe
 from django.contrib.admin.views.main import PAGE_VAR
 from django.template.defaultfilters import register

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.template.backends.django import DjangoTemplates
 from django.utils.functional import cached_property
 from django.forms.renderers import BaseRenderer

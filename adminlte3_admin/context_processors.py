@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.http import HttpRequest
 from django.urls import reverse, NoReverseMatch
 from django.contrib.admin.sites import site
