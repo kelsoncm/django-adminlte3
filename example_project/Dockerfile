@@ -6,7 +6,7 @@ RUN apt update && apt upgrade -y && apt -y install curl vim && pip install --upg
 
 ADD requirements_example.txt /
 
-RUN pip install -r /requirements_example.txt 
+RUN pip install -r /requirements_example.txt
 
 COPY --from=lib . /app/lib
 
