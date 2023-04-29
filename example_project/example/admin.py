@@ -71,7 +71,8 @@ class ModelAdmin(ModelAdmin):
         ("Boolean", {"fields": ["desconhecido", "sim", "nao"]}),
         ("Date & time", {"fields": ["date_field", "time", "date_time_field", "duration_field"]}),
         ("Net", {"fields": ["email_field", "generic_ip_address_field", "url_field"]}),
-        ("Extra", {"fields": ["json_field", "uuid_field", "file_path_field", "file_field", "image_field"]}),
+        # ("Extra", {"fields": ["json_field", "uuid_field", "file_path_field", "file_field", "image_field"]}),
+        ("Extra", {"fields": ["file_path_field", "file_field", "image_field"]}),
         ("Relational", {"fields": ["foreign_key_field", "one_to_one_field", "many_to_many_field"]}),
     )
 

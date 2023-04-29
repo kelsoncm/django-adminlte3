@@ -6,10 +6,10 @@ from django.apps import apps
 from django.utils.text import capfirst
 
 
-def __add_to_model_dict(model_dict: dict, key: str, check: bool, to_reverse: str, current_app: str):
+def __add_to_model_dict(model_dict: dict, key: str, check: bool, to_reverse: str):
     if check:
         try:
-            model_dict[key] = reverse(to_reverse, current_app)
+            model_dict[key] = reverse(to_reverse)
         except NoReverseMatch:
             pass
 
@@ -33,21 +33,19 @@ def _build_app_dict(request, label=None):
         can_change = perms.get("change")
         can_add = perms.get("add")
 
-        icon = model._meta.icon if hasattr(model._meta, "icon") else "far fa-circle"
-
         if not has_module_perms or True not in perms.values():
             continue
 
         model_dict = {
             "model": model,
             "name": capfirst(model._meta.verbose_name_plural),
-            "icon": icon,
+            "icon": getattr(model._meta, "icon", "far fa-circle"),
             "object_name": model._meta.object_name,
             "perms": perms,
         }
 
-        __add_to_model_dict(model_dict, "admin_url", can_view, "admin:%s_%s_changelist" % info, site.name)
-        __add_to_model_dict(model_dict, "add_url", can_add, "admin:%s_%s_add" % info, site.name)
+        __add_to_model_dict(model_dict, "admin_url", can_view, "admin:%s_%s_changelist" % info)
+        __add_to_model_dict(model_dict, "add_url", can_add, "admin:%s_%s_add" % info)
 
         if app_label in app_dict:
             app_dict[app_label]["models"].append(model_dict)
@@ -55,7 +53,7 @@ def _build_app_dict(request, label=None):
         app = apps.get_app_config(app_label)
         app_dict[app_label] = {
             "name": app.verbose_name,
-            "icon": icon,
+            "icon": getattr(app, "icon", "far fa-circle"),
             "app_label": app_label,
             "app_url": reverse("admin:app_list", None, [], {"app_label": app_label}, site.name),
             "has_module_perms": has_module_perms,
@@ -73,9 +71,12 @@ def sidebar_menu(request: HttpRequest) -> dict:
             {
                 "label": app["name"],
                 "url": app["app_url"],
-                "icon": app["icon"],
+                "icon": app.get("icon", "far fa-circle"),
                 "app": app_label,
-                "subitens": [{"label": model["name"], "url": model["admin_url"]} for model in app["models"]],
+                "subitens": [
+                    {"label": model["name"], "url": model["admin_url"], "icon": model.get("icon", "far fa-circle")}
+                    for model in app["models"]
+                ],
             }
         )
     return {"layout_sidebar_menu": menu_itens}

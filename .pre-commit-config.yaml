@@ -31,7 +31,7 @@ repos:
       - id: fix-byte-order-marker # Removes UTF-8 byte order marker
       - id: fix-encoding-pragma # Add # -*- coding: utf-8 -*- to the top of python files.
       - id: forbid-submodules # forbids any submodules in the repository.
-      - id: mixed-line-ending # Replaces or checks mixed line ending.
+      # - id: mixed-line-ending # Replaces or checks mixed line ending.
       - id: name-tests-test # verifies that test files are named correctly.
         args: [--pytest-test-first]
       # - id: no-commit-to-branch # Protect specific branches from direct checkins.
@@ -41,8 +41,8 @@ repos:
       - id: requirements-txt-fixer # Sorts entries in requirements.txt and constraints.txt and removes incorrect entry for pkg-resources==0.0.0
       # - id: sort-simple-yaml # Sorts simple YAML files which consist only of top-level keys, preserving comments and blocks.
       #   files: ^config/simple/
-      - id: trailing-whitespace # Trims trailing whitespace.
-        args: [--markdown-linebreak-ext=md]
+      # - id: trailing-whitespace # Trims trailing whitespace.
+      #   args: [--markdown-linebreak-ext=md]
 
   # - repo: https://github.com/charliermarsh/ruff-pre-commit
   #   # Ruff version.
