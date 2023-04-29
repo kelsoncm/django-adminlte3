@@ -22,3 +22,14 @@
 8. Solicite um Pull Request na interface do Github
 9. Crie uma release na interface do Github
 ```
+
+### Para testar localmente
+
+```bash
+docker buildx build --build-context app=. -t adminlte3_example --progress plain example_project
+docker run --rm -it -p 8000:8000 -v `pwd`:/app/lib/ -v `pwd`/example_project:/app/example_project/ --name adminlte3_example -e DJANGO_SETTINGS_MODULE=settings adminlte3_example bash -c 'python manage.py runserver_plus 0.0.0.0:8000'
+docker exec adminlte3_example python manage.py makemigrations
+docker exec adminlte3_example python manage.py migrate
+docker exec adminlte3_example python -m django_createsuperuser "admin" "admin" foo@foo.foo
+docker exec adminlte3_example python manage.py show_urls
+```
