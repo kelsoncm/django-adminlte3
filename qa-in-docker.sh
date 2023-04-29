@@ -3,6 +3,12 @@
 docker build -t adminlte3 .
 
 docker run --rm -v `pwd`:/apps/app -u 1000 adminlte3 bash -c '
+
+echo "
+# Generate pui stubs"
+# stubgen -o . adminlte3
+# stubgen -o . adminlte3_admin
+
 echo "
 # Code formatter"
 black .
