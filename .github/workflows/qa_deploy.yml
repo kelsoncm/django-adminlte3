@@ -1,0 +1,83 @@
+name: Deploy
+
+# https://docs.github.com/en/actions/learn-github-actions/contexts
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure artifacts directory
+        run: |
+          mkdir artifacts
+          mkdir cobertura
+
+      - name: Set up Python 3.9, 3.10 and 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip setuptools
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Code formatter
+        continue-on-error: true
+        run: black .
+
+      - name: Lint
+        continue-on-error: true
+        run: |
+          ruff .
+          flake8 --benchmark --doctests  --tee .
+
+      - name: Static type check
+        continue-on-error: true
+        run: mypy --warn-unused-configs --python-version 3.9 --show-error-context --show-column-numbers --show-error-end --show-error-codes --pretty --html-report artifacts/statictypecheck --cobertura-xml-report artifacts/statictypecheck --explicit-package-bases adminlte3*
+
+      # - name: Unit test
+      #   continue-on-error: true
+      #   run: python -m pytest
+
+      # - name: PyDocs
+      #   continue-on-error: true
+      #   run: pdoc3 --html -o artifacts/pydocs --config show_source_code=False --force adminlte3*
+
+      - name: Archive QA artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: |
+            artifacts
+            coverage
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build package
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        run: python setup.py sdist
+        # run: python setup.py validate_tag $RELEASE_VERSION && python setup.py sdist
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@v1.8.5
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
