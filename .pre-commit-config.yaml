@@ -31,7 +31,7 @@ repos:
       - id: fix-byte-order-marker # Removes UTF-8 byte order marker
       - id: fix-encoding-pragma # Add # -*- coding: utf-8 -*- to the top of python files.
       - id: forbid-submodules # forbids any submodules in the repository.
-      # - id: mixed-line-ending # Replaces or checks mixed line ending.
+      - id: mixed-line-ending # Replaces or checks mixed line ending.
       - id: name-tests-test # verifies that test files are named correctly.
         args: [--pytest-test-first]
       # - id: no-commit-to-branch # Protect specific branches from direct checkins.
