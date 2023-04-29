@@ -26,8 +26,8 @@ jobs:
       - name: Set up Python 3.9, 3.10 and 3.11
         uses: actions/setup-python@v4
         with:
-          # python-version: ${{ matrix.python-version }}
-          python-version: "3.9"
+          python-version: ${{ matrix.python-version }}
+          # python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -75,3 +75,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: true
