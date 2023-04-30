@@ -21,9 +21,7 @@ from django.db.models import (
     EmailField,
     GenericIPAddressField,
     URLField,
-    JSONField,
     BinaryField,
-    UUIDField,
     ForeignKey,
     OneToOneField,
     ManyToManyField,
@@ -62,9 +60,9 @@ class AllDataTypes(Model):
     email_field = EmailField()
     generic_ip_address_field = GenericIPAddressField()
     url_field = URLField()
-    json_field = JSONField()
+    # json_field = JSONField()
     binary_field = BinaryField()
-    uuid_field = UUIDField()
+    # uuid_field = UUIDField()
     foreign_key_field = ForeignKey(Group, on_delete=CASCADE, null=True, blank=True)
     one_to_one_field = OneToOneField(User, on_delete=CASCADE, null=True, blank=True)
     many_to_many_field = ManyToManyField(Permission, null=True, blank=True)
@@ -74,3 +72,8 @@ class AllDataTypes(Model):
     desconhecido = BooleanField()
     sim = BooleanField()
     nao = BooleanField()
+
+
+AllDataTypes._meta.icon = "fa fa-pen"
+
+User._meta.icon = "fa fa-user"
