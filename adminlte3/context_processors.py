@@ -218,7 +218,7 @@ def messages(request: HttpRequest) -> dict:
             "messages": [
                 {
                     "message_url": "#",
-                    "user_thumbnail_url": f"{settings.STATIC_URL}adminlte3/img/user1-128x128.jpg",
+                    "user_thumbnail_url": f"{settings.STATIC_URL}vendors/adminlte3/img/user1-128x128.jpg",
                     "user_name": "Brad Diesel",
                     "text": "Call me whenever you can...",
                     "since": "4 Hours Ago",
@@ -226,7 +226,7 @@ def messages(request: HttpRequest) -> dict:
                 },
                 {
                     "message_url": "#",
-                    "user_thumbnail_url": f"{settings.STATIC_URL}adminlte3/img/user8-128x128.jpg",
+                    "user_thumbnail_url": f"{settings.STATIC_URL}vendors/adminlte3/img/user8-128x128.jpg",
                     "user_name": "John Pierce",
                     "text": "I got your message bro",
                     "since": "4 Hours Ago",
@@ -234,7 +234,7 @@ def messages(request: HttpRequest) -> dict:
                 },
                 {
                     "message_url": "#",
-                    "user_thumbnail_url": f"{settings.STATIC_URL}adminlte3/img/user3-128x128.jpg",
+                    "user_thumbnail_url": f"{settings.STATIC_URL}vendors/adminlte3/img/user3-128x128.jpg",
                     "user_name": "Nora Silvester",
                     "text": "The subject goes here",
                     "since": "4 Hours Ago",
