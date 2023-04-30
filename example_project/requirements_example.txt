@@ -1,3 +1,2 @@
--e /adminlte3
-django>=4.0
-pillow>=9.0.1
+-e /app/lib/
+django-createsuperuser

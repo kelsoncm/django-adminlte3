@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "example",
     "django_extensions",
     "debug_toolbar",
+    "django_createsuperuser",
 ]
 
 MIDDLEWARE = [
@@ -50,7 +51,7 @@ TEMPLATES = [
                 "adminlte3.context_processors.layout_settings",
                 "adminlte3.context_processors.top_menu",
                 "adminlte3.context_processors.user",
-                # 'adminlte3.context_processors.sidebar_menu',
+                # "adminlte3.context_processors.sidebar_menu",
                 "adminlte3_admin.context_processors.sidebar_menu",
                 "adminlte3.context_processors.messages",
                 "adminlte3.context_processors.notifications",
