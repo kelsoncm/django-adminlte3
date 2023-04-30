@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from typing import Union, Dict, List, Any
 from django.http import HttpRequest
 from django.urls import reverse, NoReverseMatch
 from django.contrib.admin.sites import site
@@ -6,15 +7,16 @@ from django.apps import apps
 from django.utils.text import capfirst
 
 
-def __add_to_model_dict(model_dict: dict, key: str, check: bool, to_reverse: str):
-    if check:
-        try:
-            model_dict[key] = reverse(to_reverse)
-        except NoReverseMatch:
-            pass
+def safe_reverse(has_permission: bool, to_reverse: str) -> Union[str, None]:
+    if not has_permission:
+        return None
+    try:
+        return reverse(to_reverse)
+    except NoReverseMatch:
+        return None
 
 
-def _build_app_dict(request, label=None):
+def _build_app_dict(request, label=None) -> Dict[str, Dict[str, Any]]:
     """
     Build the app dictionary. The optional `label` parameter filters models
     of a specific app.
@@ -25,46 +27,40 @@ def _build_app_dict(request, label=None):
 
     for model, model_admin in models.items():
         app_label = model._meta.app_label
-        info = (app_label, model._meta.model_name)
 
-        has_module_perms = model_admin.has_module_permission(request)
+        if app_label not in app_dict:
+            app = apps.get_app_config(app_label)
+            app_dict[app_label] = {
+                "name": app.verbose_name,
+                "icon": getattr(app, "icon", "far fa-circle"),
+                "app_label": app_label,
+                "app_url": reverse("admin:app_list", None, [], {"app_label": app_label}, site.name),
+                "has_module_perms": model_admin.has_module_permission(request),
+                "view_only": False,
+                "models": [],
+            }
+
+        info = (app_label, model._meta.model_name)
         perms = model_admin.get_model_perms(request)
         can_view = perms.get("change") or perms.get("view")
-        can_change = perms.get("change")
         can_add = perms.get("add")
 
-        if not has_module_perms or True not in perms.values():
-            continue
-
-        model_dict = {
-            "model": model,
-            "name": capfirst(model._meta.verbose_name_plural),
-            "icon": getattr(model._meta, "icon", "far fa-circle"),
-            "object_name": model._meta.object_name,
-            "perms": perms,
-        }
-
-        __add_to_model_dict(model_dict, "admin_url", can_view, "admin:%s_%s_changelist" % info)
-        __add_to_model_dict(model_dict, "add_url", can_add, "admin:%s_%s_add" % info)
-
-        if app_label in app_dict:
-            app_dict[app_label]["models"].append(model_dict)
-
-        app = apps.get_app_config(app_label)
-        app_dict[app_label] = {
-            "name": app.verbose_name,
-            "icon": getattr(app, "icon", "far fa-circle"),
-            "app_label": app_label,
-            "app_url": reverse("admin:app_list", None, [], {"app_label": app_label}, site.name),
-            "has_module_perms": has_module_perms,
-            "view_only": can_view and not can_change,
-            "models": [model_dict],
-        }
+        app_dict[app_label]["models"].append(
+            {
+                "model": model,
+                "name": capfirst(model._meta.verbose_name_plural),
+                "icon": getattr(model._meta, "icon", "far fa-circle"),
+                "object_name": model._meta.object_name,
+                "perms": perms,
+                "admin_url": safe_reverse(can_view, "admin:%s_%s_changelist" % info),
+                "add_url": safe_reverse(can_add, "admin:%s_%s_add" % info),
+            }
+        )
 
     return app_dict.get(label) if label else app_dict
 
 
-def sidebar_menu(request: HttpRequest) -> dict:
+def sidebar_menu(request: HttpRequest) -> Dict[str, List[Dict[str, Any]]]:
     menu_itens = []
     for app_label, app in _build_app_dict(request).items():
         menu_itens.append(
