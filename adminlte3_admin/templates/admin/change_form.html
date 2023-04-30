@@ -3,7 +3,7 @@
 
 {% block extrahead %}{{ block.super }}{{ media }}{% endblock extrahead %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock extrastyle %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static '/vendors/admin/css/forms.css' %}" />{% endblock extrastyle %}
 
 {% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock bodyclass %}
 

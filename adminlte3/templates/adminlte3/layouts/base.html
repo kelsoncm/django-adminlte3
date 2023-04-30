@@ -16,38 +16,38 @@
 
   <title>{% block title %}{{ layout_site_name }}{% if page_title %} | {{ page_title }} {% endif %}{% endblock title %}</title>
   {% block favicon %}
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static '/favicon/apple-touch-icon.png' %}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon/favicon-32x32.png' %}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon/favicon-16x16.png' %}" />
-    <link rel="manifest" href="{% static '/favicon/site.webmanifest' %}" />
-    <link rel="shortcut icon" href="{% static '/favicon/favicon.ico' %}" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static '/vendors/favicon/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/vendors/favicon/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/vendors/favicon/favicon-16x16.png' %}" />
+    <link rel="manifest" href="{% static '/vendors/favicon/site.webmanifest' %}" />
+    <link rel="shortcut icon" href="{% static '/vendors/favicon/favicon.ico' %}" />
     <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="msapplication-config" content="/static/favicon/browserconfig.xml' %}" />
+    <meta name="msapplication-config" content="/vendors/static/favicon/browserconfig.xml' %}" />
     <meta name="theme-color" content="#ffffff" />
   {% endblock favicon %}
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static '/fontawesome-free/css/all.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/fontawesome-free/css/all.min.css' %}" />
   <!-- Ionicons -->
   <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
   <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="{% static '/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}" />
   <!-- iCheck -->
-  <link rel="stylesheet" href="{% static '/icheck-bootstrap/icheck-bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/icheck-bootstrap/icheck-bootstrap.min.css' %}" />
   <!-- JQVMap -->
-  <link rel="stylesheet" href="{% static '/jqvmap/jqvmap.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/jqvmap/jqvmap.min.css' %}" />
   <!-- Theme style -->
-  <link rel="stylesheet" href="{% static '/adminlte3/css/adminlte.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/adminlte3/css/adminlte.min.css' %}" />
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{% static '/overlayScrollbars/css/OverlayScrollbars.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/overlayScrollbars/css/OverlayScrollbars.min.css' %}" />
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="{% static '/daterangepicker/daterangepicker.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/daterangepicker/daterangepicker.css' %}" />
   <!-- summernote -->
-  <link rel="stylesheet" href="{% static '/summernote/summernote-bs4.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/vendors/summernote/summernote-bs4.min.css' %}" />
 
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'custom/admin/css/forms.css' %}" />
   <style>
     .form-group.is-invalid > .form-control,
     .form-group.is-invalid > .input-group > .form-control
@@ -96,7 +96,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{% static '/adminlte3/img/AdminLTELogo.png' %}" alt="AdminLTELogo" height="60" width="60" />
+    <img class="animation__shake" src="{% static '/vendors/adminlte3/img/AdminLTELogo.png' %}" alt="AdminLTELogo" height="60" width="60" />
   </div>
 
   <!-- Navbar -->
@@ -213,35 +213,35 @@
 {% block bottom_scripts %}
 {% comment %} <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
   <!-- jQuery -->
-  <script src="{% static '/jquery/jquery.min.js'%}"></script>
+  <script src="{% static '/vendors/jquery/jquery.min.js'%}"></script>
   <!-- Bootstrap 4 -->
-  <script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static '/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="{% static '/jquery-ui/jquery-ui.min.js' %}"></script>
+  <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>$.widget.bridge('uibutton', $.ui.button)</script>
   <!-- ChartJS -->
-  <script src="{% static '/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static '/vendors/chart.js/Chart.min.js' %}"></script>
   <!-- Sparkline -->
-  <script src="{% static '/sparklines/sparkline.js' %}"></script>
+  <script src="{% static '/vendors/sparklines/sparkline.js' %}"></script>
   <!-- JQVMap -->
-  <script src="{% static '/jqvmap/jquery.vmap.min.js' %}"></script>
-  <script src="{% static '/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+  <script src="{% static '/vendors/jqvmap/jquery.vmap.min.js' %}"></script>
+  <script src="{% static '/vendors/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
   <!-- jQuery Knob Chart -->
-  <script src="{% static '/jquery-knob/jquery.knob.min.js' %}"></script>
+  <script src="{% static '/vendors/jquery-knob/jquery.knob.min.js' %}"></script>
   <!-- daterangepicker -->
-  <script src="{% static '/moment/moment-with-locales.min.js' %}"></script>
-  <script src="{% static '/daterangepicker/daterangepicker.js' %}"></script>
+  <script src="{% static '/vendors/moment/moment-with-locales.min.js' %}"></script>
+  <script src="{% static '/vendors/daterangepicker/daterangepicker.js' %}"></script>
 
 
   <!-- Summernote -->
-  <script src="{% static '/summernote/summernote-bs4.min.js' %}"></script>
+  <script src="{% static '/vendors/summernote/summernote-bs4.min.js' %}"></script>
   <!-- overlayScrollbars -->
-  <script src="{% static '/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+  <script src="{% static '/vendors/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
   <!-- AdminLTE App -->
-  <script src="{% static '/adminlte3/js/adminlte.js' %}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{% static '/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js' %}"></script>
+  <script src="{% static '/vendors/adminlte3/js/adminlte.js' %}"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{% static '/vendors/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js' %}"></script>
   <script>
     $(function () {
       //Datemask dd/mm/yyyy
@@ -1156,7 +1156,7 @@
 {% block customizer_scripts %}
   {% if layout_has_customizer %}
   <!-- AdminLTE for demo purposes -->
-  <script src="{% static '/adminlte3/js/customizer.js' %}"></script>
+  <script src="{% static '/vendors/adminlte3/js/customizer.js' %}"></script>
   {% endif %}
 {% endblock customizer_scripts %}
 
