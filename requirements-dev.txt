@@ -12,4 +12,4 @@ pytest-cov
 pytest-profiling
 ruff
 types-requests
-Werkzeug>=3.0.1
+Werkzeug>=2.3.8
