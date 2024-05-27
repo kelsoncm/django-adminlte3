@@ -1385,7 +1385,7 @@
                     plot.mapElem.originalBBox = plot.mapElem.getBBox();
                 }
 
-                // The base transform will resize the SVG path to the one specified by width/height
+                // The theme transform will resize the SVG path to the one specified by width/height
                 // and also move the path to the actual coordinates
                 plot.mapElem.baseTransform = "m" + (plot.options.width / plot.mapElem.originalBBox.width) + ",0,0," +
                                                    (plot.options.height / plot.mapElem.originalBBox.height) + "," +

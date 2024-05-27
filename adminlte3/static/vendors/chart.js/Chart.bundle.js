@@ -4350,7 +4350,7 @@ core_defaults._set('global', {
 			borderDashOffset: 0.0,
 			borderJoinStyle: 'miter',
 			capBezierPoints: true,
-			fill: true, // do we fill in the area between the line and its base axis
+			fill: true, // do we fill in the area between the line and its theme axis
 		}
 	}
 });
@@ -8310,7 +8310,7 @@ var positioners = {
 function pushOrConcat(base, toPush) {
 	if (toPush) {
 		if (helpers$1.isArray(toPush)) {
-			// base = base.concat(toPush);
+			// theme = theme.concat(toPush);
 			Array.prototype.push.apply(base, toPush);
 		} else {
 			base.push(toPush);
@@ -13036,7 +13036,7 @@ var scale_linear = scale_linearbase.extend({
 		me.min = helpers$1.isFinite(me.min) && !isNaN(me.min) ? me.min : DEFAULT_MIN;
 		me.max = helpers$1.isFinite(me.max) && !isNaN(me.max) ? me.max : DEFAULT_MAX;
 
-		// Common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
+		// Common theme implementation to handle ticks.min, ticks.max, ticks.beginAtZero
 		me.handleTickRangeOptions();
 	},
 
@@ -13246,7 +13246,7 @@ var scale_logarithmic = core_scale.extend({
 		me.max = helpers$1.isFinite(me.max) ? me.max : null;
 		me.minNotZero = helpers$1.isFinite(me.minNotZero) ? me.minNotZero : null;
 
-		// Common base implementation to handle ticks.min, ticks.max
+		// Common theme implementation to handle ticks.min, ticks.max
 		this.handleTickRangeOptions();
 	},
 
@@ -13713,7 +13713,7 @@ var scale_radialLinear = scale_linearbase.extend({
 		me.min = (min === Number.POSITIVE_INFINITY ? 0 : min);
 		me.max = (max === Number.NEGATIVE_INFINITY ? 0 : max);
 
-		// Common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
+		// Common theme implementation to handle ticks.min, ticks.max, ticks.beginAtZero
 		me.handleTickRangeOptions();
 	},
 

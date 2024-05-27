@@ -1,15 +1,1 @@
-{% comment %}
 {% include "django/forms/widgets/input.html" %}
- {% endcomment %}
-
-<div class="bootstrap-timepicker">
-    <div class="form-group">
-        {% comment %} <label class="required" for="id_time">Time:</label> {% endcomment %}
-        <div class="input-group date" id="{{ widget.attrs.id }}-input-group" data-target-input="nearest">
-            <input type="text" name="{{ widget.name }}" required id="{{ widget.attrs.id }}" class="form-control datetimepicker-input" data-target="#{{ widget.attrs.id }}-input-group" {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} />
-            <div class="input-group-append" data-target="#{{ widget.attrs.id }}-input-group" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="far fa-clock"></i></div>
-            </div>
-        </div>
-    </div>
-</div>

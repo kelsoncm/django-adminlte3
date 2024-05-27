@@ -7,7 +7,7 @@ echo "
 # Generate pui stubs"
 # stubgen -o adminlte3/ adminlte3/*.py
 # stubgen -o adminlte3/ adminlte3/templatetags/*.py
-# stubgen -o adminlte3_admin/ adminlte3_admin/*.py
+# stubgen -o adminlte3/admin/ adminlte3/admin/*.py
 
 echo "
 # Code formatter"

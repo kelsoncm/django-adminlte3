@@ -59,7 +59,7 @@ var _styleToAbs = function( el ) {
 
 /**
  * Convert a URL from a relative to an absolute address so it will work
- * correctly in the popup window which has no base URL.
+ * correctly in the popup window which has no theme URL.
  *
  * @param  {string} href URL
  */
@@ -151,7 +151,7 @@ DataTable.ext.buttons.print = {
 		win.document.close();
 
 		// Inject the title and also a copy of the style and link tags from this
-		// document so the table can retain its base styling. Note that we have
+		// document so the table can retain its theme styling. Note that we have
 		// to use string manipulation as IE won't allow elements to be created
 		// in the host document and then appended to the new window.
 		var head = '<title>'+exportInfo.title+'</title>';

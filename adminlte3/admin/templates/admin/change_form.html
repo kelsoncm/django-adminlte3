@@ -1,0 +1,169 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block extrahead %}{{ block.super }}{{ media }}{% endblock extrahead %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static '/vendors/admin/css/forms.css' %}" />{% endblock extrastyle %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock bodyclass %}
+
+{% block content_subtitle %}{% endblock content_subtitle %}
+
+{% block content %}
+
+<div id="content-main">
+  {% if cl.formset and cl.formset.errors %}
+      <p class="errornote">
+      {% if cl.formset.total_error_count == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+      </p>
+      {{ cl.formset.non_form_errors }}
+  {% endif %}
+  <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+    <div class="changelist-form-container">
+
+      <div class="row"><!-- .row -->
+        <div class="{% if cl.has_filters %}col-md-10{% else %}col-md-12{% endif %} admin-result_list"><!-- .admin-result_list -->
+          <div class="card card-primary card-outline"><!-- .card -->
+
+            <div class="card-header"><!-- .card-header -->
+              <h3 class="card-title">{% if add %}{% blocktranslate with name=opts.verbose_name %}Add {{ name }}{% endblocktranslate %}{% else %}{{ original|truncatewords:"18" }}{% endif %}</h3>
+              <div class="card-tools">
+                <div class="input-group input-group-sm">
+                  {% block object-tools %}
+                    {% if change %}{% if not is_popup %}
+                        {% block object-tools-items %}
+                          {% change_form_object_tools %}
+                        {% endblock object-tools-items %}
+                      {% endif %}
+                    {% endif %}
+                  {% endblock object-tools %}
+                </div>
+              </div>
+            </div><!-- /.card-header -->
+
+            <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock form_top %}
+              {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
+              {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
+              {% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock submit_buttons_top %}{% endif %}
+
+              <div class="card-body"><!-- .card-body -->
+
+                {% if errors %}
+                  <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-ban"></i> {% translate 'Alert!' %}</h5>
+                    {% if errors|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+                    {{ adminform.form.non_field_errors }}
+                  </div>
+                {% endif %}
+                <div class="row"> <!-- fieldsets -->
+                  <div class="col-5 col-sm-12"> <!-- fieldsets_nav_col -->
+                    {% for fieldset in adminform %}
+                      {% if not fieldset.name %}
+                          {% include "admin/includes/fieldset.html" %}
+                      {% endif %}
+                    {% endfor %}
+                  </div> <!-- fieldsets_nav_col -->
+                </div> <!-- fieldsets -->
+                <div class="row"> <!-- fieldsets -->
+                  <div class="col-5 col-sm-3"> <!-- fieldsets_nav_col -->
+                      <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical"><!-- fieldsets_navs -->
+                        {% for fieldset in adminform %}
+                          {% if fieldset.name %}
+                            <a class="nav-link {% if forloop.counter == 2 %}active{% endif %}" id="vert-tabs-{{ fieldset.name|slugify }}-tab" data-toggle="pill" href="#vert-tabs-{{ fieldset.name|slugify }}" role="tab" aria-controls="vert-tabs-{{ fieldset.name|slugify }}" aria-selected="{% if forloop.counter == 2 %}true{% else %}false{% endif %}">{{ fieldset.name }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div><!-- /fieldsets_navs -->
+                  </div><!-- /fieldsets_nav_col -->
+
+                  <div class="col-7 col-sm-9"><!-- fieldsets_fields_col -->
+                    <div class="tab-content" id="vert-tabs-tabContent"><!-- fieldsets_fields -->
+                      {% for fieldset in adminform %}
+                        {% if fieldset.name %}
+                          {% include "admin/includes/fieldset.html" %}
+                        {% endif %}
+                      {% endfor %}
+
+                    </div><!-- /fieldsets_fields -->
+                  </div><!-- /fieldsets_fields_col -->
+
+                </div> <!-- /fieldsets -->
+{% comment %}
+                <div class="row">
+                  <div class="col-5 col-sm-3">
+                    <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                      <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home" aria-selected="true">Home</a>
+                      <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false">Profile</a>
+                      <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill" href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages" aria-selected="false">Messages</a>
+                      <a class="nav-link" id="vert-tabs-settings-tab" data-toggle="pill" href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings" aria-selected="false">Settings</a>
+                    </div>
+                  </div>
+                  <div class="col-7 col-sm-9">
+                    <div class="tab-content" id="vert-tabs-tabContent">
+                      <div class="tab-pane text-left fade active show" id="vert-tabs-home" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                      </div>
+                      <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
+                        Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                      </div>
+                      <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
+                        Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                      </div>
+                      <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
+                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+ {% endcomment %}
+
+{% comment %} {% block field_sets %}
+  {% for fieldset in adminform %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control is-invalid" id="exampleInputEmail1" placeholder="Enter email" aria-describedby="exampleInputEmail1-error" aria-invalid="true" />
+    <span id="exampleInputEmail1-error" class="error invalid-feedback">Please enter a email address</span>
+  </div>
+    {% include "admin/includes/fieldset.html" %}
+  {% endfor %}
+{% endblock field_sets %} {% endcomment %}
+
+{% block after_field_sets %}{% endblock after_field_sets %}
+
+{% block inline_field_sets %}
+  {% for inline_admin_formset in inline_admin_formsets %}
+      {% include inline_admin_formset.opts.template %}
+  {% endfor %}
+{% endblock inline_field_sets %}
+
+{% block after_related_objects %}{% endblock after_related_objects %}
+
+            </div><!-- /.card-body -->
+
+            <div class="card-footer"><!-- .card-footer -->
+              {% block submit_buttons_bottom %}{% submit_row %}{% endblock submit_buttons_bottom %}
+            </div><!-- /.card-footer -->
+
+            </form>
+
+          </div><!-- /.card -->
+        </div><!-- /.admin-result_list -->
+      </div><!-- /.row -->
+
+
+    </div>
+  </div>
+</div>
+
+{# JavaScript for prepopulated fields #}
+{% prepopulated_fields_js %}
+
+{% block admin_change_form_document_ready %}
+  <script id="django-admin-form-add-constants"
+          src="{% static 'admin/js/change_form.js' %}"
+          {% if adminform and add %}data-model-name="{{ opts.model_name }}"{% endif %}
+          async>
+  </script>
+{% endblock admin_change_form_document_ready %}
+
+{% endblock content %}

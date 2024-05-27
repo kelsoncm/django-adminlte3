@@ -3178,7 +3178,7 @@ var WrappedRange = /*#__PURE__*/function () {
       };
     }
     /**
-     * create offsetPath bookmark base on paragraph
+     * create offsetPath bookmark theme on paragraph
      *
      * @param {Node[]} paras
      */

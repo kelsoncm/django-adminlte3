@@ -1580,7 +1580,7 @@ var FullCalendar = (function (exports) {
         return null;
     }
 
-    // base options
+    // theme options
     // ------------
     var BASE_OPTION_REFINERS = {
         navLinkDayClick: identity,
@@ -1738,7 +1738,7 @@ var FullCalendar = (function (exports) {
         visibleRange: identity,
         titleFormat: identity,
         eventInteractive: Boolean,
-        // only used by list-view, but languages define the value, so we need it in base options
+        // only used by list-view, but languages define the value, so we need it in theme options
         noEventsText: String,
         viewHint: identity,
         navLinkHint: identity,
@@ -14483,7 +14483,7 @@ var FullCalendar = (function (exports) {
         noEventsContent: identity,
         noEventsDidMount: identity,
         noEventsWillUnmount: identity,
-        // noEventsText is defined in base options
+        // noEventsText is defined in theme options
     };
     function createFalsableFormatter(input) {
         return input === false ? null : createFormatter(input);

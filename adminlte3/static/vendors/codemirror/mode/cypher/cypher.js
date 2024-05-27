@@ -71,7 +71,7 @@
     var operatorChars = /[*+\-<>=&|~%^]/;
 
     return {
-      startState: function(/*base*/) {
+      startState: function(/*theme*/) {
         return {
           tokenize: tokenBase,
           context: null,

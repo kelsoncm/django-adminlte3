@@ -4031,7 +4031,7 @@
 		}
 		else
 		{
-			// Object to extend the base settings
+			// Object to extend the theme settings
 			oSettings.jqXHR = $.ajax( $.extend( baseAjax, ajax ) );
 
 			// Restore for next time around
@@ -6856,7 +6856,7 @@
 	 * objects since the extensions are effectively pre-parsed.
 	 *
 	 * The array is an array of objects with the following structure, where this
-	 * base array represents the Api prototype base:
+	 * theme array represents the Api prototype theme:
 	 *
 	 *     [
 	 *       {

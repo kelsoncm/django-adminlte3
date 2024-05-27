@@ -579,7 +579,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     "margin-inline-start", "overflow-anchor", "overscroll-behavior", "padding-block", "padding-block-end",
     "padding-block-start", "padding-inline", "padding-inline-end",
     "padding-inline-start", "scroll-snap-stop", "scrollbar-3d-light-color",
-    "scrollbar-arrow-color", "scrollbar-base-color", "scrollbar-dark-shadow-color",
+    "scrollbar-arrow-color", "scrollbar-theme-color", "scrollbar-dark-shadow-color",
     "scrollbar-face-color", "scrollbar-highlight-color", "scrollbar-shadow-color",
     "scrollbar-track-color", "searchfield-cancel-button", "searchfield-decoration",
     "searchfield-results-button", "searchfield-results-decoration", "shape-inside", "zoom"

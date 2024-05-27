@@ -2,7 +2,7 @@
 from django.contrib.admin import ModelAdmin
 from django.db import models
 from django import forms
-from adminlte3_admin.widgets import (
+from adminlte3.admin.widgets import (
     AdminLTEDateWidget,
     AdminLTETimeWidget,
     AdminLTESplitDateTime,

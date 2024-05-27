@@ -1067,7 +1067,7 @@
     // A styles array always starts with a number identifying the
     // mode/overlays that it is based on (for easy invalidation).
     var st = [cm.state.modeGen], lineClasses = {};
-    // Compute the base array of styles
+    // Compute the theme array of styles
     runMode(cm, line.text, cm.doc.mode, context, function (end, style) { return st.push(end, style); },
             lineClasses, forceToEnd);
     var state = context.state;
@@ -2809,7 +2809,7 @@
         (measureCharPrepared(cm, preparedMeasure, ch - (ltr ? 1 : 0)).bottom + widgetHeight <= y) == ltr ?
         "after" : "before";
       // Now get accurate coordinates for this place, in order to get a
-      // base X position
+      // theme X position
       var coords = cursorCoords(cm, Pos(lineNo, ch, sticky), "line", lineObj, preparedMeasure);
       baseX = coords.left;
       outside = y < coords.top ? -1 : y >= coords.bottom ? 1 : 0;

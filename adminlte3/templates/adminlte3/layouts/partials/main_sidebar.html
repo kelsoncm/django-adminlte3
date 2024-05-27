@@ -1,47 +1,63 @@
 {% load static i18n adminlte3 %}
-<aside class="main-sidebar sidebar-dark-primary elevation-4"><!-- .sidebar -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- .sidebar -->
 
-    {% block layout_brand_logo %}<!-- Brand Logo -->
-        <a href="{% url layout_home_url_name %}" class="brand-link">
-            <img src="{% static '/vendors/adminlte3/img/AdminLTELogo.png' %}" alt="{{ layout_site_name }} logo" width="33" height="33" class="brand-image img-circle elevation-3" />
-            <span class="brand-text font-weight-light">{{ layout_site_name }}</span>
-        </a>
-    {% endblock layout_brand_logo %}<!-- /.Brand Logo -->
+  {% block layout_brand_logo %}
+    <!-- Brand Logo -->
+    {% if layout_home_url_name %}
+      <a href='{% url layout_home_url_name %}' class="brand-link">
+        <img src="{{ layout_logo_url }}" alt="{{ layout_site_name }} logo" width="33" height="33" class="brand-image img-circle elevation-3" style="box-shadow: unset !important; border-radius: 0;" />
+        <span class="brand-text font-weight-light">{{ layout_site_name }}</span>
+      </a>
+    {% endif %}
+  {% endblock %}
+  <!-- /.Brand Logo -->
 
-    {% block layout_sidebar %}
-    <div class="sidebar"><!-- .sidebar -->
+  {% block layout_sidebar %}
+    <div class="sidebar">
+      <!-- .sidebar -->
 
-        <!-- Sidebar user panel (optional) -->
-        {% block layoyout_sidebar_user_panel %}
-            {% if user.is_authenticated %}
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image"><img src="{{ user_profile_thumbnail_url }}" class="img-circle elevation-2"  width="33" height="33" alt="{% translate 'Foto do usuário' %}" /></div>
-                    <div class="info"><a href="{{ user_profile_url }}" class="d-block">{{ user_display_name }}</a></div>
-                </div>
-            {% endif %}
-        {% endblock layoyout_sidebar_user_panel %}
-        <!-- /.Sidebar user panel (optional) -->
+      <!-- Sidebar user panel (optional) -->
+      {% block layoyout_sidebar_user_panel %}
+        {% if user.is_authenticated %}
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{{ user_profile_thumbnail_url }}" class="img-circle elevation-2" width="33" height="33" style="min-width: 33px; max-width: 33px; max-height: 33px; min-height: 33px" />
+            </div>
+            <div class="info">
+              <a href="{{ user_profile_url }}" class="d-block">{{ user_display_name }}</a>
+            </div>
+            <div class="logout">
+              <br><a href='{% url "admin:logout" %}' class="d-block">&nbsp;&nbsp;Sair</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+      <!-- /.Sidebar user panel (optional) -->
 
-        <!-- SidebarSearch Form -->
-        {% block layoyout_sidebar_search %}
+      <!-- SidebarSearch Form -->
+      {% block layoyout_sidebar_search %}
         <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
+          <div class="input-group" data-widget="sidebar-search">
             <input class="form-control form-control-sidebar" type="search" placeholder="{% translate 'Procurar' %}" aria-label="{% translate 'Procurar' %}" />
-            <div class="input-group-append"><button class="btn btn-sidebar"><i class="fas fa-search fa-fw"></i></button></div>
+            <div class="input-group-append">
+              <button class="btn btn-sidebar"><i class="fas fa-search fa-fw"></i></button>
+            </div>
+          </div>
         </div>
-        </div>
-        {% endblock layoyout_sidebar_search %}
-        <!-- /.Sidebar user panel (optional) -->
+      {% endblock %}
+      <!-- /.Sidebar user panel (optional) -->
 
-        <!-- Sidebar Menu -->
-        {% block layoyout_sidebar_menu %}
+      <!-- Sidebar Menu -->
+      {% block layoyout_sidebar_menu %}
         <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            {% render_menu_list layout_sidebar_menu %}
-        </ul>
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            {% render_sidebarmenu_list layout_sidebar_menu %}
+          </ul>
         </nav>
-        {% endblock layoyout_sidebar_menu %}
-        <!-- /.sidebar-menu -->
-    </div><!-- /.sidebar -->
-    {% endblock layout_sidebar %}
+      {% endblock %}
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  {% endblock %}
 </aside>

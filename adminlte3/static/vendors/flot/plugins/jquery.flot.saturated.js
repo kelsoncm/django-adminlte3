@@ -33,7 +33,7 @@
                 return saturated.saturate(result);
             }
         },
-        // round to nearby lower multiple of base
+        // round to nearby lower multiple of theme
         floorInBase: function(n, base) {
             return base * Math.floor(n / base);
         }

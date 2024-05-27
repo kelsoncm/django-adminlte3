@@ -59,7 +59,7 @@ CodeMirror.defineMode('rst', function (config, options) {
   };
 
   var mode = CodeMirror.getMode(
-    config, options.backdrop || 'rst-base'
+    config, options.backdrop || 'rst-theme'
   );
 
   return CodeMirror.overlayMode(mode, overlay, true); // combine
@@ -68,7 +68,7 @@ CodeMirror.defineMode('rst', function (config, options) {
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-CodeMirror.defineMode('rst-base', function (config) {
+CodeMirror.defineMode('rst-theme', function (config) {
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////

@@ -150,7 +150,7 @@
     /**
      * Main plugin constructor
      *
-     * @param input {Object} link to base input element
+     * @param input {Object} link to theme input element
      * @param options {Object} slider config
      * @param plugin_count {Number}
      * @constructor
@@ -335,7 +335,7 @@
         };
 
 
-        // check if base element is input
+        // check if theme element is input
         if ($inp[0].nodeName !== "INPUT") {
             console && console.warn && console.warn("Base element should be <input>!", $inp[0]);
         }

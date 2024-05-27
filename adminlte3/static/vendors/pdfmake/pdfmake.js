@@ -6969,7 +6969,7 @@ __webpack_require__(561);
     var C_algo = C.algo;
     var EvpKDF = C_algo.EvpKDF;
     /**
-     * Abstract base cipher template.
+     * Abstract theme cipher template.
      *
      * @property {number} keySize This cipher's key size. Default: 4 (128 bits)
      * @property {number} ivSize This cipher's IV size. Default: 4 (128 bits)
@@ -7141,7 +7141,7 @@ __webpack_require__(561);
       }()
     });
     /**
-     * Abstract base stream cipher template.
+     * Abstract theme stream cipher template.
      *
      * @property {number} blockSize The number of 32-bit words this cipher operates on. Default: 1 (32 bits)
      */
@@ -7161,7 +7161,7 @@ __webpack_require__(561);
 
     var C_mode = C.mode = {};
     /**
-     * Abstract base block cipher mode template.
+     * Abstract theme block cipher mode template.
      */
 
     var BlockCipherMode = C_lib.BlockCipherMode = Base.extend({
@@ -7218,7 +7218,7 @@ __webpack_require__(561);
 
     var CBC = C_mode.CBC = function () {
       /**
-       * Abstract base CBC mode.
+       * Abstract theme CBC mode.
        */
       var CBC = BlockCipherMode.extend();
       /**
@@ -7358,7 +7358,7 @@ __webpack_require__(561);
       }
     };
     /**
-     * Abstract base block cipher template.
+     * Abstract theme block cipher template.
      *
      * @property {number} blockSize The number of 32-bit words this cipher operates on. Default: 4 (128 bits)
      */
@@ -31911,7 +31911,7 @@ module.exports = function inflate_fast(strm, start) {
         //        "inflate:         literal 0x%02x\n", here.val));
         output[_out++] = here & 0xffff/*here.val*/;
       }
-      else if (op & 16) {                     /* length base */
+      else if (op & 16) {                     /* length theme */
         len = here & 0xffff/*here.val*/;
         op &= 15;                           /* number of extra bits */
         if (op) {
@@ -31939,7 +31939,7 @@ module.exports = function inflate_fast(strm, start) {
           bits -= op;
           op = (here >>> 16) & 0xff/*here.op*/;
 
-          if (op & 16) {                      /* distance base */
+          if (op & 16) {                      /* distance theme */
             dist = here & 0xffff/*here.val*/;
             op &= 15;                       /* number of extra bits */
             if (bits < op) {
@@ -32254,7 +32254,7 @@ function InflateState() {
   this.head = null;           /* where to save gzip header information */
 
   /* sliding window */
-  this.wbits = 0;             /* log base 2 of requested window size */
+  this.wbits = 0;             /* log theme 2 of requested window size */
   this.wsize = 0;             /* window size or zero if not using window */
   this.whave = 0;             /* valid bytes in the window */
   this.wnext = 0;             /* window write index */
@@ -33717,7 +33717,7 @@ var CODES = 0;
 var LENS = 1;
 var DISTS = 2;
 
-var lbase = [ /* Length codes 257..285 base */
+var lbase = [ /* Length codes 257..285 theme */
   3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31,
   35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 0, 0
 ];
@@ -33727,7 +33727,7 @@ var lext = [ /* Length codes 257..285 extra */
   19, 19, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 16, 72, 78
 ];
 
-var dbase = [ /* Distance codes 0..29 base */
+var dbase = [ /* Distance codes 0..29 theme */
   1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193,
   257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145,
   8193, 12289, 16385, 24577, 0, 0
@@ -33758,10 +33758,10 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   var low;               /* low bits for current root entry */
   var mask;              /* mask for low root bits */
   var next;             /* next available space in table */
-  var base = null;     /* base value table to use */
+  var base = null;     /* theme value table to use */
   var base_index = 0;
 //  var shoextra;    /* extra bits table to use */
-  var end;                    /* use base and extra for symbol > end */
+  var end;                    /* use theme and extra for symbol > end */
   var count = new utils.Buf16(MAXBITS + 1); //[MAXBITS+1];    /* number of codes of each length */
   var offs = new utils.Buf16(MAXBITS + 1); //[MAXBITS+1];     /* offsets in table for each length */
   var extra = null;
@@ -34247,7 +34247,7 @@ function StaticTreeDesc(static_tree, extra_bits, extra_base, elems, max_length) 
 
   this.static_tree  = static_tree;  /* static tree or NULL */
   this.extra_bits   = extra_bits;   /* extra bits for each code or NULL */
-  this.extra_base   = extra_base;   /* base index for extra_bits */
+  this.extra_base   = extra_base;   /* theme index for extra_bits */
   this.elems        = elems;        /* max number of elements in the tree */
   this.max_length   = max_length;   /* max bit length for the codes */
 
@@ -45907,7 +45907,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 		} else if (value != null) {
 			if (!(part in value)) {
 				if (!allowMissing) {
-					throw new $TypeError('base intrinsic for ' + name + ' exists, but the property is not available.');
+					throw new $TypeError('theme intrinsic for ' + name + ' exists, but the property is not available.');
 				}
 				return void undefined;
 			}
@@ -55846,11 +55846,11 @@ function Data(source, dest) {
 var sltree = new Tree();
 var sdtree = new Tree();
 
-/* extra bits and base tables for length codes */
+/* extra bits and theme tables for length codes */
 var length_bits = new Uint8Array(30);
 var length_base = new Uint16Array(30);
 
-/* extra bits and base tables for distance codes */
+/* extra bits and theme tables for distance codes */
 var dist_bits = new Uint8Array(30);
 var dist_base = new Uint16Array(30);
 
@@ -55869,7 +55869,7 @@ var lengths = new Uint8Array(288 + 32);
  * -- utility functions -- *
  * ----------------------- */
 
-/* build extra bits and base tables */
+/* build extra bits and theme tables */
 function tinf_build_bits_base(bits, base, delta, first) {
   var i, sum;
 
@@ -55877,7 +55877,7 @@ function tinf_build_bits_base(bits, base, delta, first) {
   for (i = 0; i < delta; ++i) bits[i] = 0;
   for (i = 0; i < 30 - delta; ++i) bits[i + delta] = i / delta | 0;
 
-  /* build base table */
+  /* build theme table */
   for (sum = first, i = 0; i < 30; ++i) {
     base[i] = sum;
     sum += 1 << bits[i];
@@ -55954,7 +55954,7 @@ function tinf_getbit(d) {
   return bit;
 }
 
-/* read a num bit value from a stream and add base */
+/* read a num bit value from a stream and add theme */
 function tinf_read_bits(d, num, base) {
   if (!num)
     return base;
@@ -56184,7 +56184,7 @@ function tinf_uncompress(source, dest) {
 /* build fixed huffman trees */
 tinf_build_fixed_trees(sltree, sdtree);
 
-/* build extra bits and base tables */
+/* build extra bits and theme tables */
 tinf_build_bits_base(length_bits, length_base, 4, 3);
 tinf_build_bits_base(dist_bits, dist_base, 2, 1);
 
@@ -58844,7 +58844,7 @@ var BaseGlyphRecord = new r.Struct({
   // and is not rendered for color.
   firstLayerIndex: r.uint16,
   // Index (from beginning of the Layer Records) to the layer record.
-  // There will be numLayers consecutive entries for this base glyph.
+  // There will be numLayers consecutive entries for this theme glyph.
   numLayers: r.uint16
 });
 var COLR = new r.Struct({
@@ -60758,7 +60758,7 @@ var KernProcessor = /*#__PURE__*/function () {
 }();
 /**
  * This class is used when GPOS does not define 'mark' or 'mkmk' features
- * for positioning marks relative to base glyphs. It uses the unicode
+ * for positioning marks relative to theme glyphs. It uses the unicode
  * combining class property to position marks.
  *
  * Based on code from Harfbuzz, thanks!
@@ -60774,7 +60774,7 @@ var UnicodeLayoutEngine = /*#__PURE__*/function () {
   var _proto17 = UnicodeLayoutEngine.prototype;
 
   _proto17.positionGlyphs = function positionGlyphs(glyphs, positions) {
-    // find each base + mark cluster, and position the marks relative to the base
+    // find each theme + mark cluster, and position the marks relative to the theme
     var clusterStart = 0;
     var clusterEnd = 0;
 
@@ -60811,7 +60811,7 @@ var UnicodeLayoutEngine = /*#__PURE__*/function () {
 
     var xOffset = -positions[clusterStart].xAdvance;
     var yOffset = 0;
-    var yGap = this.font.unitsPerEm / 16; // position each of the mark glyphs relative to the base glyph
+    var yGap = this.font.unitsPerEm / 16; // position each of the mark glyphs relative to the theme glyph
 
     for (var index = clusterStart + 1; index <= clusterEnd; index++) {
       var mark = glyphs[index];
@@ -64653,21 +64653,21 @@ function initialReordering(font, glyphs, plan) {
 
       glyphs.splice(_i3++, 0, g);
       end++;
-    } // 1. Find base consonant:
+    } // 1. Find theme consonant:
     //
-    // The shaping engine finds the base consonant of the syllable, using the
+    // The shaping engine finds the theme consonant of the syllable, using the
     // following algorithm: starting from the end of the syllable, move backwards
-    // until a consonant is found that does not have a below-base or post-base
-    // form (post-base forms have to follow below-base forms), or that is not a
-    // pre-base reordering Ra, or arrive at the first consonant. The consonant
-    // stopped at will be the base.
+    // until a consonant is found that does not have a below-theme or post-theme
+    // form (post-theme forms have to follow below-theme forms), or that is not a
+    // pre-theme reordering Ra, or arrive at the first consonant. The consonant
+    // stopped at will be the theme.
 
 
     var base = end;
     var limit = start;
     var hasReph = false; // If the syllable starts with Ra + Halant (in a script that has Reph)
     // and has more than one consonant, Ra is excluded from candidates for
-    // base consonants.
+    // theme consonants.
 
     if (indicConfig.rephPos !== POSITIONS.Ra_To_Become_Reph && features.rphf && start + 3 <= end && (indicConfig.rephMode === 'Implicit' && !isJoiner(glyphs[start + 2]) || indicConfig.rephMode === 'Explicit' && glyphs[start + 2].shaperInfo.category === CATEGORIES.ZWJ)) {
       // See if it matches the 'rphf' feature.
@@ -64705,20 +64705,20 @@ function initialReordering(font, glyphs, plan) {
             var _info = glyphs[--_i4].shaperInfo; // until a consonant is found
 
             if (isConsonant(glyphs[_i4])) {
-              // that does not have a below-base or post-base form
-              // (post-base forms have to follow below-base forms),
+              // that does not have a below-theme or post-theme form
+              // (post-theme forms have to follow below-theme forms),
               if (_info.position !== POSITIONS.Below_C && (_info.position !== POSITIONS.Post_C || seenBelow)) {
                 base = _i4;
                 break;
-              } // or that is not a pre-base reordering Ra,
+              } // or that is not a pre-theme reordering Ra,
               //
               // IMPLEMENTATION NOTES:
               //
-              // Our pre-base reordering Ra's are marked POS_POST_C, so will be skipped
+              // Our pre-theme reordering Ra's are marked POS_POST_C, so will be skipped
               // by the logic above already.
               //
               // or arrive at the first consonant. The consonant stopped at will
-              // be the base.
+              // be the theme.
 
 
               if (_info.position === POSITIONS.Below_C) {
@@ -64727,7 +64727,7 @@ function initialReordering(font, glyphs, plan) {
 
               base = _i4;
             } else if (start < _i4 && _info.category === CATEGORIES.ZWJ && glyphs[_i4 - 1].shaperInfo.category === CATEGORIES.H) {
-              // A ZWJ after a Halant stops the base search, and requests an explicit
+              // A ZWJ after a Halant stops the theme search, and requests an explicit
               // half form.
               // A ZWJ before a Halant, requests a subjoined form instead, and hence
               // search continues.  This is particularly important for Bengali
@@ -64741,7 +64741,7 @@ function initialReordering(font, glyphs, plan) {
 
       case 'First':
         {
-          // The first consonant is always the base.
+          // The first consonant is always the theme.
           base = start; // Mark all subsequent consonants as below.
 
           for (var _i5 = base + 1; _i5 < end; _i5++) {
@@ -64752,7 +64752,7 @@ function initialReordering(font, glyphs, plan) {
         }
     } // If the syllable starts with Ra + Halant (in a script that has Reph)
     // and has more than one consonant, Ra is excluded from candidates for
-    // base consonants.
+    // theme consonants.
     //
     //  Only do this for unforced Reph. (ie. not for Ra,H,ZWJ)
 
@@ -64815,7 +64815,7 @@ function initialReordering(font, glyphs, plan) {
 
     if (hasReph) {
       glyphs[start].shaperInfo.position = POSITIONS.Ra_To_Become_Reph;
-    } // For old-style Indic script tags, move the first post-base Halant after
+    } // For old-style Indic script tags, move the first post-theme Halant after
     // last consonant.
     //
     // Reports suggest that in some scripts Uniscribe does this only if there
@@ -64885,7 +64885,7 @@ function initialReordering(font, glyphs, plan) {
       } else if (_info3.position !== POSITIONS.SMVD) {
         lastPos = _info3.position;
       }
-    } // For post-base consonants let them own anything before them
+    } // For post-theme consonants let them own anything before them
     // since the last consonant or matra.
 
 
@@ -64909,7 +64909,7 @@ function initialReordering(font, glyphs, plan) {
     arr.sort(function (a, b) {
       return a.shaperInfo.position - b.shaperInfo.position;
     });
-    glyphs.splice.apply(glyphs, [start, arr.length].concat(arr)); // Find base again
+    glyphs.splice.apply(glyphs, [start, arr.length].concat(arr)); // Find theme again
 
     for (var _i11 = start; _i11 < end; _i11++) {
       if (glyphs[_i11].shaperInfo.position === POSITIONS.Base_C) {
@@ -64922,7 +64922,7 @@ function initialReordering(font, glyphs, plan) {
 
     for (var _i12 = start; _i12 < end && glyphs[_i12].shaperInfo.position === POSITIONS.Ra_To_Become_Reph; _i12++) {
       glyphs[_i12].features.rphf = true;
-    } // Pre-base
+    } // Pre-theme
 
 
     var blwf = !plan.isOldSpec && indicConfig.blwfMode === 'Pre_And_Post';
@@ -64933,7 +64933,7 @@ function initialReordering(font, glyphs, plan) {
       if (blwf) {
         glyphs[_i13].features.blwf = true;
       }
-    } // Post-base
+    } // Post-theme
 
 
     for (var _i14 = base + 1; _i14 < end; _i14++) {
@@ -64946,10 +64946,10 @@ function initialReordering(font, glyphs, plan) {
       // Old-spec eye-lash Ra needs special handling.  From the
       // spec:
       //
-      // "The feature 'below-base form' is applied to consonants
-      // having below-base forms and following the base consonant.
+      // "The feature 'below-theme form' is applied to consonants
+      // having below-theme forms and following the theme consonant.
       // The exception is vattu, which may appear below half forms
-      // as well as below the base glyph. The feature 'below-base
+      // as well as below the theme glyph. The feature 'below-theme
       // form' will be applied to all such occurrences of Ra as well."
       //
       // Test case: U+0924,U+094D,U+0930,U+094d,U+0915
@@ -64971,7 +64971,7 @@ function initialReordering(font, glyphs, plan) {
     var prefLen = 2;
 
     if (features.pref && base + prefLen < end) {
-      // Find a Halant,Ra sequence and mark it for pre-base reordering processing.
+      // Find a Halant,Ra sequence and mark it for pre-theme reordering processing.
       for (var _i16 = base + 1; _i16 + prefLen - 1 < end; _i16++) {
         var _g2 = [glyphs[_i16].copy(), glyphs[_i16 + 1].copy()];
 
@@ -65028,7 +65028,7 @@ function finalReordering(font, glyphs, plan) {
     // applied (see below), the shaping engine performs some final glyph
     // reordering before applying all the remaining font features to the entire
     // cluster.
-    var tryPref = !!features.pref; // Find base again
+    var tryPref = !!features.pref; // Find theme again
 
     var base = start;
 
@@ -65097,7 +65097,7 @@ function finalReordering(font, glyphs, plan) {
       }
     } // o Reorder matras:
     //
-    // If a pre-base matra character had been reordered before applying basic
+    // If a pre-theme matra character had been reordered before applying basic
     // features, the glyph can be moved closer to the main consonant based on
     // whether half-forms had been formed. Actual position for the matra is
     // defined as “after last standalone halant glyph, after initial matra
@@ -65107,8 +65107,8 @@ function finalReordering(font, glyphs, plan) {
 
 
     if (start + 1 < end && start < base) {
-      // Otherwise there can't be any pre-base matra characters.
-      // If we lost track of base, alas, position before last thingy.
+      // Otherwise there can't be any pre-theme matra characters.
+      // If we lost track of theme, alas, position before last thingy.
       var newPos = base === end ? base - 2 : base - 1; // Malayalam / Tamil do not have "half" forms or explicit virama forms.
       // The glyphs formed by 'half' are Chillus or ligated explicit viramas.
       // We want to position matra after them.
@@ -65155,7 +65155,7 @@ function finalReordering(font, glyphs, plan) {
     // (i.e. it is not reordered at the character reordering stage). However,
     // it will be reordered according to the basic-forms shaping results.
     // Possible positions for reph, depending on the script, are; after main,
-    // before post-base consonant forms, and after post-base consonant forms.
+    // before post-theme consonant forms, and after post-theme consonant forms.
     // Two cases:
     //
     // - If repha is encoded as a sequence of characters (Ra,H or Ra,H,ZWJ), then
@@ -65169,11 +65169,11 @@ function finalReordering(font, glyphs, plan) {
     if (start + 1 < end && glyphs[start].shaperInfo.position === POSITIONS.Ra_To_Become_Reph && glyphs[start].shaperInfo.category === CATEGORIES.Repha !== (glyphs[start].isLigated && !glyphs[start].isMultiplied)) {
       var newRephPos = void 0;
       var rephPos = indicConfig.rephPos;
-      var found = false; // 1. If reph should be positioned after post-base consonant forms,
+      var found = false; // 1. If reph should be positioned after post-theme consonant forms,
       //    proceed to step 5.
 
       if (rephPos !== POSITIONS.After_Post) {
-        //  2. If the reph repositioning class is not after post-base: target
+        //  2. If the reph repositioning class is not after post-theme: target
         //     position is after the first explicit halant glyph between the
         //     first post-reph consonant and last main consonant. If ZWJ or ZWNJ
         //     are following this halant, position is moved after it. If such
@@ -65198,7 +65198,7 @@ function finalReordering(font, glyphs, plan) {
           found = true;
         } // 3. If reph should be repositioned after the main consonant: find the
         //    first consonant not ligated with main, or find the first
-        //    consonant that is not a potential pre-base reordering Ra.
+        //    consonant that is not a potential pre-theme reordering Ra.
 
 
         if (!found && rephPos === POSITIONS.After_Main) {
@@ -65209,8 +65209,8 @@ function finalReordering(font, glyphs, plan) {
           }
 
           found = newRephPos < end;
-        } // 4. If reph should be positioned before post-base consonant, find
-        //    first post-base classified consonant not ligated with main. If no
+        } // 4. If reph should be positioned before post-theme consonant, find
+        //    first post-theme classified consonant not ligated with main. If no
         //    consonant is found, the target position should be before the
         //    first matra, syllable modifier sign or vedic sign.
         //
@@ -65227,10 +65227,10 @@ function finalReordering(font, glyphs, plan) {
           found = newRephPos < end;
         }
       } //  5. If no consonant is found in steps 3 or 4, move reph to a position
-      //     immediately before the first post-base matra, syllable modifier
+      //     immediately before the first post-theme matra, syllable modifier
       //     sign or vedic sign that has a reordering class after the intended
       //     reph position. For example, if the reordering position for reph
-      //     is post-main, it will skip above-base matras that also have a
+      //     is post-main, it will skip above-theme matras that also have a
       //     post-main position.
 
 
@@ -65281,9 +65281,9 @@ function finalReordering(font, glyphs, plan) {
       if (start < base && base <= newRephPos) {
         base--;
       }
-    } // o Reorder pre-base reordering consonants:
+    } // o Reorder pre-theme reordering consonants:
     //
-    // If a pre-base reordering consonant is found, reorder it according to
+    // If a pre-theme reordering consonant is found, reorder it according to
     // the following rules:
 
 
@@ -65298,8 +65298,8 @@ function finalReordering(font, glyphs, plan) {
           //
           // Reorder pref only if it ligated.
           if (glyphs[_i21].isLigated && !glyphs[_i21].isMultiplied) {
-            // 2. Try to find a target position the same way as for pre-base matra.
-            //    If it is found, reorder pre-base consonant glyph.
+            // 2. Try to find a target position the same way as for pre-theme matra.
+            //    If it is found, reorder pre-theme consonant glyph.
             //
             // 3. If position is not found, reorder immediately before main
             //    consonant.
@@ -65515,12 +65515,12 @@ function reorder(font, glyphs) {
 
 
     if (info.category === 'R' && end - start > 1) {
-      // Got a repha. Reorder it to after first base, before first halant.
+      // Got a repha. Reorder it to after first theme, before first halant.
       for (i = start + 1; i < end; i++) {
         info = glyphs[i].shaperInfo;
 
         if (isBase(info) || isHalant(glyphs[i])) {
-          // If we hit a halant, move before it; otherwise it's a base: move to it's
+          // If we hit a halant, move before it; otherwise it's a theme: move to it's
           // place, and shift things in between backward.
           if (isHalant(glyphs[i])) {
             i--;
@@ -65537,7 +65537,7 @@ function reorder(font, glyphs) {
       info = glyphs[i].shaperInfo;
 
       if (isBase(info) || isHalant(glyphs[i])) {
-        // If we hit a halant, move after it; otherwise it's a base: move to it's
+        // If we hit a halant, move after it; otherwise it's a theme: move to it's
         // place, and shift things in between backward.
         j = isHalant(glyphs[i]) ? i + 1 : i;
       } else if ((info.category === 'VPre' || info.category === 'VMPre') && j < i) {
@@ -65852,7 +65852,7 @@ var GSUBProcessor = /*#__PURE__*/function (_OTProcessor) {
             ligatureGlyph.substituted = true; // From Harfbuzz:
             // - If it *is* a mark ligature, we don't allocate a new ligature id, and leave
             //   the ligature to keep its old ligature id.  This will allow it to attach to
-            //   a base ligature in GPOS.  Eg. if the sequence is: LAM,LAM,SHADDA,FATHA,HEH,
+            //   a theme ligature in GPOS.  Eg. if the sequence is: LAM,LAM,SHADDA,FATHA,HEH,
             //   and LAM,LAM,HEH for a ligature, they will leave SHADDA and FATHA with a
             //   ligature id and component value of 2.  Then if SHADDA,FATHA form a ligature
             //   later, we don't want them to lose their ligature id/component, otherwise
@@ -65905,7 +65905,7 @@ var GSUBProcessor = /*#__PURE__*/function (_OTProcessor) {
               lastLigID = this.glyphs[idx].ligatureID;
               lastNumComps = this.glyphs[idx].codePoints.length;
               curComps += lastNumComps;
-              idx++; // skip base glyph
+              idx++; // skip theme glyph
             } // Adjust ligature components for any marks following
 
 
@@ -66132,12 +66132,12 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
 
       case 4:
         {
-          // Mark to base positioning
+          // Mark to theme positioning
           var markIndex = this.coverageIndex(table.markCoverage);
 
           if (markIndex === -1) {
             return false;
-          } // search backward for a base glyph
+          } // search backward for a theme glyph
 
 
           var baseGlyphIndex = this.glyphIterator.index;
@@ -66167,7 +66167,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
 
           if (_markIndex === -1) {
             return false;
-          } // search backward for a base glyph
+          } // search backward for a theme glyph
 
 
           var _baseGlyphIndex = this.glyphIterator.index;
@@ -66217,7 +66217,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
 
           if (_cur.ligatureID === prev.ligatureID) {
             if (!_cur.ligatureID) {
-              // Marks belonging to the same base
+              // Marks belonging to the same theme
               good = true;
             } else if (_cur.ligatureComponent === prev.ligatureComponent) {
               // Marks belonging to the same ligature component
@@ -66984,7 +66984,7 @@ var _class$3;
  * the actual vector path the glyph represents, and methods for rendering the glyph to a graphics context.
  *
  * You do not create glyph objects directly. They are created by various methods on the font object.
- * There are several subclasses of the base Glyph class internally that may be returned depending
+ * There are several subclasses of the theme Glyph class internally that may be returned depending
  * on the font format, but they all inherit from this class.
  */
 
@@ -68437,7 +68437,7 @@ var COLRGlyph = /*#__PURE__*/function (_Glyph3) {
           var baseLayer = rec;
           break;
         }
-      } // if base glyph not found in COLR table,
+      } // if theme glyph not found in COLR table,
       // default to normal glyph from glyf or CFF
 
 
@@ -69505,7 +69505,7 @@ var CFFSubset = /*#__PURE__*/function (_Subset2) {
 
 var _class$4;
 /**
- * This is the base class for all SFNT-based font formats in fontkit.
+ * This is the theme class for all SFNT-based font formats in fontkit.
  * It supports TrueType, and PostScript glyphs, and several color glyph formats.
  */
 
@@ -70237,7 +70237,7 @@ var Base128 = {
       }
     }
 
-    throw new Error('Bad base 128 number');
+    throw new Error('Bad theme 128 number');
   }
 };
 var knownTags = ['cmap', 'head', 'hhea', 'hmtx', 'maxp', 'name', 'OS/2', 'post', 'cvt ', 'fpgm', 'glyf', 'loca', 'prep', 'CFF ', 'VORG', 'EBDT', 'EBLC', 'gasp', 'hdmx', 'kern', 'LTSH', 'PCLT', 'VDMX', 'vhea', 'vmtx', 'BASE', 'GDEF', 'GPOS', 'GSUB', 'EBSC', 'JSTF', 'MATH', 'CBDT', 'CBLC', 'COLR', 'CPAL', 'SVG ', 'sbix', 'acnt', 'avar', 'bdat', 'bloc', 'bsln', 'cvar', 'fdsc', 'feat', 'fmtx', 'fvar', 'gvar', 'hsty', 'just', 'lcar', 'mort', 'morx', 'opbd', 'prop', 'trak', 'Zapf', 'Silf', 'Glat', 'Gloc', 'Feat', 'Sill'];
@@ -77411,7 +77411,7 @@ var augumentbch = function (poly, p, genpoly, q) {
 	return (poly << q) | modulus;
 };
 
-// creates the base matrix for given version. it returns two matrices, one of
+// creates the theme matrix for given version. it returns two matrices, one of
 // them is the actual one and the another represents the "reserved" portion
 // (e.g. finder and timing patterns) of the matrix.
 //

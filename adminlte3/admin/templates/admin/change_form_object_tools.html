@@ -1,0 +1,7 @@
+{% load i18n admin_urls %}
+{% block object-tools-items %}
+<div class="input-group-append">
+    {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+    <div class="btn btn-default"><a href="{% add_preserved_filters history_url %}" class="btn btn-tool" title="Next"><i class="fas fa-clock"></i></a></div>
+</div>
+{% endblock object-tools-items %}

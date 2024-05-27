@@ -1582,7 +1582,7 @@ S2.define('select2/selection/base',[
 
 S2.define('select2/selection/single',[
   'jquery',
-  './base',
+  './theme',
   '../utils',
   '../keys'
 ], function ($, BaseSelection, Utils, KEYS) {
@@ -1690,7 +1690,7 @@ S2.define('select2/selection/single',[
 
 S2.define('select2/selection/multiple',[
   'jquery',
-  './base',
+  './theme',
   '../utils'
 ], function ($, BaseSelection, Utils) {
   function MultipleSelection ($element, options) {
@@ -3185,7 +3185,7 @@ S2.define('select2/data/base',[
 });
 
 S2.define('select2/data/select',[
-  './base',
+  './theme',
   '../utils',
   'jquery'
 ], function (BaseAdapter, Utils, $) {

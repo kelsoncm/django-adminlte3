@@ -178,7 +178,7 @@ $.extend( Buttons.prototype, {
 
 	/**
 	 * Add a new button
-	 * @param {object} config Button configuration object, base string name or function
+	 * @param {object} config Button configuration object, theme string name or function
 	 * @param {int|string} [idx] Button index for where to insert the button
 	 * @param {boolean} [draw=true] Trigger a draw. Set a false when adding
 	 *   lots of buttons, until the last button.
@@ -927,7 +927,7 @@ $.extend( Buttons.prototype, {
 	/**
 	 * Get the button object from a node (recursive)
 	 * @param  {node} node Button node
-	 * @param  {array} [buttons] Button array, uses base if not defined
+	 * @param  {array} [buttons] Button array, uses theme if not defined
 	 * @return {object} Button object
 	 * @private
 	 */
@@ -955,7 +955,7 @@ $.extend( Buttons.prototype, {
 	/**
 	 * Get container array for a button from a button node (recursive)
 	 * @param  {node} node Button node
-	 * @param  {array} [buttons] Button array, uses base if not defined
+	 * @param  {array} [buttons] Button array, uses theme if not defined
 	 * @return {array} Button's host array
 	 * @private
 	 */

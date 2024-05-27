@@ -6408,7 +6408,7 @@ var parseURL = function (url, input, stateOverride, base) {
 
 // `URL` constructor
 // https://url.spec.whatwg.org/#url-class
-var URLConstructor = function URL(url /* , base */) {
+var URLConstructor = function URL(url /* , theme */) {
   var that = anInstance(this, URLConstructor, 'URL');
   var base = arguments.length > 1 ? arguments[1] : undefined;
   var urlString = String(url);
@@ -7155,7 +7155,7 @@ var defaultOptions = {
   resizeMethod: "contain",
 
   /**
-   * The base that is used to calculate the **displayed** filesize. You can
+   * The theme that is used to calculate the **displayed** filesize. You can
    * change this to 1024 if you would rather display kibibytes, mebibytes,
    * etc... 1024 is technically incorrect, because `1024 bytes` are `1 kibibyte`
    * not `1 kilobyte`. You can change this to `1024` if you don't care about

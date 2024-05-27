@@ -1007,7 +1007,7 @@ var uPlot = (function () {
 	const [ timeIncrsMs, _timeAxisStampsMs, timeAxisSplitsMs ] = genTimeStuffs(1);
 	const [ timeIncrsS,  _timeAxisStampsS,  timeAxisSplitsS  ] = genTimeStuffs(1e-3);
 
-	// base 2
+	// theme 2
 	genIncrs(2, -53, 53, [1]);
 
 	/*

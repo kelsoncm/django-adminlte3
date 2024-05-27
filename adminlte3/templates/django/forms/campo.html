@@ -1,0 +1,28 @@
+{% if field.use_fieldset %}
+    <fieldset>
+{% endif %}
+
+{% if field.label %}
+    <label {% include 'django/forms/attrs.html' %}{% if field.widget.is_required %} class="required"{% endif %}>{{ field.label }}</label>
+{% endif %}
+
+{% if field.help_text %}
+    <div class="helptext"{% if field.auto_id %} id="{{ field.auto_id }}_helptext"{% endif %}>
+        {{ field.help_text|safe }}
+    </div>
+{% endif %}
+
+{{ field }}
+
+{% if field.errors %}
+    <span id="{{ field.widget.name }}-error" class="error invalid-feedback">Informe um valor válido para este campo.</span>
+    {% if field.errors|length == 1 %}
+        <div class="errorlist">{% for error in field.errors %}{{ error }}{% endfor %}</div>
+    {% else %}
+        <ul class="errorlist">{% for error in field.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+{% endif %}
+
+{% if field.use_fieldset %}
+    </fieldset>
+{% endif %}

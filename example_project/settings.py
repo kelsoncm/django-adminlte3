@@ -11,7 +11,7 @@ DEBUG = True
 
 # Application definition
 INSTALLED_APPS = [
-    "adminlte3_admin",
+    "adminlte3/admin",
     "adminlte3",
     "django.forms",
     "django.contrib.admin",

@@ -32,7 +32,7 @@ CodeMirror.defineMode("xquery", function() {
     // a list of 'basic' keywords. For each add a property to kwObj with the value of
     // {type: basic[i], style: "keyword"} e.g. 'after' --> {type: "after", style: "keyword"}
     var basic = ['after', 'all', 'allowing', 'ancestor', 'ancestor-or-self', 'any', 'array', 'as',
-    'ascending', 'at', 'attribute', 'base-uri', 'before', 'boundary-space', 'by', 'case', 'cast',
+    'ascending', 'at', 'attribute', 'theme-uri', 'before', 'boundary-space', 'by', 'case', 'cast',
     'castable', 'catch', 'child', 'collation', 'comment', 'construction', 'contains', 'content',
     'context', 'copy', 'copy-namespaces', 'count', 'decimal-format', 'declare', 'default', 'delete',
     'descendant', 'descendant-or-self', 'descending', 'diacritics', 'different', 'distance',

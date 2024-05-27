@@ -42,8 +42,8 @@
         {% endblock social_auth %}
         <!-- /.social-auth-links -->
 
-        <p class="mb-1"><a href="{% url 'password_reset' %}">{% translate "I forgot my password" %}</a></p>
-        <p class="mb-0"><a href="{% url layout_register_url_name %}">{% translate "Register a new membership" %}</a></p>
+        {% if password_reset %}<p class="mb-1"><a href="{% url 'password_reset' %}">{% translate "I forgot my password" %}</a></p>{% endif %}
+        {% if layout_register_url_name %}<p class="mb-0"><a href="{% url layout_register_url_name %}">{% translate "Register a new membership" %}</a></p>{% endif %}
 
       </div>
       <!-- /.card-body -->

@@ -8,9 +8,9 @@ from django.urls import reverse
 def layout_settings(request: HttpRequest) -> dict:
     return {
         "site_title": "AdminLTE 3",
-        "layout_home_url_name": "adminlte3:dashboard",
-        "layout_register_url_name": "adminlte3:register",
-        "layout_term_of_use_url_name": "adminlte3:term_of_use",
+        # "layout_home_url_name": "adminlte3:dashboard",
+        # "layout_register_url_name": "adminlte3:register",
+        # "layout_term_of_use_url_name": "adminlte3:term_of_use",
         "layout_site_name": "AdminLTE 3",
         "layout_has_navbar_search": True,
         "layout_has_fullscreen_toggler": True,
@@ -23,10 +23,10 @@ def layout_settings(request: HttpRequest) -> dict:
 def top_menu(request: HttpRequest) -> dict:
     return {
         "layout_navbar_top_menu": [
-            {
-                "label": _("Início"),
-                "url": reverse("adminlte3:dashboard"),
-            },
+            # {
+            #     "label": _("Início"),
+            #     "url": reverse("adminlte3:dashboard"),
+            # },
             {
                 "label": _("Admin"),
                 "url": reverse("admin:index"),
@@ -218,7 +218,7 @@ def messages(request: HttpRequest) -> dict:
             "messages": [
                 {
                     "message_url": "#",
-                    "user_thumbnail_url": f"{settings.STATIC_URL}vendors/adminlte3/img/user1-128x128.jpg",
+                    "user_thumbnail_url": f"{settings.STATIC_URL}/vendors/adminlte3/img/user1-128x128.jpg",
                     "user_name": "Brad Diesel",
                     "text": "Call me whenever you can...",
                     "since": "4 Hours Ago",
@@ -226,7 +226,7 @@ def messages(request: HttpRequest) -> dict:
                 },
                 {
                     "message_url": "#",
-                    "user_thumbnail_url": f"{settings.STATIC_URL}vendors/adminlte3/img/user8-128x128.jpg",
+                    "user_thumbnail_url": f"{settings.STATIC_URL}/vendors/adminlte3/img/user8-128x128.jpg",
                     "user_name": "John Pierce",
                     "text": "I got your message bro",
                     "since": "4 Hours Ago",

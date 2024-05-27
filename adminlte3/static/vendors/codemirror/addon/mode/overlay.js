@@ -2,7 +2,7 @@
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
 // Utility function that allows modes to be combined. The mode given
-// as the base argument takes care of most of the normal mode
+// as the theme argument takes care of most of the normal mode
 // functionality, but a second (typically simple) mode is used, which
 // can override the style of text. Both modes get to parse all of the
 // text, but when both assign a non-null style to a piece of code, the

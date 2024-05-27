@@ -1,0 +1,20 @@
+{% load i18n %}
+<div class="card">
+    <div class="card-header">
+      <h3 class="card-title">{% blocktranslate with filter_title=title %} By {{ filter_title }} {% endblocktranslate %}</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <ul class="nav nav-pills flex-column">
+        {% for choice in choices %}
+            <li class="nav-item">
+                <a href="{{ choice.query_string|iriencode }}" class="nav-link {% if choice.selected %}active{% endif %}"><!-- <i class="fas fa-inbox"></i> -->{{ choice.display }} <!-- <span class="badge bg-primary float-right">12</span> --></a>
+            </li>
+        {% endfor %}
+      </ul>
+    </div>
+</div>

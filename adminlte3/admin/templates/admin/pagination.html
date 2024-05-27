@@ -1,0 +1,41 @@
+{% load i18n static admin_urls admin_list adminlte3 %}
+
+{% comment %} <div class="paginator">
+    {% if pagination_required %}
+        {% for i in page_range %}
+            {% paginator_number cl i %}
+        {% endfor %}
+    {% endif %}
+
+    {% if cl.formset and cl.result_count %}
+        <input type="submit"
+               name="_save"
+               class="default"
+               value="{% translate 'Save' %}">
+    {% endif %}
+</div> {% endcomment %}
+
+<div class="row">
+    <div class="col-md-4 mt-2">
+        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+            {% blocktranslate with list_per_page=cl.list_per_page result_count=cl.result_count  %}Total of entries: {{ result_count }}.{% endblocktranslate %}
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="dataTables_paginate paging_simple_numbers">
+            <ul class="pagination justify-content-end">
+                {% for page in page_range %}
+                    {% page_item cl page %}
+                {% endfor %}
+
+                {% if show_all_url %}
+                <li class="paginate_button page-item next">
+                    <a href="{{ show_all_url }}" class="showall page-link">{% translate 'Show all' %}</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</div>

@@ -505,7 +505,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
 
   def("text/x-csharp", {
     name: "clike",
-    keywords: words("abstract as async await base break case catch checked class const continue" +
+    keywords: words("abstract as async await theme break case catch checked class const continue" +
                     " default delegate do else enum event explicit extern finally fixed for" +
                     " foreach goto if implicit in interface internal is lock namespace new" +
                     " operator out override params private protected public readonly ref return sealed" +
@@ -840,7 +840,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
 
   def("text/x-squirrel", {
     name: "clike",
-    keywords: words("base break clone continue const default delete enum extends function in class" +
+    keywords: words("theme break clone continue const default delete enum extends function in class" +
                     " foreach local resume return this throw typeof yield constructor instanceof static"),
     types: cTypes,
     blockKeywords: words("case catch class else for foreach if switch try while"),

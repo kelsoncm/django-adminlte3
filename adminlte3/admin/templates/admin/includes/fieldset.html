@@ -1,0 +1,28 @@
+<div class="tab-pane text-left fade {% if forloop.counter == 2 or not fieldset.name %}active show{% endif %}" id="vert-tabs-{{ fieldset.name|slugify }}" role="tabpanel" aria-labelledby="vert-tabs-{{ fieldset.name|slugify }}-tab">
+    {% if fieldset.description %}
+        <div class="callout callout-info">
+            <p>{{ fieldset.description|safe }}</p>
+        </div>
+    {% endif %}
+    {% for line in fieldset %}
+        {% for field in line %}
+            <div class="form-group {% if field.errors %}is-invalid{% endif %}">
+                {% if field.is_checkbox %}
+                    <div class="icheck-primary d-inline">
+                        <input class="form-check-input" type="checkbox" {% if field.field.initial %}checked="" {% endif %} id="{{ field.field.id_for_label }}" name="{{ field.field.name }}" /><label class="form-check-label" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
+                    </div>
+                {% else %}
+                    <label class="required" for="id_{{ field.field.name }}">{{ field.field.label }}</label>
+                    {{ field.field }}
+                {% endif %}
+
+                {{ field.errors }}
+
+                {% if field.field.help_text %}
+                    <div class="help-block text-sm text-muted">{{ field.field.help_text|safe }}</div>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>

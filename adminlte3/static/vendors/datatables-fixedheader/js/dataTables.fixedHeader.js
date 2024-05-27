@@ -626,7 +626,7 @@ $.extend( FixedHeader.prototype, {
 			}
 		}
 		else if ( mode === 'below' ) { // only used for the header
-			// Fix the position of the floating header at base of the table body
+			// Fix the position of the floating header at theme of the table body
 			this._clone( item, forceChange );
 
 			itemDom.floating.addClass( 'fixedHeader-locked' );

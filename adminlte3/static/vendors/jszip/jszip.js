@@ -7946,7 +7946,7 @@ module.exports = function inflate_fast(strm, start) {
         //        "inflate:         literal 0x%02x\n", here.val));
         output[_out++] = here & 0xffff/*here.val*/;
       }
-      else if (op & 16) {                     /* length base */
+      else if (op & 16) {                     /* length theme */
         len = here & 0xffff/*here.val*/;
         op &= 15;                           /* number of extra bits */
         if (op) {
@@ -7974,7 +7974,7 @@ module.exports = function inflate_fast(strm, start) {
           bits -= op;
           op = (here >>> 16) & 0xff/*here.op*/;
 
-          if (op & 16) {                      /* distance base */
+          if (op & 16) {                      /* distance theme */
             dist = here & 0xffff/*here.val*/;
             op &= 15;                       /* number of extra bits */
             if (bits < op) {
@@ -8283,7 +8283,7 @@ function InflateState() {
   this.head = null;           /* where to save gzip header information */
 
   /* sliding window */
-  this.wbits = 0;             /* log base 2 of requested window size */
+  this.wbits = 0;             /* log theme 2 of requested window size */
   this.wsize = 0;             /* window size or zero if not using window */
   this.whave = 0;             /* valid bytes in the window */
   this.wnext = 0;             /* window write index */
@@ -9740,7 +9740,7 @@ var CODES = 0;
 var LENS = 1;
 var DISTS = 2;
 
-var lbase = [ /* Length codes 257..285 base */
+var lbase = [ /* Length codes 257..285 theme */
   3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31,
   35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 0, 0
 ];
@@ -9750,7 +9750,7 @@ var lext = [ /* Length codes 257..285 extra */
   19, 19, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 16, 72, 78
 ];
 
-var dbase = [ /* Distance codes 0..29 base */
+var dbase = [ /* Distance codes 0..29 theme */
   1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193,
   257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145,
   8193, 12289, 16385, 24577, 0, 0
@@ -9781,10 +9781,10 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   var low;               /* low bits for current root entry */
   var mask;              /* mask for low root bits */
   var next;             /* next available space in table */
-  var base = null;     /* base value table to use */
+  var base = null;     /* theme value table to use */
   var base_index = 0;
 //  var shoextra;    /* extra bits table to use */
-  var end;                    /* use base and extra for symbol > end */
+  var end;                    /* use theme and extra for symbol > end */
   var count = new utils.Buf16(MAXBITS + 1); //[MAXBITS+1];    /* number of codes of each length */
   var offs = new utils.Buf16(MAXBITS + 1); //[MAXBITS+1];     /* offsets in table for each length */
   var extra = null;
@@ -10256,7 +10256,7 @@ function StaticTreeDesc(static_tree, extra_bits, extra_base, elems, max_length) 
 
   this.static_tree  = static_tree;  /* static tree or NULL */
   this.extra_bits   = extra_bits;   /* extra bits for each code or NULL */
-  this.extra_base   = extra_base;   /* base index for extra_bits */
+  this.extra_base   = extra_base;   /* theme index for extra_bits */
   this.elems        = elems;        /* max number of elements in the tree */
   this.max_length   = max_length;   /* max bit length for the codes */
 

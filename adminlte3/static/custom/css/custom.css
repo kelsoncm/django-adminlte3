@@ -32,3 +32,15 @@
 .borda-verde-navMenu {
     border-color: green !important;
 }
+
+.errorlist {
+  color: #dc3545;
+}
+
+.nav-link>.badge {
+    font-size: 10px;
+    font-weight: 400;
+    position: absolute;
+    /*right: -10px;*/
+    top: -3px;
+}

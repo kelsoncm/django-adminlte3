@@ -1,10 +1,1 @@
-{% comment %} <input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %} class="form-control date-field" /><div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-    </div>
- {% endcomment %}
-        <div class="input-group date" id="{{ widget.attrs.id }}-input-group" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#{{ widget.attrs.id }}-input-group" id="{{ widget.attrs.id }}" name="{{ widget.name }}" {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} />
-            <div class="input-group-append" data-target="#{{ widget.attrs.id }}-input-group" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div>
-        </div>
+<input class="form-control datetimepicker-input"  type="date" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
