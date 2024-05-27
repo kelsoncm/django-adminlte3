@@ -29,7 +29,7 @@ setup_args = {
         "Natural Language :: English",
         "Natural Language :: Portuguese (Brazilian)",
     ],
-    "python_requires": ">=3.9",
+    "python_requires": ">=3.10",
     "install_requires": ["Django>=5.0", "pillow>=10.3.0"],
     "packages": ["adminlte3", "adminlte3.templatetags", "adminlte3.admin"],
     "package_dir": {"adminlte3": "adminlte3"},

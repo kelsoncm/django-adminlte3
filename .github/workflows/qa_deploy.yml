@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
       - uses: actions/checkout@v3
@@ -23,11 +23,10 @@ jobs:
           mkdir artifacts
           mkdir cobertura
 
-      - name: Set up Python 3.9, 3.10 and 3.11
+      - name: Set up Python 3.10, 3.11 and 3.12
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-          # python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -46,7 +45,7 @@ jobs:
 
       - name: Static type check
         continue-on-error: true
-        run: mypy --warn-unused-configs --python-version 3.9 --show-error-context --show-column-numbers --show-error-end --show-error-codes --pretty --html-report artifacts/statictypecheck --cobertura-xml-report artifacts/statictypecheck --explicit-package-bases adminlte3*
+        run: mypy --warn-unused-configs --python-version 3.10 --show-error-context --show-column-numbers --show-error-end --show-error-codes --pretty --html-report artifacts/statictypecheck --cobertura-xml-report artifacts/statictypecheck --explicit-package-bases adminlte3*
 
       # - name: Unit test
       #   continue-on-error: true
