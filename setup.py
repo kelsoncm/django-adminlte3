@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup_args = {
     "name": "django-theme-adminlte3",
-    "version": "3.2.0.10",
+    "version": "3.2.0.11",
     "url": "https://github.com/kelsoncm/django-theme-adminlte3",
     "download_url": "https://github.com/kelsoncm/django-theme-adminlte3/releases",
     "description": "Django Admin LTE v3 Theme",
@@ -30,21 +30,10 @@ setup_args = {
         "Natural Language :: Portuguese (Brazilian)",
     ],
     "python_requires": ">=3.9",
-    "install_requires": ["Django>=4.0", "pillow>=9.0.1"],
-    "packages": ["adminlte3", "adminlte3.templatetags", "adminlte3_admin"],
+    "install_requires": ["Django>=5.0", "pillow>=10.3.0"],
+    "packages": ["adminlte3", "adminlte3.templatetags", "adminlte3.admin"],
     "package_dir": {"adminlte3": "adminlte3"},
     "package_data": {
-        "adminlte3_admin": [
-            "templates/*",
-            "templates/admin_ref/*",
-            "templates/admin_ref/user/*",
-            "templates/admin_ref/widgets/*",
-            "templates/admin_ref/edit_inline/*",
-            "templates/admin_ref/includes/*",
-            "templates/admin/*",
-            "templates/admin/widgets/*",
-            "templates/admin/includes/*",
-        ],
         "adminlte3": [
             "templates/*",
             "templates/auth/*",
@@ -352,6 +341,15 @@ setup_args = {
             "static/tempusdominus-bootstrap-4/css/*",
             "static/tempusdominus-bootstrap-4/js/*",
             "static/sweetalert2/*",
+            "admin/templates/*",
+            "admin/templates/admin_ref/*",
+            "admin/templates/admin_ref/user/*",
+            "admin/templates/admin_ref/widgets/*",
+            "admin/templates/admin_ref/edit_inline/*",
+            "admin/templates/admin_ref/includes/*",
+            "admin/templates/admin/*",
+            "admin/templates/admin/widgets/*",
+            "admin/templates/admin/includes/*",
         ],
     },
 }

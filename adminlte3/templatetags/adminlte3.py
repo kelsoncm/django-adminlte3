@@ -14,7 +14,6 @@ def quiet(field: Field):
 
 @register.simple_tag
 def render_sidebarmenu_list(menu_items: list, top_level=True) -> SafeString:
-
     def __concatenate(check: bool, value: str, otherwise: str = ""):
         return value if check else otherwise
 
@@ -22,24 +21,16 @@ def render_sidebarmenu_list(menu_items: list, top_level=True) -> SafeString:
         return mark_safe("")
     result = __concatenate(not top_level, '<ul class="nav nav-treeview">')
     for mi in menu_items:
-        result += __concatenate(
-            mi.url, '<li class="nav-item">', '<li class="nav-header">'
-        )
-        result += __concatenate(
-            mi.url is not None, f'<a href="{mi.url}" class="nav-link {mi.is_active}">'
-        )
+        result += __concatenate(mi.url, '<li class="nav-item">', '<li class="nav-header">')
+        result += __concatenate(mi.url is not None, f'<a href="{mi.url}" class="nav-link {mi.is_active}">')
         result += f'<i class="nav-icon {mi.icon} {mi.color}"></i>'
         result += "<p>"
         result += mi.label
         result += mi.badge_as_html
-        result += __concatenate(
-            len(mi.subitems) > 0, '<i class="right fas fa-angle-left"></i>'
-        )
+        result += __concatenate(len(mi.subitems) > 0, '<i class="right fas fa-angle-left"></i>')
         result += "</p>"
         result += __concatenate(mi.url is not None, "</a>")
-        result += __concatenate(
-            len(mi.subitems) > 0, render_sidebarmenu_list(mi.subitems, False)
-        )
+        result += __concatenate(len(mi.subitems) > 0, render_sidebarmenu_list(mi.subitems, False))
         result += "</li>"
     result += __concatenate(not top_level, "</ul>")
     return mark_safe(result)
@@ -47,7 +38,6 @@ def render_sidebarmenu_list(menu_items: list, top_level=True) -> SafeString:
 
 @register.simple_tag
 def render_topmenu_list(menu_items: list, top_level=True) -> SafeString:
-
     SUBITEMS_EXTRA = 'role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'
     A_TOP_WITH_SUBITEMS = f'class="nav-link dropdown-toggle" {SUBITEMS_EXTRA}'
     A_TOP_WITHOUT_SUBITEMS = f'class="nav-link"'
