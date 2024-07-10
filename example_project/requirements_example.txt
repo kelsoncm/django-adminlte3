@@ -1,3 +1,4 @@
 -e /app/lib/
 django-createsuperuser
 sqlparse>=0.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
