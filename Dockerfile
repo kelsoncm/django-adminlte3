@@ -1,4 +1,4 @@
-FROM python:3.13-rc-slim
+FROM python:3.14-rc-slim
 
 ENV PYTHONUNBUFFERED 1
 
