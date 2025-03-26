@@ -1,15 +1,13 @@
-FROM python:3.13-rc-slim
+FROM python:3.13.2-slim
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt update && apt upgrade -y && apt -y install curl vim && pip install --upgrade pip setuptools
-
 COPY --from=app /requirements.txt /
 COPY --from=app /requirements-dev.txt /
-RUN pip install -r requirements.txt -r requirements-dev.txt
-
 COPY --from=app / /app/lib/
-RUN pip install -r /app/lib/example_project/requirements_example.txt
+RUN pip install --upgrade pip setuptools \
+    && pip install -r requirements.txt -r requirements-dev.txt \
+    && pip install -r /app/lib/example_project/requirements_example.txt
 
 ADD . /app/example_project/
 
