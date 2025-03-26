@@ -1,12 +1,11 @@
-FROM python:3.13-rc-slim
+FROM python:3.13.2-slim
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt update && apt upgrade -y && apt -y install curl vim && pip install --upgrade pip setuptools
-
 ADD requirements* /
 
-RUN pip install -r /requirements.txt -r /requirements-dev.txt
+RUN pip install --upgrade pip setuptools \
+    && pip install -r /requirements.txt -r /requirements-dev.txt
 
 EXPOSE 8000
 # ENTRYPOINT [ "executable" ]
