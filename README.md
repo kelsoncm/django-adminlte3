@@ -1,35 +1,68 @@
-# Django Admin LTE v3 theme
+# Django Admin LTE v3 Theme 🎨
 
-1. [Instale o virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
-2. Crie um virtualenv chamado mpo: `mkvirtualenv djang-adminlte3`
-3. Atualize o pip: `pip install --upgrade pip`
-4. Instale os pacotes do projeto `pip install -r requirements.txt`
-5. Migre o banco `python manage.py migrate`
-7. Suba a aplicação (disponível em http://localhost:8000) `./manage.py runserver_plus`
-8. Se você alterar algum plugin `python manage.py makemigrations`
-9. Defina o ipdb como default breackpoint `export PYTHONBREAKPOINT=ipdb.set_trace`
-10. Criar super usuário `python3 manage.py createsuperuser
+[![PyPI version](https://badge.fury.io/py/django-admintheme-adminlte3.svg)](https://badge.fury.io/py/django-admintheme-adminlte3)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Como gerar uma nova release
+Tema moderno baseado no **AdminLTE 3** adaptado nativamente para a interface de administração do Django Admin.
 
-1. Clone o projeto
-2. Instale o validador de QA installando o pre-commmit, `pre-commit install`
-3. Crie uma nova branch, `git checkout -b issueX`
-4. Se foi criada uma nova pasta em `templates` ou em  `static`, adicione estas pastas usuando o exemplo presente nos arquivos `setup.py`
-5. Incremente o número da versão no arquivo `setup.py`
-6. Teste o QA, `pre-commit run --all-files`
-7. Faça um commit, `git commit -m "feat: [add] subject"`
-8. Solicite um Pull Request na interface do Github
-9. Crie uma release na interface do Github
-```
+> 📚 **Documentação Oficial e Suíte**: Para guias completos, visão geral de arquitetura e outros temas da organização, visite [django-adminthemes.github.io](https://django-adminthemes.github.io).
 
-### Para testar localmente
+---
+
+## Como Usar
+
+### 1. Instalação via pip
 
 ```bash
-docker buildx build --build-context app=. -t adminlte3_example --progress plain example_project
-docker run --rm -it -p 8000:8000 -v `pwd`:/app/lib/ -v `pwd`/example_project:/app/example_project/ --name adminlte3_example -e DJANGO_SETTINGS_MODULE=settings adminlte3_example bash -c 'python manage.py runserver_plus 0.0.0.0:8000'
-docker exec adminlte3_example python manage.py makemigrations
-docker exec adminlte3_example python manage.py migrate
-docker exec adminlte3_example python -m django_createsuperuser "admin" "admin" foo@foo.foo
-docker exec adminlte3_example python manage.py show_urls
+pip install django-admintheme-adminlte3
 ```
+
+### 2. Configuração no `settings.py`
+
+Adicione `'adminlte3'` ao `INSTALLED_APPS` **antes** de `'django.contrib.admin'`:
+
+```python
+INSTALLED_APPS = [
+    'adminlte3',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # ...
+]
+```
+
+### 3. Coleta de Arquivos Estáticos
+
+```bash
+python manage.py collectstatic --noinput
+python manage.py runserver
+```
+
+---
+
+## Desenvolvimento Local (Workspace Privado)
+
+Para contribuir ou testar alterações neste repositório em conjunto com o ecossistema **Django Admin Themes**, utilize o ambiente orquestrado do `workspace`:
+
+```bash
+# 1. Clone o repositório workspace privado
+git clone git@github.com:django-adminthemes/workspace.git ~/projetos/PESSOAL/django-adminthemes/workspace
+cd ~/projetos/PESSOAL/django-adminthemes/workspace
+
+# 2. Inicialize o ambiente (clona repositórios e configura atalhos)
+./datw setup
+
+# 3. Suba o container do AdminLTE3 em modo de desenvolvimento
+datw launch adminlte3
+```
+
+Para mais detalhes sobre o workflow de desenvolvimento e atalhos CLI, consulte a documentação do [workspace/README.md](https://github.com/django-adminthemes/workspace).
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE.md` para mais informações.
