@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentação — django-admintheme-adminlte3</title>
+  <meta name="description" content="Documentação oficial do tema AdminLTE3 para Django Admin." />
+  <meta property="og:title" content="django-admintheme-adminlte3" />
+  <meta property="og:description" content="Tema moderno baseado no AdminLTE 3 para o Django Admin." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@700,800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+      --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+      --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    4.5rem);
+      
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+      --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+      --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+      --space-16: 4rem; --space-20: 5rem;
+
+      --color-bg:             #f8f9fa;
+      --color-surface:        #ffffff;
+      --color-surface-2:      #f1f3f5;
+      --color-surface-offset: #e9ecef;
+      --color-divider:        #dee2e6;
+      --color-border:         #ced4da;
+      --color-text:           #212529;
+      --color-text-muted:     #6c757d;
+      --color-text-faint:     #adb5bd;
+      --color-text-inverse:   #f8f9fa;
+      --color-primary:        #0969da;
+      --color-primary-hover:  #0451a5;
+      --color-primary-highlight: #ddf4ff;
+      --color-secondary:      #2da44e;
+      --color-accent-warm:    #d97706;
+
+      --radius-sm: 0.375rem; --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;  --radius-xl: 1rem; --radius-full: 9999px;
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
+      
+      --content-narrow: 680px; --content-default: 1040px; --content-wide: 1240px;
+      --font-display: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:             #0d1117;
+      --color-surface:        #161b22;
+      --color-surface-2:      #21262d;
+      --color-surface-offset: #1c2128;
+      --color-divider:        #30363d;
+      --color-border:         #30363d;
+      --color-text:           #c9d1d9;
+      --color-text-muted:     #8b949e;
+      --color-text-faint:     #484f58;
+      --color-text-inverse:   #0d1117;
+      --color-primary:        #58a6ff;
+      --color-primary-hover:  #79c0ff;
+      --color-primary-highlight: #1f6feb26;
+      --color-secondary:      #3fb950;
+      --color-accent-warm:    #f0883e;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-divider);
+      padding: var(--space-4) 0;
+    }
+
+    [data-theme="light"] header {
+      background: rgba(248, 249, 250, 0.85);
+    }
+
+    .container {
+      max-width: var(--content-wide);
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+      color: var(--color-text);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-lg);
+    }
+
+    .brand-badge {
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-family: var(--font-body);
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .theme-toggle, .btn-secondary, .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-interactive);
+      font-size: var(--text-sm);
+      border: 1px solid transparent;
+    }
+
+    .theme-toggle {
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+
+    .theme-toggle:hover {
+      background: var(--color-surface-offset);
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+    }
+
+    .btn-secondary {
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface-offset);
+    }
+
+    .hero {
+      padding: var(--space-20) 0 var(--space-16);
+      text-align: center;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-6);
+      background: linear-gradient(135deg, var(--color-text) 30%, var(--color-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      max-width: var(--content-narrow);
+      margin: 0 auto var(--space-8);
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .section {
+      padding: var(--space-16) 0;
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .section-header {
+      margin-bottom: var(--space-12);
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: var(--text-base);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: var(--transition-interactive);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-3);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+    }
+
+    .card-desc {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .code-block {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      overflow-x: auto;
+      margin-top: var(--space-6);
+    }
+
+    .code-block pre {
+      color: var(--color-primary);
+    }
+
+    footer {
+      border-top: 1px solid var(--color-divider);
+      padding: var(--space-10) 0;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-inner">
+      <a href="https://django-adminthemes.github.io" class="brand">
+        🎨 AdminLTE3
+        <span class="brand-badge">Theme</span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Alternar Tema">
+          <i data-lucide="sun"></i>
+          <span>Modo</span>
+        </button>
+        <a href="https://django-adminthemes.github.io" class="btn-secondary">
+          <i data-lucide="globe"></i> Suíte Oficial
+        </a>
+        <a href="https://github.com/django-adminthemes/django-admintheme-adminlte3" target="_blank" rel="noopener" class="btn-primary">
+          <i data-lucide="github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Django AdminLTE3 Theme</h1>
+      <p class="hero-subtitle">
+        Tema moderno e responsivo baseado no AdminLTE 3 adaptado nativamente para o Django Admin com menu lateral expansível e suporte a personalização visual.
+      </p>
+      <div class="hero-ctas">
+        <a href="#quickstart" class="btn-primary">
+          <i data-lucide="rocket"></i> Como Usar
+        </a>
+        <a href="#features" class="btn-secondary">
+          <i data-lucide="layout"></i> Funcionalidades
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Funcionalidades</h2>
+        <p class="section-subtitle">Destaques da integração do AdminLTE3 com o Django</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3 class="card-title">Layout Responsivo</h3>
+          <p class="card-desc">Adapta-se perfeitamente a dispositivos móveis, tablets e telas de alta resolução.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3 class="card-title">Menu Lateral com Busca</h3>
+          <p class="card-desc">Navegação intuitiva com filtro em tempo real das aplicações e modelos cadastrados.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Instalação Simples</h3>
+          <p class="card-desc">Basta adicionar ao <code>INSTALLED_APPS</code> do Django sem modificar seus templates existentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICKSTART -->
+  <section class="section" id="quickstart">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Instalação e Uso</h2>
+        <p class="section-subtitle">Adicione o tema AdminLTE3 ao seu projeto em poucos passos</p>
+      </div>
+
+      <div class="code-block">
+        <pre><code># 1. Instale o pacote via pip
+pip install django-admintheme-adminlte3
+
+# 2. Adicione 'adminlte3' no INSTALLED_APPS (antes de 'django.contrib.admin')
+INSTALLED_APPS = [
+    'adminlte3',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # ...
+]
+
+# 3. Colete os estáticos e inicie a aplicação
+python manage.py collectstatic --noinput
+python manage.py runserver</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESENVOLVIMENTO LOCAL -->
+  <section class="section" id="dev">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Desenvolvimento Local (Workspace)</h2>
+        <p class="section-subtitle">Utilize o <code>workspace</code> privado da organização para contribuir</p>
+      </div>
+
+      <div class="code-block">
+        <pre><code># 1. Clone o repositório workspace privado
+git clone git@github.com:django-adminthemes/workspace.git ~/projetos/PESSOAL/django-adminthemes/workspace
+cd ~/projetos/PESSOAL/django-adminthemes/workspace
+
+# 2. Inicialize o ambiente
+./datw setup
+
+# 3. Inicie o container do AdminLTE3
+datw launch adminlte3</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>django-admintheme-adminlte3 — Licença MIT.</p>
+      <p style="margin-top: 0.5rem;">
+        Parte da organização <a href="https://django-adminthemes.github.io">Django Admin Themes</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) { lucide.createIcons(); }
+      const themeBtn = document.getElementById('themeToggleBtn');
+      themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+      });
+    });
+  </script>
+</body>
+</html>
