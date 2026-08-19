@@ -53,10 +53,10 @@ git clone git@github.com:django-adminthemes/workspace.git ~/projetos/PESSOAL/dja
 cd ~/projetos/PESSOAL/django-adminthemes/workspace
 
 # 2. Inicialize o ambiente (clona repositórios e configura atalhos)
-./datw setup
+./dbkw setup
 
 # 3. Suba o container do AdminLTE3 em modo de desenvolvimento
-datw launch adminlte3
+dbkw launch adminlte3
 ```
 
 Para mais detalhes sobre o workflow de desenvolvimento e atalhos CLI, consulte a documentação do [workspace/README.md](https://github.com/django-adminthemes/workspace).
